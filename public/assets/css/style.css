@@ -1,0 +1,77 @@
+@font-face {
+    font-family: Calligraffitti;
+    src: url(../fonts/Calligraffitti-Regular.ttf); /* titres h1 */
+}
+
+@font-face {
+    font-family: deliusregular;
+    src: url(../fonts/Delius-Regular.ttf);
+}
+
+@font-face {
+    font-family: deliusunicregular;
+    src: url(../fonts/DeliusUnicase-Regular.ttf);
+}
+
+@font-face {
+    font-family: deliusunicbold;
+    src: url(../fonts/DeliusUnicase-Bold.ttf);
+}
+
+@font-face {
+    font-family: rancho;
+    src: url(../fonts/Rancho-Regular.ttf);
+}
+
+:root {
+    --raisin-black: rgb(39, 37, 37);
+    --persian-orange:rgb(240, 142, 69);
+    --dutch-white: rgb(244, 230, 195);
+}
+
+
+body {
+    margin: 0;
+}
+
+/*header------------------------------------*/
+
+header {
+    background-color: var(--raisin-black)
+}
+
+.logo {
+    width: 72px;
+    height: 72px;
+}
+
+h1 {
+    font-family: Calligraffitti;
+    color: var(--persian-orange);
+    /*Persian Orange*/
+    -webkit-text-stroke-width: 1px;
+    /* Largeur du contour */
+    -webkit-text-stroke-color: var(--raisin-black);
+    /* Couleur du contour */
+    text-shadow: -1px -1px 2px var(--raisin-black, 0.5);
+}
+
+.custom-h1 {
+    font-size: 42px;
+}
+
+/*header end------------------------------------*/
+
+/*nav------------------------------------------*/
+
+.nav {
+    background-color: var(--dutch-white) ;
+    font-family: rancho;
+}
+
+.category-link:hover {
+    background-color: var(--raisin-black);
+    color: var(--dutch-white) ;
+    border-radius: 18px;
+
+}
