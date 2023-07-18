@@ -24,14 +24,14 @@ class Company
     #[ORM\Column(length: 255)]
     private ?string $director_lastname = null;
 
-    #[ORM\Column]
-    private ?int $siret = null;
+    #[ORM\Column(length: 255)]
+    private ?string $siret = null;
 
     #[ORM\Column(length: 255)]
     private ?string $adress = null;
 
-    #[ORM\Column]
-    private ?int $zipcode = null;
+    #[ORM\Column(length: 255)]
+    private ?string $zipcode = null;
 
     #[ORM\Column(length: 255)]
     private ?string $city = null;
@@ -93,12 +93,12 @@ class Company
         return $this;
     }
 
-    public function getSiret(): ?int
+    public function getSiret(): ?string
     {
         return $this->siret;
     }
 
-    public function setSiret(int $siret): static
+    public function setSiret(string $siret): static
     {
         $this->siret = $siret;
 
@@ -117,12 +117,12 @@ class Company
         return $this;
     }
 
-    public function getZipcode(): ?int
+    public function getZipcode(): ?string
     {
         return $this->zipcode;
     }
 
-    public function setZipcode(int $zipcode): static
+    public function setZipcode(string $zipcode): static
     {
         $this->zipcode = $zipcode;
 
