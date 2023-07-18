@@ -3,14 +3,37 @@
 namespace App\DataFixtures;
 
 use App\Entity\Company;
+use App\Entity\Product;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use App\Entity\Trait\SlugTrait;
+
 
 class AppFixtures extends Fixture
 {
+    use SlugTrait;
+    function randomBrandChoices($faker)
+    {
+        $choices = ['Brasserie Dupont', 'Mongozo', 'Guinness', 'Erdinger', 'Hoegaarden'];
+        $randomIndex = $faker->numberBetween(0, 4);
+        return $choices[$randomIndex];
+    }
 
+    function randomCategoryChoices($faker)
+    {
+        $choices = ['Blonde', 'Brune', 'Blanche', 'Ambrée', 'Fruitée'];
+        $randomIndex = $faker->numberBetween(0, 4);
+        return $choices[$randomIndex];
+    }
+
+    function randomStyleChoices($faker)
+    {
+        $choices = ['IPA', 'Stout', 'Lagger', 'Pils', 'Lambic'];
+        $randomIndex = $faker->numberBetween(0, 4);
+        return $choices[$randomIndex];
+    }
     public function load(ObjectManager $manager): void
 
     {
@@ -48,6 +71,24 @@ class AppFixtures extends Fixture
                 }
                 $user->setCompany($company);
                 $manager->persist($user);
+            }
+            for ($k = 0; $k < 5; $k++) {
+                $product = new Product();
+                $product->setCompany($company);
+                $product->setName($faker->word());
+                $product->setBrand($this->randomBrandChoices($faker));
+                $product->setCategory($this->randomCategoryChoices($faker));
+                $product->setStyle($this->randomStyleChoices($faker));
+                $product->setCustomerDescription($faker->text(50));
+                $product->setEmployeeDescription($faker->text(150));
+                $product->setDegreOfAlcohol($faker->randomDigitNotNull());
+                $product->setOrigin($faker->country());
+                $product->setCapacity($faker->randomElement([250, 330, 341, 355, 500]));
+                $product->setPrice($faker->numberBetween(300, 1500));
+                $product->setStock($faker->numberBetween(0, 150));
+                $product->setThreshold(5);
+                $product->setSlug($this->generateSlug($product->getName()));
+                $manager->persist($product);
             }
         }
         $manager->flush();
