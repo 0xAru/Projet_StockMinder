@@ -49,7 +49,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $company = new Company();
             $company->setName($faker->word());
-            $company->setAdress($faker->address());
+            $company->setAddress($faker->address());
             $company->setZipcode($faker->postcode());
             $company->setCity($faker->city());
             $company->setSiret($faker->siret());

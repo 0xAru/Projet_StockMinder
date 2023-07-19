@@ -27,6 +27,8 @@
     --raisin-black: rgb(39, 37, 37);
     --persian-orange:rgb(240, 142, 69);
     --dutch-white: rgb(244, 230, 195);
+    --dun: rgb(219, 204, 168);
+    --wine: rgb(91, 38, 47);
 }
 
 
@@ -46,14 +48,14 @@ header {
 }
 
 h1 {
-    font-family: Calligraffitti;
+    font-family: Calligraffitti, serif, sans-serif;
     color: var(--persian-orange);
     /*Persian Orange*/
     -webkit-text-stroke-width: 1px;
     /* Largeur du contour */
     -webkit-text-stroke-color: var(--raisin-black);
     /* Couleur du contour */
-    text-shadow: -1px -1px 2px var(--raisin-black, 0.5);
+    text-shadow: -1px -1px 2px rgb(39, 37, 37, 0.5);
 }
 
 .custom-h1 {
@@ -66,7 +68,7 @@ h1 {
 
 .nav {
     background-color: var(--dutch-white) ;
-    font-family: rancho;
+    font-family: rancho, serif, sans-serif;
 }
 
 .category-link:hover {
@@ -74,4 +76,26 @@ h1 {
     color: var(--dutch-white) ;
     border-radius: 18px;
 
+}
+
+/*nav end------------------------------------------*/
+
+/*main------------------------------------------*/
+
+h2 {
+    font-family: rancho, serif, sans-serif;
+    color: var(--wine);
+    background-color: var(--dun);
+}
+
+h3 {
+    font-family: rancho, serif, sans-serif;
+}
+
+.my-blondes h3{
+    color: var(--wine);
+}
+
+.my-blondes {
+    background-color: var(--dun);
 }
