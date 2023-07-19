@@ -31,8 +31,8 @@ class Event
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $end_time = null;
 
-    #[ORM\Column]
-    private ?int $display_time_period = null;
+    #[ORM\Column(length: 255)]
+    private ?string $display_time_period = null;
 
     #[ORM\Column(length: 255)]
     private ?string $theme = null;
@@ -112,12 +112,12 @@ class Event
         return $this;
     }
 
-    public function getDisplayTimePeriod(): ?int
+    public function getDisplayTimePeriod(): ?string
     {
         return $this->display_time_period;
     }
 
-    public function setDisplayTimePeriod(int $display_time_period): static
+    public function setDisplayTimePeriod(string $display_time_period): static
     {
         $this->display_time_period = $display_time_period;
 

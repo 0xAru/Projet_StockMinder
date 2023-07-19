@@ -35,8 +35,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
-    #[ORM\Column]
-    private ?int $employee_number = null;
+    #[ORM\Column(length: 255)]
+    private ?string $employee_number = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
@@ -136,12 +136,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getEmployeeNumber(): ?int
+    public function getEmployeeNumber(): ?string
     {
         return $this->employee_number;
     }
 
-    public function setEmployeeNumber(int $employee_number): static
+    public function setEmployeeNumber(string $employee_number): static
     {
         $this->employee_number = $employee_number;
 

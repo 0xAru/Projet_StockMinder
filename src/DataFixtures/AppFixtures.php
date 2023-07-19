@@ -35,6 +35,13 @@ class AppFixtures extends Fixture
         $randomIndex = $faker->numberBetween(0, 4);
         return $choices[$randomIndex];
     }
+
+    function randomLabelChoices($faker)
+    {
+        $choices = ['biologique', 'sans gluten', 'sans alcool', 'avec lactose', 'avec arachides', 'local', ' '];
+        $randomIndex = $faker->numberBetween(0, 6);
+        return $choices[$randomIndex];
+    }
     public function load(ObjectManager $manager): void
 
     {
@@ -89,6 +96,7 @@ class AppFixtures extends Fixture
                 $product->setStock($faker->numberBetween(0, 150));
                 $product->setThreshold(5);
                 $product->setSlug($this->generateSlug($product->getName()));
+                $product->setLabel($this->randomLabelChoices($faker));
                 $manager->persist($product);
             }
             for ($l = 0; $l < 3; $l++) {
