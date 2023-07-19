@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Company;
+use App\Entity\Event;
 use App\Entity\Product;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -89,6 +90,26 @@ class AppFixtures extends Fixture
                 $product->setThreshold(5);
                 $product->setSlug($this->generateSlug($product->getName()));
                 $manager->persist($product);
+            }
+            for ($l = 0; $l < 3; $l++) {
+                $event = new Event();
+                $event->setCompany($company);
+                $event->setName($faker->word(3));
+                $currentDate = new \DateTime();
+                $event->setStartDate($faker->dateTimeBetween($currentDate, "+30 days"));
+                $event->setEndDate($faker->dateTimeBetween($event->getStartDate(), $event->getStartDate()->format('Y-m-d') . "+10 days"));
+                // Créer une instance de DateTime à partir de la chaîne de caractères de l'heure
+                $startTime = new \DateTime($faker->time());
+                $event->setStartTime($startTime);
+                // De même pour l'heure de fin, si nécessaire
+                $endTime = new \DateTime($faker->time());
+                $event->setEndTime($endTime);
+                $event->setDisplayTimePeriod($faker->numberBetween(7, 30));
+                $event->setTheme($faker->word());
+                $event->setImage($faker->imageUrl($width = 400, $height = 400));
+                $event->setDescription($faker->text(100));
+                $event->setSlug($this->generateSlug($event->getName()));
+                $manager->persist($event);
             }
         }
         $manager->flush();
