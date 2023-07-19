@@ -33,14 +33,14 @@ class Product
     #[ORM\Column(length: 600)]
     private ?string $employee_description = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $degre_of_alcohol = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $degre_of_alcohol = null;
 
     #[ORM\Column(length: 255)]
     private ?string $origin = null;
 
-    #[ORM\Column]
-    private ?int $capacity = null;
+    #[ORM\Column(length: 255)]
+    private ?string $capacity = null;
 
     #[ORM\Column]
     private ?int $price = null;
@@ -57,6 +57,9 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Company $company = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $label = null;
 
     public function getId(): ?int
     {
@@ -135,12 +138,12 @@ class Product
         return $this;
     }
 
-    public function getDegreOfAlcohol(): ?int
+    public function getDegreOfAlcohol(): ?string
     {
         return $this->degre_of_alcohol;
     }
 
-    public function setDegreOfAlcohol(int $degre_of_alcohol): static
+    public function setDegreOfAlcohol(string $degre_of_alcohol): static
     {
         $this->degre_of_alcohol = $degre_of_alcohol;
 
@@ -159,12 +162,12 @@ class Product
         return $this;
     }
 
-    public function getCapacity(): ?int
+    public function getCapacity(): ?string
     {
         return $this->capacity;
     }
 
-    public function setCapacity(int $capacity): static
+    public function setCapacity(string $capacity): static
     {
         $this->capacity = $capacity;
 
@@ -227,6 +230,18 @@ class Product
     public function setCompany(?Company $company): static
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(?string $label): static
+    {
+        $this->label = $label;
 
         return $this;
     }
