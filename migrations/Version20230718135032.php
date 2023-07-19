@@ -21,6 +21,7 @@ final class Version20230718135032 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE user CHANGE email email VARCHAR(180) DEFAULT NULL, CHANGE password password VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE product CHANGE degre_of_alcohol degre_of_alcohol VARCHAR(180) NOT NULL');
     }
 
     public function down(Schema $schema): void
