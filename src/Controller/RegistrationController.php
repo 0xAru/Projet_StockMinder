@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Company;
 use App\Form\RegistrationFormType;
 use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,11 +21,13 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $company = new Company();
+
+        $form = $this->createForm(RegistrationFormType::class, ['user' => $user, 'company' =>$company]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            // Encoder le mot de passe
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -32,9 +35,32 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+        // Récupérer les données de la société à partir du formulaire
+        $companyData = $form->get('company')->getData();
+
+        $company->setName($companyData['company_name']);
+        $company->setDirectorFirstname($company['director_firstname']);
+        $company->setDirectorLastname($company['director_lastname']);
+        $company->setSiret($company['siret_number']);
+        $company->setAddress($company['address']);
+        $company->setZipcode($company['zipcode']);
+        $company->setCity($company['city']);
+
+        // Associez la société à l'utilisateur
+        $user->setCompany($company);
+
+        // Récupérez les données de l'utilisateur à partir du formulaire
+        $userData = $form->get('user')->getData();
+
+        $user->setFirstname($userData['director_firstname']);
+        $user->setLastname($userData['director_lastname']);
+        $user->setEmail($userData['email']);
+        $user->setEmployeeNumber(1);
+        $user->setRoles(['admin']);
+
+        $entityManager->persist($company);
+        $entityManager->persist($user);
+        $entityManager->flush();
 
             return $userAuthenticator->authenticateUser(
                 $user,
