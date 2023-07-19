@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Company;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -19,33 +20,20 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            //champs pour l'utilisateur
             ->add('director_firstname', TextType::class, [
-                'label' => 'Nom du directeur'
-        ])
+                'label' => 'Nom du directeur',
+                'required' => true
+            ])
             ->add('director_lastname', TextType::class, [
-                'label' => 'Prénom du directeur'
-            ])
-            ->add('company_name', TextType::class, [
-                'label' => 'Dénomination sociale'
-            ])
-            ->add('siret_number', TextType::class, [
-                'label' => 'Numéro SIRET'
-            ])
-            ->add('address', TextType::class, [
-                'label' => 'Adresse'
-            ])
-            ->add('zipcode', TextType::class, [
-                'label' => 'Code postal'
-            ])
-            ->add('city', TextType::class, [
-                'label' => 'Ville'
+                'label' => 'Prénom du directeur',
+                'required' => true
             ])
             ->add('email', EmailType::class, [
-                'label' => 'E-mail'
+                'label' => 'E-mail',
+                'required' => true
             ])
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'label' => 'Mot de passe',
@@ -60,12 +48,28 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+                'required' => true
             ])
-            ->add('employee_number', HiddenType::class, [
-                'data' => 1
+            //champs pour la société
+            ->add('company_name', TextType::class, [
+                'label' => 'Dénomination sociale',
+                'required' => true
             ])
-            ->add('role', HiddenType::class, [
-                'data' => "admin"
+            ->add('siret_number', TextType::class, [
+                'label' => 'Numéro SIRET',
+                'required' => true
+            ])
+            ->add('address', TextType::class, [
+                'label' => 'Adresse',
+                'required' => true
+            ])
+            ->add('zipcode', TextType::class, [
+                'label' => 'Code postal',
+                'required' => true
+            ])
+            ->add('city', TextType::class, [
+                'label' => 'Ville',
+                'required' => true
             ])
         ;
     }
@@ -73,7 +77,7 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => null,
         ]);
     }
 }
