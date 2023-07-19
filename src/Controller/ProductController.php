@@ -12,10 +12,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     #[Route('/produits', name: 'app_product')]
-    public function index(): Response
+    public function index(ProductRepository $productRepository): Response
     {
-        return $this->render('product/index.html.twig', [
-            'controller_name' => 'ProductController',
+        // Récupération tous les produits depuis le ProductRepository
+        $products = $productRepository->findAll();
+
+        // Passez les produits récupérés au modèle Twig pour les afficher
+        return $this->render('/index.html.twig', [
+            'products' => $products,
         ]);
     }
 }
