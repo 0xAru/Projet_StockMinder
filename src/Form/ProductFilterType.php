@@ -50,10 +50,10 @@ class ProductFilterType extends AbstractType
                 'required' => false,
                 'placeholder' => 'Avec ou sans alcool', //il faut faire une logique afin de déterminer s'il y a de l'alcool ou non (alcool>0°= with, else = without)
             ])
-            ->add('search', TextType::class, [
-                'required' => false,
-                'attr' => ['placeholder' => 'Recherche par nom'],
-            ])
+            //->add('search', TextType::class, [
+               // 'required' => false,
+                //'attr' => ['placeholder' => 'Recherche par nom'],
+            //])
             ->add('submit', SubmitType::class, [
                 'label' => 'Filtrer', // activer le bouton submit uniquement lorsque le champs de recherche est renseigner
             ]);

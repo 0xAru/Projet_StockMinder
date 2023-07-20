@@ -67,8 +67,16 @@ h1 {
 /*nav------------------------------------------*/
 
 .nav {
+    position: relative;
     background-color: var(--dutch-white) ;
     font-family: rancho, serif, sans-serif;
+}
+
+.fixed-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 .category-link:hover {
@@ -92,6 +100,8 @@ h3 {
     font-family: rancho, serif, sans-serif;
 }
 
+/* Les blondes -------------------------------*/
+
 .my-blondes h3{
     color: var(--wine);
 }
@@ -99,3 +109,24 @@ h3 {
 .my-blondes {
     background-color: var(--dun);
 }
+
+.my-blondes .my-product-card{
+    color: var(--wine);
+}
+
+/* Les brunes -------------------------------*/
+
+.my-brunes h3{
+    color: var(--dun);
+}
+
+.my-brunes{
+    background-color: var(--raisin-black);
+}
+
+.my-brunes .my-product-card{
+    color: var(--dun);
+}
+
+/* Les blanches -------------------------------*/
+
