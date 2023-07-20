@@ -1,12 +1,28 @@
-<div class="overflow-x-auto nav">
+<div class="h-11 overflow-x-auto nav">
     <nav class="h-11 flex items-center">
         <ul class="list-none ml-3.5 uppercase text-base inline whitespace-nowrap">
-            <li class="inline-block px-4 category-link py-1"><a class="" href="#">bières blondes</a></li>
-            <li class="inline-block px-4 category-link py-1"><a href="#">bières brunes</a></li>
-            <li class="inline-block px-4 category-link py-1"><a href="#">bières blanches</a></li>
-            <li class="inline-block px-4 category-link py-1"><a href="#">bières ambrées</a></li>
-            <li class="inline-block px-4 category-link py-1 mr-3.5"><a href="#">bières blondes</a></li>
+            <li class="inline-block px-4 category-link py-1"><a class="" href="#blondes">bières blondes</a></li>
+            <li class="inline-block px-4 category-link py-1"><a href="#brunes">bières brunes</a></li>
+            <li class="inline-block px-4 category-link py-1"><a href="#blanches">bières blanches</a></li>
+            <li class="inline-block px-4 category-link py-1"><a href="#ambrees">bières ambrées</a></li>
+            <li class="inline-block px-4 category-link py-1 mr-3.5"><a href="#fruitees">bières fruitées</a></li>
+            <li class="inline-block px-4 category-link py-1 mr-3.5"><a href="#sansAlcool">bières sans alcools</a></li>
+            <li class="inline-block px-4 category-link py-1 mr-3.5"><a href="#softs">softs</a></li>
         </ul>
     </nav>
 </div>
-<!-- menu filter & search bar -->
+
+<script>
+    let navBar = document.querySelector(".nav");
+
+    window.addEventListener('scroll', function() {
+        // Hauteur à partir de laquelle nous voulons détecter le défilement (96px)
+        const scrollThreshold = 96;
+
+        if (window.scrollY > scrollThreshold) {
+            navBar.classList.add("fixed-nav");
+        } else {
+            navBar.classList.remove("fixed-nav");
+        }
+    });
+</script>
