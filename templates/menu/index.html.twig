@@ -6,11 +6,13 @@
     {% include '/layouts/_menu-header.html.twig' %}
 {% endblock %}
 
+
+
 {% block body %}
     <main>
-        {% block categoryMenu %}
-            {% include '/layouts/_menu-category.html.twig' %}
-        {% endblock %}
+        {% include '/layouts/_menu-category.html.twig' %}
+        {% include '/layouts/_menu-filter.html.twig' %}
+
 
         <h2 class="flex justify-center text-2xl uppercase">Nos bières</h2>
 
@@ -28,36 +30,36 @@
                         {% if product.label != "" %}
                             {% if product.label == "local" %}
                                 <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Local.svg') }}" alt="">
-                                {% elseif product.label == "biologique" %}
-                                    <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt="">
-                                {% elseif product.label == "sans gluten" %}
-                                    <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}" alt="">
-                                {% elseif product.label == "sans alcool" %}
-                                    <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}" alt="">
-                                {% elseif product.label == "avec lactose" %}
-                                    <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt="">
-                                {% elseif product.label == "avec arachides" %}
-                                    <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt="">
+                            {% elseif product.label == "biologique" %}
+                                <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt="">
+                            {% elseif product.label == "sans gluten" %}
+                                <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}" alt="">
+                            {% elseif product.label == "sans alcool" %}
+                                <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}" alt="">
+                            {% elseif product.label == "avec lactose" %}
+                                <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt="">
+                            {% elseif product.label == "avec arachides" %}
+                                <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt="">
                             {% endif %}
                         {% endif %}
                     </div>
                     <div class="flex flex-col">
                         <h4 class="flex">{{ product.name }}</h4>
                         <div class="flex">
-                            <span>{{ product.style }}</span><img class="mx-2 my-auto"
-                                                                 src="{{ asset('assets/img/Puce_wine.svg') }}"
-                                                                 alt=""><span
-                                    class="font-bold">{{ product.degreOfAlcohol }}%</span><img class="mx-2 my-auto"
-                                                                                               src="{{ asset('assets/img/Puce_wine.svg') }}"
-                                                                                               alt=""><span>{{ product.capacity / 10 }} cl</span>
+                            <span>{{ product.style }}</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
+                            <span class="font-bold">{{ product.degreOfAlcohol }}%</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
+                            <span>{{ product.capacity / 10 }} cl</span>
                         </div>
+                        <!-- {{ dump(product) }} -->
                         <div class="flex">
                             <p>{{ product.customerDescription }}</p>
                         </div>
                         <div class="flex">
-                            <span>{{ product.brand }}</span><img class="mx-2 my-auto"
-                                                                 src="{{ asset('assets/img/Puce_wine.svg') }}"
-                                                                 alt=""><span>{{ product.origin }}</span>
+                            <span>{{ product.brand }}</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
+                            <span>{{ product.origin }}</span>
                         </div>
                     </div>
                 </div>
