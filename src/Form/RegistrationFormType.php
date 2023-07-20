@@ -22,6 +22,9 @@ class RegistrationFormType extends AbstractType
             ->add('director_firstname', TextType::class, [
                 'label' => 'Nom du directeur',
                 'required' => true,
+                'attr' => [
+                    'class' => 'my-44'
+                ]
             ])
             ->add('director_lastname', TextType::class, [
                 'label' => 'Prénom du directeur',
