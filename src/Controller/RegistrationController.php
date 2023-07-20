@@ -13,62 +13,56 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
 
 class RegistrationController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
-        $user = new User();
-        $company = new Company();
 
-        $form = $this->createForm(RegistrationFormType::class, ['user' => $user, 'company' =>$company]);
+        $form = $this->createForm(RegistrationFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Encoder le mot de passe
+
+            // Récupérer les données à partir du formulaire
+            $data = $form->getData();
+
+            $user = new User();
+            $user->setFirstname($data['director_firstname']);
+            $user->setLastname($data['director_lastname']);
+            $user->setEmail($data['email']);
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setEmployeeNumber(1);
+            $user->setRoles(['admin']);
 
-        // Récupérer les données de la société à partir du formulaire
-        $companyData = $form->get('company')->getData();
+            $company = new Company();
+            $company->setName($data['company_name']);
+            $company->setDirectorFirstname($data['director_firstname']);
+            $company->setDirectorLastname($data['director_lastname']);
+            $company->setSiret($data['siret_number']);
+            $company->setAddress($data['address']);
+            $company->setZipcode($data['zipcode']);
+            $company->setCity($data['city']);
 
-        $company->setName($companyData['company_name']);
-        $company->setDirectorFirstname($company['director_firstname']);
-        $company->setDirectorLastname($company['director_lastname']);
-        $company->setSiret($company['siret_number']);
-        $company->setAddress($company['address']);
-        $company->setZipcode($company['zipcode']);
-        $company->setCity($company['city']);
+            // Associez la société à l'utilisateur
+            $user->setCompany($company);
 
-        // Associez la société à l'utilisateur
-        $user->setCompany($company);
+            $entityManager->persist($user);
+            $entityManager->persist($company);
+            $entityManager->flush();
 
-        // Récupérez les données de l'utilisateur à partir du formulaire
-        $userData = $form->get('user')->getData();
+            $session->set('user_name', $user->getFirstname());
 
-        $user->setFirstname($userData['director_firstname']);
-        $user->setLastname($userData['director_lastname']);
-        $user->setEmail($userData['email']);
-        $user->setEmployeeNumber(1);
-        $user->setRoles(['admin']);
-
-        $entityManager->persist($company);
-        $entityManager->persist($user);
-        $entityManager->flush();
-
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
+            return $this->redirectToRoute('app_dashboard');
         }
-
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);

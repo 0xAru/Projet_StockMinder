@@ -2,16 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\User;
-use App\Entity\Company;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -23,7 +21,7 @@ class RegistrationFormType extends AbstractType
             //champs pour l'utilisateur
             ->add('director_firstname', TextType::class, [
                 'label' => 'Nom du directeur',
-                'required' => true
+                'required' => true,
             ])
             ->add('director_lastname', TextType::class, [
                 'label' => 'Prénom du directeur',
@@ -33,23 +31,28 @@ class RegistrationFormType extends AbstractType
                 'label' => 'E-mail',
                 'required' => true
             ])
-            ->add('plainPassword', PasswordType::class, [
-                'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'label' => 'Mot de passe',
-                'constraints' => [
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Les champs de mot de passe doivent correspondre.',
+                'options' => ['attr' => ['class' => 'password-field']],
+                'required' => true,
+                'first_options'  => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmer le mot de passe'],
+                'mapped' => false, // Vous pouvez retirer cette option si vous n'en avez pas besoin
+                'constraints' => [ // Vous pouvez conserver les contraintes de validation pour le premier champ de mot de passe
                     new NotBlank([
                         'message' => 'Entrez votre mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit être composé d\'au moins {{ limit }} caractères',
+                        'minMessage' => 'Votre mot de passe doit être composé d\'au moins 6 caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
-                'required' => true
             ])
+
+
             //champs pour la société
             ->add('company_name', TextType::class, [
                 'label' => 'Dénomination sociale',
@@ -71,6 +74,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Ville',
                 'required' => true
             ])
+            ->add('Envoyer', SubmitType::class)
         ;
     }
 
