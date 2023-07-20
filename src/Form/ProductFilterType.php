@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Product;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType; // pour utiliser le type de champs EntityType
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType; // pour utiliser le type de champs ChoiceType (champs avec ou sans alcool)
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType; // pour utiliser le type de champs TextType (champs de recherche)
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,32 +15,30 @@ class ProductFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // Récupérer les options uniques pour le champ "style" et supprimer les doublons
+        $styleChoices = array_values(array_unique($options['style_choices']));
+        $originChoices = array_values(array_unique($options['origin_choices']));
+        $brandChoices = array_values(array_unique($options['brand_choices']));
+        $capacityChoices = array_values(array_unique($options['capacity_choices']));
+
         $builder
-            ->add('style', EntityType::class, [
-                'class' => Product::class,
-                'choice_label' => 'style',
-                'group_by' => 'style', // Cette option regroupe les styles de produits identiques dans le champ select
+            ->add('style', ChoiceType::class, [
+                'choices' => array_combine($styleChoices, $styleChoices),
                 'required' => false,
-                'placeholder' => 'Style'
+                'placeholder' => 'Style',
             ])
-            ->add('origin', EntityType::class, [
-                'class' => Product::class,
-                'choice_label' => 'origin',
-                'group_by' => 'origin',
+            ->add('origin', ChoiceType::class, [
+                'choices' => array_combine($originChoices, $originChoices),
                 'required' => false,
                 'placeholder' => 'Provenance',
             ])
-            ->add('brand', EntityType::class, [
-                'class' => Product::class,
-                'choice_label' => 'brand',
-                'group_by' => 'brand',
+            ->add('brand', ChoiceType::class, [
+                'choices' => array_combine($brandChoices, $brandChoices),
                 'required' => false,
                 'placeholder' => 'Marque',
             ])
-            ->add('capacity', EntityType::class, [
-                'class' => Product::class,
-                'choice_label' => 'capacity',
-                'group_by' => 'capacity',
+            ->add('capacity', ChoiceType::class, [
+                'choices' => array_combine($capacityChoices, $capacityChoices),
                 'required' => false,
                 'placeholder' => 'Contenance',
             ])
@@ -64,6 +63,10 @@ class ProductFilterType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Product::class,
+            'style_choices' => [],
+            'origin_choices' => [],
+            'brand_choices' => [],
+            'capacity_choices' => [],
         ]);
     }
 }

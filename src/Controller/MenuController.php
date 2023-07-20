@@ -2,25 +2,53 @@
 
 namespace App\Controller;
 
+use App\Form\ProductFilterType;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MenuController extends AbstractController
 {
     #[Route('/carte', name: 'app_menu')]
-    public function index(ProductRepository $productRepository ): Response
+    public function index(ProductRepository $productRepository, Request $request ): Response
     {
         // Appeler l'action index du ProductController pour récupérer les produits
         $products = $productRepository->findAll();
 
-        // Appeler l'action index du EventController pour récupérer les événements
-        //$events = $eventController->index();
+        // Récupérer les options uniques pour les champs du formulaire
+        $filterOptions = [
+            'style_choices' => $productRepository->findUniqueStyles(),
+            'origin_choices' => $productRepository->findUniqueOrigins(),
+            'brand_choices' => $productRepository->findUniqueBrands(),
+            'capacity_choices' => $productRepository->findUniqueCapacities(),
+        ];
 
-        // Passez les produits et les événements aux modèles Twig pour les afficher
+        // Créer une instance du formulaire avec les options uniques
+        $form = $this->createForm(ProductFilterType::class, null, $filterOptions);
+
+        // Traitez la soumission du formulaire s'il a été envoyé
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Récupérez les données du formulaire
+            $data = $form->getData();
+
+            // Filtrez les produits en fonction des critères choisis dans le formulaire
+            $products = $productRepository->findByFilters($data);
+
+            //dd($productRepository->findProductByKeyword("rum"));
+
+            // Appeler l'action index du EventController pour récupérer les événements
+            //$events = $eventController->index();
+
+        }
+
         return $this->render('menu/index.html.twig', [
             'products' => $products,
+            'form' => $form->createView(),
             //'events' => $events,
         ]);
     }
