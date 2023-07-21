@@ -20,27 +20,44 @@ class RegistrationFormType extends AbstractType
         $builder
             //champs pour l'utilisateur
             ->add('director_firstname', TextType::class, [
-                'label' => 'Nom du directeur',
+                'label' => " ",
                 'required' => true,
                 'attr' => [
-                    'class' => 'my-44'
+                    'placeholder' => "Nom du directeur",
                 ]
             ])
             ->add('director_lastname', TextType::class, [
-                'label' => 'Prénom du directeur',
-                'required' => true
+                'label' => ' ',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Prénom du directeur",
+                ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'E-mail',
-                'required' => true
+                'label' => ' ',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "E-mail",
+                ]
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les champs de mot de passe doivent correspondre.',
-                'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmer le mot de passe'],
+                'first_options' => [
+                    'label' => ' ',
+                    'attr' => [
+                        'placeholder' => 'Mot de passe',
+                        'class' => 'password-field'
+                    ],
+                ],
+                'second_options' => [
+                    'label' => ' ',
+                    'attr' => [
+                        'placeholder' => 'Confirmez le mot de passe',
+                        'class' => 'password-field'
+                    ],
+                ],
                 'mapped' => false, // Vous pouvez retirer cette option si vous n'en avez pas besoin
                 'constraints' => [ // Vous pouvez conserver les contraintes de validation pour le premier champ de mot de passe
                     new NotBlank([
@@ -55,15 +72,20 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
 
-
             //champs pour la société
             ->add('company_name', TextType::class, [
-                'label' => 'Dénomination sociale',
-                'required' => true
+                'label' => ' ',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Dénomination Sociale"
+                ]
             ])
             ->add('siret_number', TextType::class, [
-                'label' => 'Numéro SIRET',
-                'required' => true
+                'label' => ' ',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Numéro SIRET"
+                ]
             ])
             ->add('address', TextType::class, [
                 'label' => 'Adresse',
@@ -77,10 +99,13 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Ville',
                 'required' => true
             ])
-            ->add('Envoyer', SubmitType::class)
-        ;
-    }
+            ->add('Envoyer', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn'
+                ]
+            ]);
 
+    }
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
