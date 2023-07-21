@@ -1,0 +1,61 @@
+@font-face {
+    font-family: Calligraffitti;
+    src: url(../fonts/Calligraffitti-Regular.ttf); /* titres h1 */
+}
+
+@font-face {
+    font-family: deliusregular;
+    src: url(../fonts/Delius-Regular.ttf);
+}
+
+@font-face {
+    font-family: deliusunicregular;
+    src: url(../fonts/DeliusUnicase-Regular.ttf);
+}
+
+@font-face {
+    font-family: deliusunicbold;
+    src: url(../fonts/DeliusUnicase-Bold.ttf);
+}
+
+@font-face {
+    font-family: rancho;
+    src: url(../fonts/Rancho-Regular.ttf);
+}
+
+:root {
+    --raisin-black: rgb(39, 37, 37);
+    --persian-orange:rgb(240, 142, 69);
+    --dutch-white: rgb(244, 230, 195);
+    --dun: rgb(219, 204, 168);
+    --wine: rgb(91, 38, 47);
+}
+
+header {
+    background-color: var(--wine);
+    height: 100px;
+}
+
+.logo {
+    width: auto;
+    height: 100px;
+}
+
+.container-register-form {
+    background-color: var(--dutch-white);
+}
+
+h1 {
+    -webkit-text-stroke-width: 0.1px;
+    font-weight: bolder;
+}
+
+.left-aside {
+    background-color: var(--wine);
+}
+
+footer {
+    background-color: var(--wine);
+    height: 100px;
+}
+
