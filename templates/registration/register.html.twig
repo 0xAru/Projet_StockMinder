@@ -2,6 +2,10 @@
 
 {% block title %}Inscription{% endblock %}
 
+{% block styles_dashboard %}
+    <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
+{% endblock %}
+
 {% block body %}
     <main class="container-register-form grid grid-cols-12">
         <section class="left-aside grid-cols-1">
@@ -9,6 +13,7 @@
         </section>
         <section class="col-start-2 col-end-13 flex flex-col items-center py-8">
             <h1 class="custom-h1 md:mb-6">Inscription</h1>
+            <input type="text" class="rounded-full md:my-3"
             {{ form_errors(registrationForm) }}
             {{ form(registrationForm) }}
         </section>

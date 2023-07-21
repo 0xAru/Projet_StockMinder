@@ -55,12 +55,12 @@ Encore
         config.useBuiltIns = 'usage';
         config.corejs = '3.23';
     })
-    //.enablePostCssLoader((options) => {
-        // Ajoutez ici les plugins PostCSS
-      //  options.postcssOptions = {
-        //    config: './.postcss.config.js'
-        //};
-    //})
+    // .enablePostCssLoader((options) => {
+    //     // Ajoutez ici les plugins PostCSS
+    //     options.postcssOptions = {
+    //         config: './.postcss.config.js'
+    //     };
+    // })
     // enables Sass/SCSS support
     //.enableSassLoader()
 
