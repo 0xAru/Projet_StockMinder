@@ -118,11 +118,16 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('Envoyer', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn'
+                    'class' => 'md:px-28 btn rounded-full '
                 ],
                 'row_attr' => [
-                    'class' => 'flex justify-center md:my-3 '
+                    'class' => 'flex justify-center md:my-3'
                 ]
+            ])
+
+            // Ajouter la classe à la div qui englobe tous les champs
+            ->setAttributes([
+                'class' => 'flex flex-col items-center',
             ]);
 
     }
