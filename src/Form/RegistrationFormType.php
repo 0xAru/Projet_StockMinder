@@ -24,6 +24,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Nom du directeur",
+                    'class' => 'rounded-full md:my-3'
                 ]
             ])
             ->add('director_lastname', TextType::class, [
@@ -31,6 +32,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Prénom du directeur",
+                    'class' => 'rounded-full md:my-3'
                 ]
             ])
             ->add('email', EmailType::class, [
@@ -38,6 +40,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "E-mail",
+                    'class' => 'rounded-full md:my-3'
                 ]
             ])
             ->add('plainPassword', RepeatedType::class, [
@@ -48,14 +51,14 @@ class RegistrationFormType extends AbstractType
                     'label' => ' ',
                     'attr' => [
                         'placeholder' => 'Mot de passe',
-                        'class' => 'password-field'
+                        'class' => 'password-field rounded-full md:my-3'
                     ],
                 ],
                 'second_options' => [
                     'label' => ' ',
                     'attr' => [
                         'placeholder' => 'Confirmez le mot de passe',
-                        'class' => 'password-field'
+                        'class' => 'password-field rounded-full md:my-3'
                     ],
                 ],
                 'mapped' => false, // Vous pouvez retirer cette option si vous n'en avez pas besoin
@@ -77,31 +80,48 @@ class RegistrationFormType extends AbstractType
                 'label' => ' ',
                 'required' => true,
                 'attr' => [
-                    'placeholder' => "Dénomination Sociale"
+                    'placeholder' => "Dénomination Sociale",
+                    'class' => 'rounded-full md:my-3'
                 ]
             ])
             ->add('siret_number', TextType::class, [
                 'label' => ' ',
                 'required' => true,
                 'attr' => [
-                    'placeholder' => "Numéro SIRET"
+                    'placeholder' => "Numéro SIRET",
+                    'class' => 'rounded-full md:my-3'
                 ]
             ])
             ->add('address', TextType::class, [
-                'label' => 'Adresse',
-                'required' => true
+                'label' => ' ',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Adresse",
+                    'class' => 'rounded-full md:my-3'
+                ]
             ])
             ->add('zipcode', TextType::class, [
-                'label' => 'Code postal',
-                'required' => true
+                'label' => ' ',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Code postal",
+                    'class' => 'rounded-full md:my-3'
+                ]
             ])
             ->add('city', TextType::class, [
-                'label' => 'Ville',
-                'required' => true
+                'label' => ' ',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Ville",
+                    'class' => 'rounded-full md:my-3'
+                ]
             ])
             ->add('Envoyer', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn'
+                ],
+                'row_attr' => [
+                    'class' => 'flex justify-center md:my-3 '
                 ]
             ]);
 
