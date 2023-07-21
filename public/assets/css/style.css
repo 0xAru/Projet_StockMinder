@@ -38,6 +38,7 @@ body {
     height: 100vh;
 }
 
+
 /*header------------------------------------*/
 
 header {
@@ -102,6 +103,14 @@ h3 {
     font-family: rancho, serif, sans-serif;
 }
 
+h4 {
+    font-family: deliusunicbold;
+    font-size: 12px !important;
+}
+
+.my-product-data {
+    font-family: deliusregular;
+}
 /* Les blondes -------------------------------*/
 
 .my-blondes h3{
@@ -132,3 +141,42 @@ h3 {
 
 /* Les blanches -------------------------------*/
 
+.my-blanches h3{
+    color: var(--raisin-black);
+}
+
+.my-blanches{
+    background-color: var(--dutch-white);
+}
+
+.my-blanches .my-product-card{
+    color: var(--raisin-black);
+}
+
+/* Les ambrees -------------------------------*/
+
+.my-ambrees h3{
+    color: var(--dun);
+}
+
+.my-ambrees{
+    background-color: var(--wine);
+}
+
+.my-ambrees .my-product-card{
+    color: var(--dun);
+}
+
+/* Les fruitees -------------------------------*/
+
+.my-fruitees h3{
+    color: var(--wine);
+}
+
+.my-fruitees{
+    background-color: var(--dun);
+}
+
+.my-fruitees .my-product-card{
+    color: var(--wine);
+}
