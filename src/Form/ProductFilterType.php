@@ -27,9 +27,7 @@ class ProductFilterType extends AbstractType
                 'required' => false,
                 'placeholder' => 'Style',
                 'label' => false,
-                'attr' => [
-                    'class' => 'text-red-500',
-                    ],
+
             ])
             ->add('origin', ChoiceType::class, [
                 'choices' => array_combine($originChoices, $originChoices),

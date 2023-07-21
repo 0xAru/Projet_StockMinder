@@ -1,5 +1,4 @@
 const Encore = require('@symfony/webpack-encore');
-const purgecss = require('@fullhuman/postcss-purgecss');
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -56,28 +55,12 @@ Encore
         config.useBuiltIns = 'usage';
         config.corejs = '3.23';
     })
-    .enablePostCssLoader((options) => {
+    //.enablePostCssLoader((options) => {
         // Ajoutez ici les plugins PostCSS
-        options.postcssOptions = {
-            plugins: [
-                // Activez le plugin "postcss-purgecss"
-                purgecss({
-                    // Spécifiez ici les fichiers Twig à analyser pour les classes utilisées
-                    content: [
-                        './templates/**/*.twig',
-                        // Ajoutez d'autres fichiers Twig au besoin
-                    ],
-                    // Excluez les fichiers qui peuvent contenir des classes dynamiques ou générées
-                    safelist: [
-                        // Ajoutez ici les classes que vous ne souhaitez pas purger
-                        // Par exemple, les classes utilisées par JavaScript
-                    ],
-                }),
-                // Ajoutez d'autres plugins PostCSS au besoin
-            ],
-            config: './.postcss.config.js'
-        };
-    })
+      //  options.postcssOptions = {
+        //    config: './.postcss.config.js'
+        //};
+    //})
     // enables Sass/SCSS support
     //.enableSassLoader()
 
