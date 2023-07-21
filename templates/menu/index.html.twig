@@ -28,26 +28,27 @@
         <div class="flex flex-col justify-center my-blondes">
             <h3 class="ml-5 !important text-2xl" id="blondes">Les blondes</h3>
             {% endif %}
-                <div class="my-product-card flex">
-                    <div class="flex flex-col items-center w-14">
-                        {% if product.label != "" %}
-                            {% if product.label == "local" %}
-                                <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Local.svg') }}" alt="">
-                            {% elseif product.label == "biologique" %}
-                                <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt="">
-                            {% elseif product.label == "sans gluten" %}
-                                <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}" alt="">
-                            {% elseif product.label == "sans alcool" %}
-                                <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}" alt="">
-                            {% elseif product.label == "avec lactose" %}
-                                <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt="">
-                            {% elseif product.label == "avec arachides" %}
-                                <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt="">
-                            {% endif %}
+            <div class="my-product-card flex">
+                <div class="flex flex-col items-center w-14">
+                    {% if product.label != "" %}
+                        {% if product.label == "local" %}
+                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Local.svg') }}" alt="">
+                        {% elseif product.label == "biologique" %}
+                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt="">
+                        {% elseif product.label == "sans gluten" %}
+                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}" alt="">
+                        {% elseif product.label == "sans alcool" %}
+                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}" alt="">
+                        {% elseif product.label == "avec lactose" %}
+                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt="">
+                        {% elseif product.label == "avec arachides" %}
+                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt="">
                         {% endif %}
-                    </div>
-                    <div class="flex flex-col">
-                        <h4 class="flex">{{ product.name }}</h4>
+                    {% endif %}
+                </div>
+                <div class="flex flex-col">
+                    <h4 class="text-xs flex">{{ product.name }}</h4>
+                    <div class="my-product-data">
                         <div class="flex">
                             <span>{{ product.style }}</span>
                             <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
@@ -66,9 +67,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
             {% endif %}
             {% endfor %}
-            </div>
+        </div>
 
         <!-- Fin Affichage catégorie blondes -->
 
@@ -102,22 +104,24 @@
                     {% endif %}
                 </div>
                 <div class="flex flex-col">
-                    <h4 class="flex">{{ product.name }}</h4>
-                    <div class="flex">
-                        <span>{{ product.style }}</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span class="font-bold">{{ product.degreOfAlcohol }}%</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span>{{ product.capacity / 10 }} cl</span>
-                    </div>
-                    <!-- {{ dump(product) }} -->
-                    <div class="flex">
-                        <p>{{ product.customerDescription }}</p>
-                    </div>
-                    <div class="flex">
-                        <span>{{ product.brand }}</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span>{{ product.origin }}</span>
+                    <h4 class="text-xs flex">{{ product.name }}</h4>
+                    <div class="my-product-data">
+                        <div class="flex">
+                            <span>{{ product.style }}</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                            <span class="font-bold">{{ product.degreOfAlcohol }}%</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                            <span>{{ product.capacity / 10 }} cl</span>
+                        </div>
+                        <!-- {{ dump(product) }} -->
+                        <div class="flex">
+                            <p>{{ product.customerDescription }}</p>
+                        </div>
+                        <div class="flex">
+                            <span>{{ product.brand }}</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                            <span>{{ product.origin }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -157,22 +161,24 @@
                     {% endif %}
                 </div>
                 <div class="flex flex-col">
-                    <h4 class="flex">{{ product.name }}</h4>
-                    <div class="flex">
-                        <span>{{ product.style }}</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span class="font-bold">{{ product.degreOfAlcohol }}%</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span>{{ product.capacity / 10 }} cl</span>
-                    </div>
-                    <!-- {{ dump(product) }} -->
-                    <div class="flex">
-                        <p>{{ product.customerDescription }}</p>
-                    </div>
-                    <div class="flex">
-                        <span>{{ product.brand }}</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span>{{ product.origin }}</span>
+                    <h4 class="text-xs flex">{{ product.name }}</h4>
+                    <div class="my-product-data">
+                        <div class="flex">
+                            <span>{{ product.style }}</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
+                            <span class="font-bold">{{ product.degreOfAlcohol }}%</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
+                            <span>{{ product.capacity / 10 }} cl</span>
+                        </div>
+                        <!-- {{ dump(product) }} -->
+                        <div class="flex">
+                            <p>{{ product.customerDescription }}</p>
+                        </div>
+                        <div class="flex">
+                            <span>{{ product.brand }}</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
+                            <span>{{ product.origin }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -212,22 +218,24 @@
                     {% endif %}
                 </div>
                 <div class="flex flex-col">
-                    <h4 class="flex">{{ product.name }}</h4>
-                    <div class="flex">
-                        <span>{{ product.style }}</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span class="font-bold">{{ product.degreOfAlcohol }}%</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span>{{ product.capacity / 10 }} cl</span>
-                    </div>
-                    <!-- {{ dump(product) }} -->
-                    <div class="flex">
-                        <p>{{ product.customerDescription }}</p>
-                    </div>
-                    <div class="flex">
-                        <span>{{ product.brand }}</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span>{{ product.origin }}</span>
+                    <h4 class="text-xs flex">{{ product.name }}</h4>
+                    <div class="my-product-data">
+                        <div class="flex">
+                            <span>{{ product.style }}</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                            <span class="font-bold">{{ product.degreOfAlcohol }}%</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                            <span>{{ product.capacity / 10 }} cl</span>
+                        </div>
+                        <!-- {{ dump(product) }} -->
+                        <div class="flex">
+                            <p>{{ product.customerDescription }}</p>
+                        </div>
+                        <div class="flex">
+                            <span>{{ product.brand }}</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                            <span>{{ product.origin }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -256,9 +264,11 @@
                         {% elseif product.label == "biologique" %}
                             <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt="">
                         {% elseif product.label == "sans gluten" %}
-                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}" alt="">
+                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
+                                 alt="">
                         {% elseif product.label == "sans alcool" %}
-                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}" alt="">
+                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
+                                 alt="">
                         {% elseif product.label == "avec lactose" %}
                             <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt="">
                         {% elseif product.label == "avec arachides" %}
@@ -267,22 +277,24 @@
                     {% endif %}
                 </div>
                 <div class="flex flex-col">
-                    <h4 class="flex">{{ product.name }}</h4>
-                    <div class="flex">
-                        <span>{{ product.style }}</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span class="font-bold">{{ product.degreOfAlcohol }}%</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span>{{ product.capacity / 10 }} cl</span>
-                    </div>
-                    <!-- {{ dump(product) }} -->
-                    <div class="flex">
-                        <p>{{ product.customerDescription }}</p>
-                    </div>
-                    <div class="flex">
-                        <span>{{ product.brand }}</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span>{{ product.origin }}</span>
+                    <h4 class="text-xs flex">{{ product.name }}</h4>
+                    <div class="my-product-data">
+                        <div class="flex">
+                            <span>{{ product.style }}</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
+                            <span class="font-bold">{{ product.degreOfAlcohol }}%</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
+                            <span>{{ product.capacity / 10 }} cl</span>
+                        </div>
+                        <!-- {{ dump(product) }} -->
+                        <div class="flex">
+                            <p>{{ product.customerDescription }}</p>
+                        </div>
+                        <div class="flex">
+                            <span>{{ product.brand }}</span>
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
+                            <span>{{ product.origin }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -293,57 +305,6 @@
         <!-- Fin Affichage catégorie fruitées -->
 
         <!-- Affichage catégorie sans alcool -->
-
-        {% set sansAlcoolHeadingDisplayed = false %}
-
-        {% for product in products %}
-        {% if product.category == "Fruitée" %}
-        {% if not fruiteesHeadingDisplayed %}
-        {% set fruiteesHeadingDisplayed = true %}
-        <div class="flex flex-col justify-center my-fruitees">
-            <h3 class="ml-5 !important text-2xl" id="fruitees">Les fruitées</h3>
-            {% endif %}
-            <div class="my-product-card flex">
-                <div class="flex flex-col items-center w-14">
-                    {% if product.label != "" %}
-                        {% if product.label == "local" %}
-                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Local.svg') }}" alt="">
-                        {% elseif product.label == "biologique" %}
-                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt="">
-                        {% elseif product.label == "sans gluten" %}
-                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}" alt="">
-                        {% elseif product.label == "sans alcool" %}
-                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}" alt="">
-                        {% elseif product.label == "avec lactose" %}
-                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt="">
-                        {% elseif product.label == "avec arachides" %}
-                            <img class="h-7 w-7" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt="">
-                        {% endif %}
-                    {% endif %}
-                </div>
-                <div class="flex flex-col">
-                    <h4 class="flex">{{ product.name }}</h4>
-                    <div class="flex">
-                        <span>{{ product.style }}</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span class="font-bold">{{ product.degreOfAlcohol }}%</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span>{{ product.capacity / 10 }} cl</span>
-                    </div>
-                    <!-- {{ dump(product) }} -->
-                    <div class="flex">
-                        <p>{{ product.customerDescription }}</p>
-                    </div>
-                    <div class="flex">
-                        <span>{{ product.brand }}</span>
-                        <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                        <span>{{ product.origin }}</span>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-            {% endfor %}
-        </div>
 
         <!-- Fin Affichage catégorie sans alcool -->
 
