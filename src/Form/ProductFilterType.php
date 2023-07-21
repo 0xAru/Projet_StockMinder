@@ -27,6 +27,9 @@ class ProductFilterType extends AbstractType
                 'required' => false,
                 'placeholder' => 'Style',
                 'label' => false,
+                'attr' => [
+                    'class' => 'rounded-full border-2 border-gray-300',
+                ],
 
             ])
             ->add('origin', ChoiceType::class, [

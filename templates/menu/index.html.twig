@@ -2,6 +2,12 @@
 
 {% block title %}Carte{% endblock %}
 
+ {% block stylesheets %}
+     {{ encore_entry_link_tags('app') }}
+     <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
+     {% block styles_dashboard %}{% endblock %}
+ {% endblock %}
+
 {% block header %}
     {% include '/layouts/_menu-header.html.twig' %}
 {% endblock %}
