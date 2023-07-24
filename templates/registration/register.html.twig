@@ -7,14 +7,41 @@
 {% endblock %}
 
 {% block body %}
-    <main class="container-register-form grid grid-cols-12">
+    <main class= "flex-1 container-register-form grid grid-cols-12">
         <section class="left-aside grid-cols-1">
         </section>
 
-        <section class="col-start-2 col-end-13 flex flex-col items-center py-8">
-            <h1 class="custom-h1 md:mb-6">Inscription</h1>
+        <section class="col-start-2 col-end-13 flex flex-col items-center justify-center py-8">
+            <h1 class="text-stroke custom-h1 md:mb-6">Inscription</h1>
             {{ form_errors(registrationForm) }}
-            {{ form(registrationForm) }}
+
+            {{ form_start(registrationForm) }}
+            <div class="grid">
+                <div class="flex gap-10">
+                    {{ form_row(registrationForm.director_firstname) }}
+                    {{ form_row(registrationForm.director_lastname) }}
+                </div>
+                <br>
+                <div class="flex gap-10">
+                    {{ form_row(registrationForm.company_name) }}
+                    {{ form_row(registrationForm.siret_number) }}
+                </div>
+                <div>
+                    {{ form_row(registrationForm.address) }}
+                </div>
+                <div class="flex gap-10">
+                    {{ form_row(registrationForm.zipcode) }}
+                    {{ form_row(registrationForm.city) }}
+                </div>
+                <div>
+                    {{ form_row(registrationForm.email) }}
+                </div>
+                <div class="flex gap-10">
+                    {{ form_row(registrationForm.plainPassword) }}
+                </div>
+                {{ form_row(registrationForm.Envoyer) }}
+            </div>
+            {{ form_end(registrationForm) }}
         </section>
     </main>
 {% endblock %}

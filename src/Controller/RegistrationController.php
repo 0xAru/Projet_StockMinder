@@ -5,24 +5,28 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Company;
 use App\Form\RegistrationFormType;
-use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator, EntityManagerInterface $entityManager, SessionInterface $session): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
+        $stylesOptions = [
+            'attr' => [
+                'class' => 'flex flex-col items-center'
+            ]
+        ];
 
-        $form = $this->createForm(RegistrationFormType::class);
+        $form = $this->createForm(RegistrationFormType::class, null, $stylesOptions);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +63,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($company);
             $entityManager->flush();
 
-            $session->set('user_name', $user->getFirstname());
+            $session->set('user_firstname', $user->getFirstname());
 
             return $this->redirectToRoute('app_dashboard');
         }
