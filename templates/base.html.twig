@@ -9,12 +9,8 @@
             <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
             {% block styles_additionnels %}{% endblock %}
         {% endblock %}
-
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        {% block javascripts %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
     </head>
     <body>
             {% block header %}
