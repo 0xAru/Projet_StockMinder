@@ -118,7 +118,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('Envoyer', SubmitType::class, [
                 'attr' => [
-                    'class' => 'md:px-28 btn rounded-full '
+                    'class' => 'btn rounded-full'
                 ],
                 'row_attr' => [
                     'class' => 'flex justify-center md:my-3'

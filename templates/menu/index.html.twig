@@ -3,9 +3,7 @@
 {% block title %}Carte{% endblock %}
 
  {% block stylesheets %}
-     {{ encore_entry_link_tags('app') }}
-     <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
-     {% block styles_dashboard %}{% endblock %}
+     {% block styles_additionnels %}<link rel="stylesheet" href="{{ asset("assets/css/carte_style.css") }}">{% endblock %}
  {% endblock %}
 
 {% block header %}
