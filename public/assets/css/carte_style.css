@@ -1,0 +1,96 @@
+.my-menu {
+    background-color: var(--persian-orange);
+}
+
+select {
+    background-image: url("/assets/img/up-arrow.svg");
+    background-size: 20px 20px;
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+select:focus {
+    background-image: url("/assets/img/up-arrow.svg");
+    background-size: 20px 20px;
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+select:focus {
+    background-image: url("/assets/img/down-arrow.svg");
+}
+
+
+.my-product-data {
+    font-family: deliusregular;
+}
+/* Les blondes -------------------------------*/
+
+.my-blondes h3{
+    color: var(--wine);
+}
+
+.my-blondes {
+    background-color: var(--dun);
+}
+
+.my-blondes .my-product-card{
+    color: var(--wine);
+}
+
+/* Les brunes -------------------------------*/
+
+.my-brunes h3{
+    color: var(--dun);
+}
+
+.my-brunes{
+    background-color: var(--raisin-black);
+}
+
+.my-brunes .my-product-card{
+    color: var(--dun);
+}
+
+/* Les blanches -------------------------------*/
+
+.my-blanches h3{
+    color: var(--raisin-black);
+}
+
+.my-blanches{
+    background-color: var(--dutch-white);
+}
+
+.my-blanches .my-product-card{
+    color: var(--raisin-black);
+}
+
+/* Les ambrees -------------------------------*/
+
+.my-ambrees h3{
+    color: var(--dun);
+}
+
+.my-ambrees{
+    background-color: var(--wine);
+}
+
+.my-ambrees .my-product-card{
+    color: var(--dun);
+}
+
+/* Les fruitees -------------------------------*/
+
+.my-fruitees h3{
+    color: var(--wine);
+}
+
+.my-fruitees{
+    background-color: var(--dun);
+}
+
+.my-fruitees .my-product-card{
+    color: var(--wine);
+}
+

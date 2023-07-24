@@ -1,2 +1,47 @@
-{{ form(form) }}
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"> -->
+
+{{ form_start(form) }}
+<div class="my-filter-fields">
+    {{ form_row(form.style) }}
+</div>
+
+<div class="my-filter-fields">
+    {{ form_row(form.origin) }}
+</div>
+
+<div class="my-filter-fields">
+    {{ form_row(form.brand) }}
+</div>
+
+<div class="my-filter-fields">
+    {{ form_row(form.capacity) }}
+</div>
+
+<div class="my-filter-fields">
+    {{ form_row(form.degre_of_alcohol) }}
+</div>
+
+  {{ form_row(form.submit) }}
+{{ form_end(form) }}
+
+
+<script>
+
+
+    let selects = document.querySelectorAll("select");
+
+
+selects.forEach(function(select) {
+    let options = select.getElementsByTagName('option');
+
+    select.addEventListener('focus', function () {
+
+// Appliquer le style souhaité à chaque option
+        for (let i = 0; i < options.length; i++) {
+            options[i].style.backgroundColor = "var(--persian-orange)"; // Modifier la couleur d'arrière-plan du texte de toutes les options
+            if (i === 0) {
+                options[i].style.fontWeight = "bold"; // Mettre en gras le texte de la première option
+            }
+        }
+    });
+});
+</script>

@@ -2,9 +2,9 @@
 
 {% block title %}Carte{% endblock %}
 
- {% block stylesheets %}
+
      {% block styles_additionnels %}<link rel="stylesheet" href="{{ asset("assets/css/carte_style.css") }}">{% endblock %}
- {% endblock %}
+
 
 {% block header %}
     {% include '/layouts/_menu-header.html.twig' %}
@@ -16,7 +16,11 @@
 
     <main>
         {% include '/layouts/_menu-category.html.twig' %}
+        <nav>
+            <img src="{{ asset('assets/img/burger-menu-cross.svg') }}" alt="">
         {% include '/layouts/_menu-filter.html.twig' %}
+        </nav>
+
 
 
         <h2 class="flex justify-center text-2xl uppercase">Nos bières</h2>

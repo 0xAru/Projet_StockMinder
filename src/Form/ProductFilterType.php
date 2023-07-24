@@ -28,7 +28,10 @@ class ProductFilterType extends AbstractType
                 'placeholder' => 'Style',
                 'label' => false,
                 'attr' => [
-                    'class' => 'rounded-full border-2 border-gray-300',
+                    'class' => 'focus:font-bold focus:ring-0 bg-transparent border-0 w-40',
+                ],
+                'row_attr' => [
+                    'class' => 'my-filter-fields',
                 ],
 
             ])
@@ -38,7 +41,10 @@ class ProductFilterType extends AbstractType
                 'placeholder' => 'Provenance',
                 'label' => false,
                 'attr' => [
-                    'class' => 'rounded-full border-2 border-gray-300',
+                    'class' => 'focus:font-bold focus:ring-0 bg-transparent border-0 w-40 ',
+                ],
+                'row_attr' => [
+                    'class' => 'my-filter-fields',
                 ],
             ])
             ->add('brand', ChoiceType::class, [
@@ -47,7 +53,10 @@ class ProductFilterType extends AbstractType
                 'placeholder' => 'Marque',
                 'label' => false,
                 'attr' => [
-                    'class' => 'rounded-full border-2 border-gray-300',
+                    'class' => 'focus:font-bold focus:ring-0 bg-transparent border-0 w-40',
+                ],
+                'row_attr' => [
+                    'class' => 'my-filter-fields',
                 ],
             ])
             ->add('capacity', ChoiceType::class, [
@@ -56,7 +65,10 @@ class ProductFilterType extends AbstractType
                 'placeholder' => 'Contenance',
                 'label' => false,
                 'attr' => [
-                    'class' => 'rounded-full border-2 border-gray-300',
+                    'class' => 'focus:font-bold focus:ring-0 bg-transparent border-0 w-40 ',
+                ],
+                'row_attr' => [
+                    'class' => 'my-filter-fields',
                 ],
             ])
             ->add('degre_of_alcohol', ChoiceType::class, [
@@ -67,9 +79,12 @@ class ProductFilterType extends AbstractType
                 'required' => false,
                 'label' => false,
                 'attr' => [
-                    'class' => 'rounded-full border-2 border-gray-300',
+                    'class' => 'focus:ring-0 focus: text-bold bg-transparent border-0 w-40 ',
                 ],
-                'placeholder' => 'Avec ou sans alcool', //il faut faire une logique afin de déterminer s'il y a de l'alcool ou non (alcool>0°= with, else = without)
+                'row_attr' => [
+                    'class' => 'my-filter-fields',
+                ],
+                'placeholder' => 'Alcool', //il faut faire une logique afin de déterminer s'il y a de l'alcool ou non (alcool>0°= with, else = without)
             ])
             //->add('search', TextType::class, [
                // 'required' => false,
