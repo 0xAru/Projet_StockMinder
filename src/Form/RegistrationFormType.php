@@ -18,12 +18,12 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            //champs pour l'utilisateur
+            // Champs pour l'utilisateur
             ->add('director_firstname', TextType::class, [
                 'label' => " ",
                 'required' => true,
                 'attr' => [
-                    'placeholder' => "Nom du directeur",
+                    'placeholder' => "Prénom du directeur",
                     'class' => 'rounded-full md:my-3'
                 ]
             ])
@@ -31,7 +31,7 @@ class RegistrationFormType extends AbstractType
                 'label' => ' ',
                 'required' => true,
                 'attr' => [
-                    'placeholder' => "Prénom du directeur",
+                    'placeholder' => "Nom du directeur",
                     'class' => 'rounded-full md:my-3'
                 ]
             ])
@@ -40,7 +40,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "E-mail",
-                    'class' => 'rounded-full md:my-3'
+                    'class' => 'w-full rounded-full md:my-3'
                 ]
             ])
             ->add('plainPassword', RepeatedType::class, [
@@ -97,7 +97,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Adresse",
-                    'class' => 'rounded-full md:my-3'
+                    'class' => 'w-full rounded-full md:my-3'
                 ]
             ])
             ->add('zipcode', TextType::class, [
@@ -116,20 +116,14 @@ class RegistrationFormType extends AbstractType
                     'class' => 'rounded-full md:my-3'
                 ]
             ])
-            ->add('Envoyer', SubmitType::class, [
+            ->add("Envoyer", SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn rounded-full'
+                    'class' => 'btn rounded-full px-10 py-2 font-semibold'
                 ],
                 'row_attr' => [
                     'class' => 'flex justify-center md:my-3'
                 ]
-            ])
-
-            // Ajouter la classe à la div qui englobe tous les champs
-            ->setAttributes([
-                'class' => 'flex flex-col items-center',
             ]);
-
     }
     public function configureOptions(OptionsResolver $resolver): void
     {
