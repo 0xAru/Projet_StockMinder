@@ -37,18 +37,27 @@ class ProductFilterType extends AbstractType
                 'required' => false,
                 'placeholder' => 'Provenance',
                 'label' => false,
+                'attr' => [
+                    'class' => 'rounded-full border-2 border-gray-300',
+                ],
             ])
             ->add('brand', ChoiceType::class, [
                 'choices' => array_combine($brandChoices, $brandChoices),
                 'required' => false,
                 'placeholder' => 'Marque',
                 'label' => false,
+                'attr' => [
+                    'class' => 'rounded-full border-2 border-gray-300',
+                ],
             ])
             ->add('capacity', ChoiceType::class, [
                 'choices' => array_combine($capacityChoices, $capacityChoices),
                 'required' => false,
                 'placeholder' => 'Contenance',
                 'label' => false,
+                'attr' => [
+                    'class' => 'rounded-full border-2 border-gray-300',
+                ],
             ])
             ->add('degre_of_alcohol', ChoiceType::class, [
                 'choices' => [
@@ -57,6 +66,9 @@ class ProductFilterType extends AbstractType
                 ],
                 'required' => false,
                 'label' => false,
+                'attr' => [
+                    'class' => 'rounded-full border-2 border-gray-300',
+                ],
                 'placeholder' => 'Avec ou sans alcool', //il faut faire une logique afin de déterminer s'il y a de l'alcool ou non (alcool>0°= with, else = without)
             ])
             //->add('search', TextType::class, [
