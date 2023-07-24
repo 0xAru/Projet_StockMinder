@@ -23,6 +23,9 @@ class MenuController extends AbstractController
             'origin_choices' => $productRepository->findUniqueOrigins(),
             'brand_choices' => $productRepository->findUniqueBrands(),
             'capacity_choices' => $productRepository->findUniqueCapacities(),
+            'attr' => [
+                'class' => 'my-menu w-44', // Ajoutez la classe parent ici
+            ],
         ];
 
         // Créer une instance du formulaire avec les options uniques
