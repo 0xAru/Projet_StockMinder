@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Form\ProductFilterType;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,15 +12,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
-    #[Route('/produits', name: 'app_product')]
-    public function index(ProductRepository $productRepository): Response
-    {
-        // Récupération tous les produits depuis le ProductRepository
-        $products = $productRepository->findAll();
 
-        // Passez les produits récupérés au modèle Twig pour les afficher
-        return $this->render('/index.html.twig', [
-            'products' => $products,
+
+    #[Route('/{id}/produits', name: 'app_product')]
+    public function index(ProductRepository $productRepository, Company $company): Response
+    {
+        $response = new Response();
+        // Récupération tous les produits depuis le ProductRepository
+        $products = $company->getProducts();
+        return $this->json([
+            'products'=>$products,
         ]);
     }
 }

@@ -107,3 +107,15 @@ h4 {
     font-family: deliusunicbold;
     font-size: 12px !important;
 }
+
+.text-stroke {
+    -webkit-text-stroke-width: 0.3px;
+}
+
+.div-img {
+    background-color: var(--dutch-white);
+}
+
+.div-img:active {
+    background-color: var(--persian-orange);
+}

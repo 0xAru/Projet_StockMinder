@@ -29,6 +29,7 @@ class ProductRepository extends ServiceEntityRepository
 
 
         return $this->createQueryBuilder('p')
+
             ->orWhere('p.name LIKE :searchTerm')
             ->orWhere('p.style LIKE :searchTerm')
             ->orWhere('p.origin LIKE :searchTerm')
