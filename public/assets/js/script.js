@@ -27,3 +27,6 @@ navbar.addEventListener('touchmove', (event) => {
 navbar.addEventListener('touchend', () => {
     isScrolling = false;
 });
+
+
+

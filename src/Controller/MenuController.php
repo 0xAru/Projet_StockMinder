@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Form\ProductFilterType;
 use App\Repository\ProductRepository;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 class MenuController extends AbstractController
 {
@@ -24,7 +26,7 @@ class MenuController extends AbstractController
             'brand_choices' => $productRepository->findUniqueBrands(),
             'capacity_choices' => $productRepository->findUniqueCapacities(),
             'attr' => [
-                'class' => 'my-menu w-44', // Ajoutez la classe parent ici
+                'class' => 'my-menu w-48', // Ajoutez la classe parent ici
             ],
         ];
 
@@ -34,23 +36,25 @@ class MenuController extends AbstractController
         // Traitez la soumission du formulaire s'il a été envoyé
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
 
+        $searchTerm = $request->query->get('search');
+
+        if ($searchTerm !== null) {
+            // Filtrez les produits en fonction du terme de recherche
+            $products = $productRepository->findProductByKeyword($searchTerm);
+        } else if ($form->isSubmitted() && $form->isValid()) {
             // Récupérez les données du formulaire
             $data = $form->getData();
 
             // Filtrez les produits en fonction des critères choisis dans le formulaire
             $products = $productRepository->findByFilters($data);
-
-            //dd($productRepository->findProductByKeyword("rum"));
-
-            // Appeler l'action index du EventController pour récupérer les événements
-            //$events = $eventController->index();
-
+        } else {
+            $products = $productRepository->findAll();
         }
 
         return $this->render('menu/index.html.twig', [
             'products' => $products,
+            'searchTerm' => $searchTerm,
             'form' => $form->createView(),
             //'events' => $events,
         ]);
