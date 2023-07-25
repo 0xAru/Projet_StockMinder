@@ -69,9 +69,5 @@ footer {
 
 
 .text-stroke {
-    -webkit-text-stroke-width: 0.3px;
-}
-
-.text-strokeh1 {
     -webkit-text-stroke-width: 0.1px;
 }
