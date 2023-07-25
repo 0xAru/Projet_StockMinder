@@ -2,56 +2,86 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use App\Controller\ProductController;
 use App\Entity\Trait\SlugTrait;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ApiResource(
+
+    operations: [
+
+    new Get(
+        uriTemplate: '/{id}/products',
+        controller: ProductController::class,
+        name: 'app_product'
+    ),
+
+],
+    normalizationContext: ['groups' => ['read:products']])]
 class Product
 {
     use SlugTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read:products'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:products'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:products'])]
     private ?string $brand = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:products'])]
     private ?string $category = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:products'])]
     private ?string $style = null;
 
     #[ORM\Column(length: 500)]
+    #[Groups(['read:products'])]
     private ?string $customer_description = null;
 
     #[ORM\Column(length: 600)]
+    #[Groups(['read:products'])]
     private ?string $employee_description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read:products'])]
     private ?string $degre_of_alcohol = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:products'])]
     private ?string $origin = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:products'])]
     private ?string $capacity = null;
 
     #[ORM\Column]
+    #[Groups(['read:products'])]
     private ?int $price = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['read:products'])]
     private ?int $promotion = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['read:products'])]
     private ?int $stock = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['read:products'])]
     private ?int $threshold = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
@@ -59,6 +89,7 @@ class Product
     private ?Company $company = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['read:products'])]
     private ?string $label = null;
 
     public function getId(): ?int

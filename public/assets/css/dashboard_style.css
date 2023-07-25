@@ -45,6 +45,10 @@ header {
     background-color: var(--dutch-white);
 }
 
+.custom-h1sm {
+    font-size: 32px;
+}
+
 h1 {
     font-weight: bolder;
 }
@@ -66,4 +70,8 @@ footer {
 
 .text-stroke {
     -webkit-text-stroke-width: 0.3px;
+}
+
+.text-strokeh1 {
+    -webkit-text-stroke-width: 0.1px;
 }

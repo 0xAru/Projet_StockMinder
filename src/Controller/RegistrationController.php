@@ -64,6 +64,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             $session->set('user_firstname', $user->getFirstname());
+            $session->set('company_id', $user->getCompany());
 
             return $this->redirectToRoute('app_dashboard');
         }
