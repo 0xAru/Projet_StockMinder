@@ -1,47 +1,104 @@
-
-{{ form_start(form) }}
-<div class="my-filter-fields">
-    {{ form_row(form.style) }}
-</div>
-
-<div class="my-filter-fields">
-    {{ form_row(form.origin) }}
-</div>
-
-<div class="my-filter-fields">
-    {{ form_row(form.brand) }}
-</div>
-
-<div class="my-filter-fields">
-    {{ form_row(form.capacity) }}
-</div>
-
-<div class="my-filter-fields">
-    {{ form_row(form.degre_of_alcohol) }}
-</div>
-
-  {{ form_row(form.submit) }}
-{{ form_end(form) }}
+<nav>
+    <img src="{{ asset('assets/img/burger-menu.svg') }}" alt="" class="my-burger my-closed ml-3.5 mt-3.5">
+    <div class="my-menu-container my-hidden ml-3.5 w-48 py-3.5 px-3 rounded-r-lg rounded-bl-lg absolute">
+        <form id="searchTermForm" action="/carte" method="get">
+            <div class="flex">
+                {% if searchTerm %}  <input type="text" class="my-search-input w-32 rounded-full p-1 focus:font-bold focus:ring-0 border-0" placeholder="Tout voir" name="search">
+                {% else %} <input type="text" class="my-search-input w-32 rounded-full p-1 focus:font-bold focus:ring-0 border-0" placeholder="Recherche..." name="search">
+                {% endif %}
+                <button type="submit"><img class="mx-4" src="{{ asset('assets/img/search-icon.svg') }}" alt=""></button>
+            </div>
+        </form>
 
 
+        {{ form_start(form) }}
+        <div class="my-filter-fields">
+            {{ form_row(form.style) }}
+        </div>
+
+        <div class="my-filter-fields">
+            {{ form_row(form.origin) }}
+        </div>
+
+        <div class="my-filter-fields">
+            {{ form_row(form.brand) }}
+        </div>
+
+        <div class="my-filter-fields">
+            {{ form_row(form.capacity) }}
+        </div>
+
+        <div class="my-filter-fields">
+            {{ form_row(form.degre_of_alcohol) }}
+        </div>
+
+        {{ form_row(form.submit) }}
+        {{ form_row(form.button) }}
+
+        {{ form_end(form) }}
+    </div>
+</nav>
 <script>
-
 
     let selects = document.querySelectorAll("select");
 
+    selects.forEach(function (select) {
+        let options = select.getElementsByTagName('option');
 
-selects.forEach(function(select) {
-    let options = select.getElementsByTagName('option');
-
-    select.addEventListener('focus', function () {
+        select.addEventListener('focus', function () {
 
 // Appliquer le style souhaité à chaque option
-        for (let i = 0; i < options.length; i++) {
-            options[i].style.backgroundColor = "var(--persian-orange)"; // Modifier la couleur d'arrière-plan du texte de toutes les options
-            if (i === 0) {
-                options[i].style.fontWeight = "bold"; // Mettre en gras le texte de la première option
+            for (let i = 0; i < options.length; i++) {
+                options[i].style.backgroundColor = "var(--persian-orange)"; // Modifier la couleur d'arrière-plan du texte de toutes les options
+                if (i === 0) {
+                    options[i].style.fontWeight = "bold"; // Mettre en gras le texte de la première option
+                }
             }
+        });
+    });
+
+    let burger = document.querySelector('.my-burger');
+    let menu = document.querySelector('.my-menu-container');
+
+
+    burger.addEventListener('click', () => {
+
+        if (burger.classList.contains('my-closed')){
+            burger.src = "{{ asset('assets/img/burger-menu-cross.svg') }}";
+            burger.classList.remove("my-closed");
+            burger.classList.add("my-opened")
+            menu.classList.remove("my-hidden");
+        } else {
+            burger.src = "{{ asset('assets/img/burger-menu.svg') }}";
+            burger.classList.remove("my-opened");
+            burger.classList.add("my-closed");
+            menu.classList.add("my-hidden");
         }
     });
-});
+
+    function removeSearchParamFromURL() {
+        let urlWithoutSearchParam = window.location.href.split('?')[0];
+        history.replaceState({}, document.title, urlWithoutSearchParam);
+    }
+
+    // Attacher un événement au chargement de la page pour supprimer le paramètre 'search'
+    window.addEventListener('DOMContentLoaded', () => {
+        removeSearchParamFromURL();
+    });
+
+    function resetFilters() {
+
+        let selects = document.querySelectorAll('select');
+        let search = document.querySelector('.my-search-input');
+
+        selects.forEach(function (select){
+            select.value = "";
+        })
+
+        search.value = "";
+
+       window.location = "/carte";
+
+    }
+
 </script>

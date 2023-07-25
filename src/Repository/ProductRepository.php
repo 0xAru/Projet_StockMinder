@@ -24,12 +24,17 @@ class ProductRepository extends ServiceEntityRepository
         $this->entityManager = $entityManager;
     }
 
-        public function findProductByKeyword($keyword): array
+        public function findProductByKeyword($searchTerm): array
     {
 
+
         return $this->createQueryBuilder('p')
-            ->andWhere('p.name LIKE :keyword')
-           ->setParameter('keyword', "%".$keyword."%")
+            ->orWhere('p.name LIKE :searchTerm')
+            ->orWhere('p.style LIKE :searchTerm')
+            ->orWhere('p.origin LIKE :searchTerm')
+            ->orWhere('p.brand LIKE :searchTerm')
+            ->orWhere('p.capacity LIKE :searchTerm')
+           ->setParameter('searchTerm', "%".$searchTerm."%")
             ->getQuery()
             ->getResult()
         ;
@@ -68,7 +73,7 @@ class ProductRepository extends ServiceEntityRepository
     public function findUniqueCapacities(): array
     {
         $query = $this->entityManager->createQueryBuilder()
-            ->select('DISTINCT p.capacity')
+            ->select('DISTINCT p.capacity / 10 AS divided_capacity')
             ->from(Product::class, 'p')
             ->getQuery();
 

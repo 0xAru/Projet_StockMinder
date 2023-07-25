@@ -1,5 +1,17 @@
-.my-menu {
+.my-menu-container {
     background-color: var(--persian-orange);
+    color: var(--wine);
+    font-family: deliusregular, serif, sans-serif;
+}
+
+.my-hidden {
+    display: none;
+}
+
+.my-search-input {
+    background-color: var(--dutch-white);
+    color: var(--wine);
+    font-family: deliusregular, serif, sans-serif;
 }
 
 select {
@@ -36,6 +48,12 @@ select:focus {
 
 .my-blondes .my-product-card{
     color: var(--wine);
+    border-bottom: dashed 1px var(--wine);
+
+}
+
+.my-price {
+    font-family: deliusregular, sefif, sans-serif;
 }
 
 /* Les brunes -------------------------------*/
