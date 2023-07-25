@@ -29,7 +29,7 @@ class ProductRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('p')
             ->andWhere('p.name LIKE :keyword')
-           ->setParameter('keyword', "%".$keyword."%")
+            ->setParameter('keyword', "%".$keyword."%")
             ->getQuery()
             ->getResult()
         ;
