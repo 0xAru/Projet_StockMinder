@@ -92,13 +92,16 @@ class ProductFilterType extends AbstractType
 
             ->add('submit', SubmitType::class, [
                 'label' => 'Filtrer', // activer le bouton submit uniquement lorsque le champs de recherche est renseigner
-
+                'attr' => [
+                    'class' => 'my-button w-28 rounded-full p-1 focus:font-bold focus:ring-0 border-0 ',
+                ],
             ])
 
             ->add('button', ButtonType::class, [
                 'label' => 'Effacer',
                 'attr' => [
                     'onclick' => 'resetFilters()',
+                    'class' => 'my-button w-28 rounded-full p-1 focus:font-bold focus:ring-0 border-0'
                 ],
             ]);
 

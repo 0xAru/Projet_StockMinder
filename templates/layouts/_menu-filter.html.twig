@@ -1,41 +1,50 @@
 <nav>
-    <img src="{{ asset('assets/img/burger-menu.svg') }}" alt="" class="my-burger my-closed ml-3.5 mt-3.5">
-    <div class="my-menu-container my-hidden ml-3.5 w-48 py-3.5 px-3 rounded-r-lg rounded-bl-lg absolute">
-        <form id="searchTermForm" action="/carte" method="get">
-            <div class="flex">
-                {% if searchTerm %}  <input type="text" class="my-search-input w-32 rounded-full p-1 focus:font-bold focus:ring-0 border-0" placeholder="Tout voir" name="search">
-                {% else %} <input type="text" class="my-search-input w-32 rounded-full p-1 focus:font-bold focus:ring-0 border-0" placeholder="Recherche..." name="search">
-                {% endif %}
-                <button type="submit"><img class="mx-4" src="{{ asset('assets/img/search-icon.svg') }}" alt=""></button>
+    <div class="flex">
+        <img src="{{ asset('assets/img/burger-menu.svg') }}" alt=""
+             class="my-burger burger-hidden my-closed ml-0 mt-3 fixed">
+        <div class="my-menu-container menu-hidden w-48 py-3.5 mt-3 rounded-br-lg fixed">
+            <form id="searchTermForm" action="/carte" method="get">
+                <div class="flex">
+                    {% if searchTerm %}  <input type="text"
+                                                class="my-search-input w-32 rounded-full p-1 ml-2 focus:font-bold focus:ring-0 border-0"
+                                                placeholder="Tout voir" name="search">
+                    {% else %} <input type="text"
+                                      class="my-search-input w-32 rounded-full p-1 ml-2 focus:font-bold focus:ring-0 border-0"
+                                      placeholder="Recherche..." name="search">
+                    {% endif %}
+                    <button type="submit"><img class="mx-4" src="{{ asset('assets/img/search-icon.svg') }}" alt="">
+                    </button>
+                </div>
+            </form>
+
+
+            {{ form_start(form) }}
+            <div class="my-filter-fields">
+                {{ form_row(form.style) }}
             </div>
-        </form>
 
+            <div class="my-filter-fields">
+                {{ form_row(form.origin) }}
+            </div>
 
-        {{ form_start(form) }}
-        <div class="my-filter-fields">
-            {{ form_row(form.style) }}
+            <div class="my-filter-fields">
+                {{ form_row(form.brand) }}
+            </div>
+
+            <div class="my-filter-fields">
+                {{ form_row(form.capacity) }}
+            </div>
+
+            <div class="my-filter-fields">
+                {{ form_row(form.degre_of_alcohol) }}
+            </div>
+            <div class="flex flex-col items-center w-48">
+                div
+                {{ form_row(form.button) }}
+                {{ form_row(form.submit) }}
+            </div>
+            {{ form_end(form) }}
         </div>
-
-        <div class="my-filter-fields">
-            {{ form_row(form.origin) }}
-        </div>
-
-        <div class="my-filter-fields">
-            {{ form_row(form.brand) }}
-        </div>
-
-        <div class="my-filter-fields">
-            {{ form_row(form.capacity) }}
-        </div>
-
-        <div class="my-filter-fields">
-            {{ form_row(form.degre_of_alcohol) }}
-        </div>
-
-        {{ form_row(form.submit) }}
-        {{ form_row(form.button) }}
-
-        {{ form_end(form) }}
     </div>
 </nav>
 <script>
@@ -63,18 +72,27 @@
 
     burger.addEventListener('click', () => {
 
-        if (burger.classList.contains('my-closed')){
+        if (burger.classList.contains('my-closed')) {
             burger.src = "{{ asset('assets/img/burger-menu-cross.svg') }}";
             burger.classList.remove("my-closed");
-            burger.classList.add("my-opened")
-            menu.classList.remove("my-hidden");
+            burger.classList.add("my-opened");
+            burger.classList.add("burger-visible")
+            burger.classList.remove("burger-hidden")
+            menu.classList.remove("menu-hidden");
+            menu.classList.add("menu-visible");
+
         } else {
             burger.src = "{{ asset('assets/img/burger-menu.svg') }}";
             burger.classList.remove("my-opened");
             burger.classList.add("my-closed");
-            menu.classList.add("my-hidden");
+            burger.classList.add("burger-hidden")
+            burger.classList.remove("burger-visible")
+            menu.classList.remove("menu-visible");
+            menu.classList.add("menu-hidden");
+
         }
     });
+
 
     function removeSearchParamFromURL() {
         let urlWithoutSearchParam = window.location.href.split('?')[0];
@@ -91,13 +109,13 @@
         let selects = document.querySelectorAll('select');
         let search = document.querySelector('.my-search-input');
 
-        selects.forEach(function (select){
+        selects.forEach(function (select) {
             select.value = "";
         })
 
         search.value = "";
 
-       window.location = "/carte";
+        window.location = "/carte";
 
     }
 
