@@ -1,12 +1,44 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .my-menu-container {
     background-color: var(--persian-orange);
     color: var(--wine);
     font-family: deliusregular, serif, sans-serif;
+    left: -12rem ;
 }
 
-.my-hidden {
-    display: none;
+.my-menu-container .my-button{
+    background-color: var(--dutch-white);
+    color: var(--wine);
+    font-family: deliusregular, serif, sans-serif;
+    left: -12rem ;
 }
+
+.menu-hidden {
+    left: -12rem;
+    transition: left 600ms ease;
+}
+
+.menu-visible {
+    left:0;
+    transition: left 600ms ease;
+}
+
+.burger-hidden {
+    left: 0;
+    transition: left 600ms ease;
+}
+
+.burger-visible {
+    left: 12rem;
+    transition: left 600ms ease;
+}
+
+/*.my-hidden {
+    display: none;
+} */
 
 .my-search-input {
     background-color: var(--dutch-white);
@@ -36,6 +68,12 @@ select:focus {
 .my-product-data {
     font-family: deliusregular;
 }
+
+.my-price {
+    font-family: deliusregular, sefif, sans-serif;
+}
+
+
 /* Les blondes -------------------------------*/
 
 .my-blondes h3{
@@ -52,9 +90,10 @@ select:focus {
 
 }
 
-.my-price {
-    font-family: deliusregular, sefif, sans-serif;
+.my-blondes .my-product-card:last-child {
+    border-bottom: none;
 }
+
 
 /* Les brunes -------------------------------*/
 
@@ -68,6 +107,11 @@ select:focus {
 
 .my-brunes .my-product-card{
     color: var(--dun);
+    border-bottom: dashed 1px var(--dun);
+}
+
+.my-brunes .my-product-card:last-child {
+    border-bottom: none;
 }
 
 /* Les blanches -------------------------------*/
@@ -82,6 +126,12 @@ select:focus {
 
 .my-blanches .my-product-card{
     color: var(--raisin-black);
+    border-bottom: dashed 1px var(--raisin-black);
+}
+
+
+.my-blanches .my-product-card:last-child {
+    border-bottom: none;
 }
 
 /* Les ambrees -------------------------------*/
@@ -96,6 +146,11 @@ select:focus {
 
 .my-ambrees .my-product-card{
     color: var(--dun);
+    border-bottom: dashed 1px var(--dun);
+}
+
+.my-ambrees .my-product-card:last-child {
+    border-bottom: none;
 }
 
 /* Les fruitees -------------------------------*/
@@ -110,5 +165,16 @@ select:focus {
 
 .my-fruitees .my-product-card{
     color: var(--wine);
+    border-bottom: dashed 1px var(--wine);
 }
+
+
+.my-fruitees .my-product-card:last-child {
+    border-bottom: none;
+}
+
+
+
+
+
 
