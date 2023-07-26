@@ -2,25 +2,44 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use App\Controller\CompanyController;
 use App\Repository\UserRepository;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte utilisant cette adresse mail.')]
+#[ApiResource(
+
+    operations: [
+
+        new Get(
+            uriTemplate: '/{id}/employees',
+            controller: CompanyController::class,
+            name: 'app_employee'
+        ),
+
+    ],
+    normalizationContext: ['groups' => ['read:employees']])]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read:employees'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true, nullable:true)]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Groups(['read:employees'])]
     private array $roles = [];
 
     /**
@@ -30,12 +49,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:employees'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:employees'])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:employees'])]
     private ?string $employee_number = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]

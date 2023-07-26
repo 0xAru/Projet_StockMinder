@@ -2,45 +2,72 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use App\Controller\CompanyController;
 use App\Entity\Trait\SlugTrait;
 use App\Repository\EventRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
+#[ApiResource(
+
+    operations: [
+
+        new Get(
+            uriTemplate: '/{id}/events',
+            controller: CompanyController::class,
+            name: 'app_event'
+        ),
+
+    ],
+    normalizationContext: ['groups' => ['read:events']])]
+
 class Event
 {
     use SlugTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read:events'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:events'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['read:events'])]
     private ?\DateTimeInterface $start_date = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['read:events'])]
     private ?\DateTimeInterface $end_date = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Groups(['read:events'])]
     private ?\DateTimeInterface $start_time = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[Groups(['read:events'])]
     private ?\DateTimeInterface $end_time = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:events'])]
     private ?string $display_time_period = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:events'])]
     private ?string $theme = null;
 
     #[ORM\Column(length: 500)]
+    #[Groups(['read:events'])]
     private ?string $image = null;
 
     #[ORM\Column(length: 500)]
+    #[Groups(['read:events'])]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]

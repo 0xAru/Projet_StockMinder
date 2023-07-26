@@ -5,8 +5,8 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use App\Controller\ProductController;
-use App\Entity\Trait\SlugTrait;
 use App\Repository\ProductRepository;
+use App\Entity\Trait\SlugTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -23,6 +23,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 ],
     normalizationContext: ['groups' => ['read:products']])]
+
 class Product
 {
     use SlugTrait;

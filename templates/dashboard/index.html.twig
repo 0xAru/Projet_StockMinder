@@ -10,20 +10,20 @@
 
     <main class="flex-1 container-register-form grid grid-cols-12">
         <section class="left-aside grid-cols-1">
-            <div>
+            <div class="fixed">
                 <ul>
                     <li class="flex justify-center mt-52">
-                        <div id="employee" class="rounded-full w-16 h-16 div-img flex justify-center items-center"><img
+                        <div id="employee" class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer" data-companyId="{{ company_id }}"><img
                                         src=" {{ asset("assets/img/icon_employee.png") }}" class="w-10"
                                         title="Employés"></div>
                     </li>
                     <li class="flex justify-center my-14">
-                        <div id="product" class="rounded-full w-16 h-16 div-img flex justify-center items-center" data-companyId="{{ company_id }}"><img
+                        <div id="product" class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer" data-companyId="{{ company_id }}"><img
                                         src=" {{ asset("assets/img/icon_product.png") }}" class="w-10" title="Produits">
                         </div>
                     </li>
                     <li class="flex justify-center my-14">
-                        <div id="event" class="rounded-full w-16 h-16 div-img flex justify-center items-center"><img
+                        <div id="event" class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer" data-companyId="{{ company_id }}"><img
                                         src=" {{ asset("assets/img/icon_event.png") }}" class="w-10" title="Évènements">
                         </div>
                     </li>
@@ -38,6 +38,9 @@
                         bord {{ app.session.get('user_name') }}!</h1></div>
                 <a href="/logout"><img src=" {{ asset("assets/img/logout-wine.png") }}"
                                        class="w-8 h-8 absolute top-5 right-5" title="Déconnexion"></a>
+            </div>
+            <div class="">
+
             </div>
         </section>
     </main>
