@@ -13,11 +13,8 @@ class DashboardController extends AbstractController
 
     public function index(): Response
     {
-
-        dd('hghghg');
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
-//            'companyId'=>
         ]);
     }
 }
