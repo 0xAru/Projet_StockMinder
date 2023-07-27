@@ -2,10 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DashboardProductFormType extends AbstractType
 {
@@ -28,17 +30,54 @@ class DashboardProductFormType extends AbstractType
                     'class' => 'rounded-full md:my-3'
                 ]
             ])
-            ->add('category', ChoiceType::class, [
-                'choices' => [
-                    'Blonde' => 'Blonde',
-                    'Brune' => 'Brune',
-                    'Blanche' => 'Blanche',
-                    'Ambrée' => 'Ambrée',
-                    'Fruitée' => 'Fruitée',
-                    'Sans alcool' => 'Sans alcool',
-                    'Soft' => 'Soft'
+            ->add('degre_of_alcohol', TextType::class,[
+                'label' => ' ',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Degré d\'alcool',
+                    'class' => 'rounded-full md:my-3'
                 ]
             ])
+            ->add('category', TextType::class, [
+                'label' => " ",
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Catégorie',
+                    'class' => 'rounded-full md:my-3'
+                ]
+            ])
+            ->add('style', TextType::class, [
+                'label' => " ",
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Style',
+                    'list' => "styleOptions",
+                    'class' => 'rounded-full md:my-3'
+                ]
+            ])
+            ->add('price', TextType::class, [
+                'label' => ' ',
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Prix Unitaire',
+                    'class' => 'rounded-full md:my-3'
+                ]
+            ])
+            ->add('promotion', PercentType::class, [
+                'label' => " ",
+                'attr' => [
+                    'placeholder' => 'Promotion',
+                    'class' => 'rounded-full md:my-3'
+                ]
+            ])
+
         ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver): void
+    {
+        $resolver->setDefaults([
+            'data_class' => Product::class,
+        ]);
     }
 }
