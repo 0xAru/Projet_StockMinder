@@ -1,0 +1,65 @@
+<div>
+<div class="my-event-container max-h-52 grid grid-cols-1">
+    <h2 class="text-2xl text-center pt-2">Nos prochains événements</h2>
+    <div class="my-carousel">
+        {% for event in events %}
+            <img class="my-left-arrow h-8 w-8 my-auto" src="{{ asset('assets/img/Left-arrow.svg') }}" alt="">
+            <div class="my-event flex text-center mx-auto mt-2 w-80 h-38">
+                <img class="h-20 w-20 flex my-auto" src="{{ event.image }}" alt="">
+                <div class="my-event-data flex flex-col p-2">
+                    <h3 class="text-lg capitalize">{{ event.name }}</h3>
+                    <p class="my-event-time text-center text-xs">Du {{ event.startDate | date('d-m-Y') }}
+                        au {{ event.endDate | date('d-m-Y') }}</p>
+                    <p class="my-event-time text-center text-xs">De {{ event.startTime | date('H:i') }}
+                        à {{ event.endTime | date('H:i') }}</p>
+                    <h4>{{ event.theme }}</h4>
+                    <p class="my-event-description text-center text-xs">{{ event.description }}</p>
+                </div>
+            </div>
+            <img class="my-right-arrow h-8 w-8 my-auto" src="{{ asset('assets/img/Right-arrow.svg') }}" alt="">
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const carouselContainer = document.querySelector('.my-event-carousel');
+        const carousel = document.querySelector('.my-carousel');
+        const carouselItems = document.querySelectorAll('.my-event');
+
+        const leftArrow = document.querySelector('.my-left-arrow');
+        const rightArrow = document.querySelector('.my-right-arrow');
+
+        let currentIndex = 0;
+
+// Cacher la flèche gauche au chargement de la page
+        leftArrow.style.display = 'none';
+
+// Fonction pour déplacer le carousel vers la gauche
+        leftArrow.addEventListener('click', function () {
+            currentIndex--;
+            const translateValue = `${currentIndex * -81}%`; /* Ajustez la valeur en fonction de la largeur des éléments du carousel */
+            carousel.style.transform = `translateX(${translateValue})`;
+
+            if (currentIndex === 0) {
+                leftArrow.style.display = 'none';
+            }
+            rightArrow.style.display = 'block';
+        });
+
+// Fonction pour déplacer le carousel vers la droite
+        rightArrow.addEventListener('click', function () {
+            currentIndex++;
+            const translateValue = `${currentIndex * -100}%`; /* Ajustez la valeur en fonction de la largeur des éléments du carousel */
+            carousel.style.transform = `translateX(${translateValue})`;
+
+            if (currentIndex === carouselItems.length - 1) {
+                rightArrow.style.display = 'none';
+            }
+            leftArrow.style.display = 'block';
+        });
+    });
+
+</script>

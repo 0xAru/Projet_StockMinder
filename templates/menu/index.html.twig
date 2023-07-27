@@ -15,19 +15,24 @@
 {% block body %}
 
     <main>
+        <!--menu avec les catégories de produits (blondes, brunes, softs...) -->
         {% include '/layouts/_menu-category.html.twig' %}
 
+
+        <!--menu avec les filtres et la barre de recherche -->
         {% include '/layouts/_menu-filter.html.twig' %}
 
 
 
-        <h2 class="flex justify-center text-2xl uppercase">Nos bières</h2>
 
+
+        <h2 class="flex justify-center text-2xl uppercase mt-5">Nos bières</h2>
         <!-- Affichage catégorie blondes -->
 
         {% set blondesHeadingDisplayed = false %}
 
         {% for product in products %}
+
         {% if product.category == "Blonde" %}
         {% if not blondesHeadingDisplayed %}
         {% set blondesHeadingDisplayed = true %}
@@ -54,6 +59,7 @@
                 </div>
                 <div class="col-start-2 col-end-6">
                     <h4 class="text-xs flex">{{ product.name }}</h4>
+                    {% if product.stock >= product.threshold %}
                     <div class="my-product-data">
                         <div class="flex">
                             <span>{{ product.style }}</span>
@@ -62,7 +68,6 @@
                             <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
                             <span>{{ product.capacity / 10 }} cl</span>
                         </div>
-                        <!-- {{ dump(product) }} -->
                         <div class="flex">
                             <p>{{ product.customerDescription }}</p>
                         </div>
@@ -72,7 +77,11 @@
                             <span>{{ product.origin }}</span>
                         </div>
                     </div>
-
+                    {% else %}
+                        <div class="my-product-data">
+                            <img src="{{ asset('assets/img/Stock.svg') }}" alt="">
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
                     <p>{{ product.price / 100 }}€</p>
@@ -115,6 +124,7 @@
                 </div>
                 <div class="col-start-2 col-end-6">
                     <h4 class="text-xs flex">{{ product.name }}</h4>
+                    {% if product.stock >= product.threshold %}
                     <div class="my-product-data">
                         <div class="flex">
                             <span>{{ product.style }}</span>
@@ -133,6 +143,11 @@
                             <span>{{ product.origin }}</span>
                         </div>
                     </div>
+                    {% else %}
+                        <div class="my-product-data">
+                            <img src="{{ asset('assets/img/Stock.svg') }}" alt="">
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
                     <p>{{ product.price / 100 }}€</p>
@@ -175,6 +190,7 @@
                 </div>
                 <div class="col-start-2 col-end-6">
                     <h4 class="text-xs flex">{{ product.name }}</h4>
+                    {% if product.stock >= product.threshold %}
                     <div class="my-product-data">
                         <div class="flex">
                             <span>{{ product.style }}</span>
@@ -193,6 +209,11 @@
                             <span>{{ product.origin }}</span>
                         </div>
                     </div>
+                    {% else %}
+                        <div class="my-product-data">
+                            <img src="{{ asset('assets/img/Stock.svg') }}" alt="">
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
                     <p>{{ product.price / 100 }}€</p>
@@ -235,6 +256,7 @@
                 </div>
                 <div class="col-start-2 col-end-6">
                     <h4 class="text-xs flex">{{ product.name }}</h4>
+                    {% if product.stock >= product.threshold %}
                     <div class="my-product-data">
                         <div class="flex">
                             <span>{{ product.style }}</span>
@@ -253,6 +275,11 @@
                             <span>{{ product.origin }}</span>
                         </div>
                     </div>
+                    {% else %}
+                        <div class="my-product-data">
+                            <img src="{{ asset('assets/img/Stock.svg') }}" alt="">
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
                     <p>{{ product.price / 100 }}€</p>
@@ -297,6 +324,7 @@
                 </div>
                 <div class="col-start-2 col-end-6">
                     <h4 class="text-xs flex">{{ product.name }}</h4>
+                    {% if product.stock >= product.threshold %}
                     <div class="my-product-data">
                         <div class="flex">
                             <span>{{ product.style }}</span>
@@ -315,6 +343,11 @@
                             <span>{{ product.origin }}</span>
                         </div>
                     </div>
+                    {% else %}
+                        <div class="my-product-data">
+                            <img src="{{ asset('assets/img/Stock.svg') }}" alt="">
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
                     <p>{{ product.price / 100 }}€</p>
@@ -333,6 +366,10 @@
         <!-- Affichage catégorie sans soft -->
 
         <!-- Fin Affichage catégorie soft -->
+
+        <!--section événements -->
+        {% include '/layouts/_menu-event.html.twig' %}
+
 
         {% include '/layouts/_menu-legend.html.twig' %}
 

@@ -38,6 +38,7 @@ class ProductFilterType extends AbstractType
                 ],
 
             ])
+
             ->add('origin', ChoiceType::class, [
                 'choices' => array_combine($originChoices, $originChoices),
                 'required' => false,
@@ -73,21 +74,6 @@ class ProductFilterType extends AbstractType
                 'row_attr' => [
                     'class' => 'my-filter-fields',
                 ],
-            ])
-            ->add('degre_of_alcohol', ChoiceType::class, [
-                'choices' => [
-                    'Avec' => 'with',
-                    'Sans' => 'without',
-                ],
-                'required' => false,
-                'label' => false,
-                'attr' => [
-                    'class' => 'focus:ring-0 focus: text-bold bg-transparent border-0 w-40 ',
-                ],
-                'row_attr' => [
-                    'class' => 'my-filter-fields',
-                ],
-                'placeholder' => 'Alcool', //il faut faire une logique afin de déterminer s'il y a de l'alcool ou non (alcool>0°= with, else = without)
             ])
 
             ->add('submit', SubmitType::class, [

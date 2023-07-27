@@ -3,7 +3,7 @@ html {
 }
 
 .my-menu-container {
-    background-color: var(--persian-orange);
+    background-color: rgb(238, 150, 94);
     color: var(--wine);
     font-family: deliusregular, serif, sans-serif;
     left: -12rem ;
@@ -36,9 +36,6 @@ html {
     transition: left 600ms ease;
 }
 
-/*.my-hidden {
-    display: none;
-} */
 
 .my-search-input {
     background-color: var(--dutch-white);
@@ -64,16 +61,99 @@ select:focus {
     background-image: url("/assets/img/down-arrow.svg");
 }
 
+.my-button {
+    background-color: var(--dutch-white);
+    box-shadow: 0px 6px 6px 0px rgb(39, 37, 37, 0.8);
+}
+
+.my-button:focus {
+    background-color: var(--wine);
+    color: var(--dutch-white);
+    box-shadow: 0px 3px 3px 0px rgb(39, 37, 37, 0.8);
+}
+
 
 .my-product-data {
-    font-family: deliusregular;
+    font-family: deliusregular, serif, sans-serif;
 }
 
 .my-price {
     font-family: deliusregular, sefif, sans-serif;
 }
 
+/* Affichage des événements-------------------*/
 
+.my-event-container {
+    background-color: var(--raisin-black);
+}
+
+.my-event {
+    background-color: var(--wine);
+}
+.my-event-container h2 {
+    font-family: Calligraffitti, serif, sans-serif;
+    color: var(--persian-orange);
+    background-color: var(--raisin-black);
+}
+
+.my-event-container h3 {
+    font-family: Calligraffitti, serif, sans-serif;
+    color: var(--persian-orange);
+}
+
+.my-event-time{
+    font-family: deliusregular, Serif, sans-serif;
+    color: var(--dun);
+}
+
+.my-event-container h4{
+    font-family: deliusbold, Serif, sans-serif;
+    color: var(--dun);
+}
+
+.my-event-description {
+    color: var(--persian-orange);
+}
+
+/* carousel événements */
+
+.my-event-carousel {
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+.my-carousel {
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.my-event {
+    flex: 0 0 80%; /* Ajustez la largeur des éléments du carousel ici */
+    margin-right: 1rem; /* Espace entre les éléments du carousel */
+}
+
+/* Cacher les flèches du carousel lorsqu'il est en début ou fin de liste */
+.my-event-carousel img {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.my-event-carousel img:first-child {
+    margin-right: 0; /* Ajustez la marge pour aligner correctement les flèches */
+}
+
+/* Rendre les flèches du carousel cliquables */
+.my-event-carousel:hover img {
+    opacity: 1;
+    pointer-events: auto;
+}
+/* fin carousel événements*/
+
+/* Fin Affichage des événements-------------------*/
+
+
+/* Affichage des produits-----------------------------------------------------------------*/
 /* Les blondes -------------------------------*/
 
 .my-blondes h3{
@@ -173,7 +253,7 @@ select:focus {
     border-bottom: none;
 }
 
-
+/* Fin Affichage des produits-----------------------------------------------------------------*/
 
 
 
