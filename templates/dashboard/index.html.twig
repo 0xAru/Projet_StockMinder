@@ -10,7 +10,7 @@
 
     <main class="flex-1 container-register-form grid grid-cols-12">
         <section class="left-aside grid-cols-1">
-            <div class="fixed">
+            <div>
                 <ul>
                     <li class="flex justify-center mt-52">
                         <div id="employee" class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer" data-companyId="{{ company_id }}"><img
@@ -39,10 +39,12 @@
                 <a href="/logout"><img src=" {{ asset("assets/img/logout-wine.png") }}"
                                        class="w-8 h-8 absolute top-5 right-5" title="Déconnexion"></a>
             </div>
-            <div class="">
-
+            <div>
+                {{ form(form) }}
             </div>
+
         </section>
+
     </main>
 {% endblock %}
 

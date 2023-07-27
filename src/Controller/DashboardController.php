@@ -2,19 +2,33 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
+use App\Form\DashboardProductFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\SecurityBundle\Security;
 class DashboardController extends AbstractController
 {
 
     #[Route('/dashboard', name: 'app_dashboard')]
 
-    public function index(): Response
+    public function index(Request $request ): Response
     {
+        $product = new Product();
+        $form = $this->createForm(DashboardProductFormType::class, $product);
+
+        // Traitez la soumission du formulaire s'il a été envoyé
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+        }
+
         return $this->render('dashboard/index.html.twig', [
-            'controller_name' => 'DashboardController',
+            'form' => $form->createView(),
+
+
         ]);
     }
 }
