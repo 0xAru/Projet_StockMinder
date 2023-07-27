@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
 use App\Entity\User;
+use App\Form\DashboardProductFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,6 +37,7 @@ class SecurityController extends AbstractController
     #[Route(path: '/dashboard', name: 'app_dashboard')]
     public function dashboard(Request $request): Response
     {
+
         // Vérifiez si l'utilisateur est connecté
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -46,8 +49,22 @@ class SecurityController extends AbstractController
         // Stocker le prénom dans une variable de session
         $request->getSession()->set('user_name', $firstName);
 
+        $product = new Product();
+        $form = $this->createForm(DashboardProductFormType::class, $product);
 
+        // Traitez la soumission du formulaire s'il a été envoyé
+        $form->handleRequest($request);
 
-        return $this->render('dashboard/index.html.twig', ['first_name' => $firstName, 'company_id'=> $this->getUser()->getCompany()->getId()]);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $data = $form->getData();
+//        }
+
+        return $this->render('dashboard/index.html.twig', [
+            'form' => $form->createView(),
+            'first_name' => $firstName,
+            'company_id'=> $this->getUser()->getCompany()->getId(),
+
+        ]);
+
     }
 }
