@@ -85,8 +85,56 @@
 
             {# Ajouter le tableau de produits ici #}
             </div>
-            <div id="employeeForm">
-            {{ form(employeeForm) }}
+            <div id="employeeForm" class="w-full flex flex-col justify-center rounded-lg">
+                {{ form_errors(employeeForm) }}
+
+                {{ form_start(employeeForm) }}
+                <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
+                    <h2 class="text-4xl m-6">Employés</h2>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(employeeForm.firstname) }}
+                        {{ form_row(employeeForm.lastname) }}
+                    </div>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(employeeForm.employee_number) }}
+                        {{ form_row(employeeForm.roles) }}
+                    </div>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(employeeForm.Envoyer) }}
+                    </div>
+                </div>
+                {{ form_end(employeeForm) }}
+
+                {# Ajouter le tableau des employés ici #}
+            </div>
+            <div id="eventForm" class="w-full flex flex-col justify-center rounded-lg">
+                {{ form_errors(eventForm) }}
+
+                {{ form_start(eventForm) }}
+                <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
+                    <h2 class="text-4xl m-6">Évènements</h2>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(eventForm.name) }}
+                        {{ form_row(eventForm.theme) }}
+                        {{ form_row(eventForm.display_time_period) }}
+                    </div>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(eventForm.start_date) }}
+                        {{ form_row(eventForm.end_date) }}
+                    </div>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(eventForm.start_time) }}
+                        {{ form_row(eventForm.end_time) }}
+                    </div>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(eventForm.image) }}
+                        {{ form_row(eventForm.description) }}
+                    </div>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(eventForm.Envoyer) }}
+                    </div>
+                </div>
+                {{ form_end(eventForm) }}
             </div>
         </section>
 

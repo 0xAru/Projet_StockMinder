@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Event;
 use App\Entity\Product;
 use App\Entity\User;
 use App\Form\DashboardEmployeeFormType;
+use App\Form\DashboardEventFormType;
 use App\Form\DashboardProductFormType;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,13 +58,16 @@ class SecurityController extends AbstractController
         $company = $this->getUser()->getCompany();
         $product = new Product();
         $employee = new User();
+        $event = new Event();
 
         $productForm = $this->createForm(DashboardProductFormType::class, $product);
         $employeeForm = $this->createForm(DashboardEmployeeFormType::class, $employee);
+        $eventForm = $this->createForm(DashboardEventFormType::class, $event);
 
         // Traitez la soumission du formulaire s'il a été envoyé
         $productForm->handleRequest($request);
         $employeeForm->handleRequest($request);
+        $eventForm->handleRequest($request);
 
         if ($employeeForm->isSubmitted() && $employeeForm->isValid()){
             $employee->setCompany($company);
@@ -77,7 +81,8 @@ class SecurityController extends AbstractController
             'first_name' => $firstName,
             'company_id'=> $this->getUser()->getCompany()->getId(),
             'productForm' => $productForm->createView(),
-            'employeeForm' => $employeeForm->createView()
+            'employeeForm' => $employeeForm->createView(),
+            'eventForm' => $eventForm->createView()
         ]);
 
     }
