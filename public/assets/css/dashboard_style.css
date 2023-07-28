@@ -71,3 +71,7 @@ footer {
 .text-stroke {
     -webkit-text-stroke-width: 0.1px;
 }
+
+.dashFormBg {
+    background-color: var(--dun);
+}
