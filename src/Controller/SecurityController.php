@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Entity\User;
+use App\Form\DashboardEmployeeFormType;
 use App\Form\DashboardProductFormType;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,6 +16,9 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
+    public function __construct(private EntityManagerInterface $em) {
+
+    }
     #[Route(path: '/connexion', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -37,7 +43,6 @@ class SecurityController extends AbstractController
     #[Route(path: '/dashboard', name: 'app_dashboard')]
     public function dashboard(Request $request): Response
     {
-
         // Vérifiez si l'utilisateur est connecté
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
@@ -49,21 +54,30 @@ class SecurityController extends AbstractController
         // Stocker le prénom dans une variable de session
         $request->getSession()->set('user_name', $firstName);
 
+        $company = $this->getUser()->getCompany();
         $product = new Product();
-        $form = $this->createForm(DashboardProductFormType::class, $product);
+        $employee = new User();
+
+        $productForm = $this->createForm(DashboardProductFormType::class, $product);
+        $employeeForm = $this->createForm(DashboardEmployeeFormType::class, $employee);
 
         // Traitez la soumission du formulaire s'il a été envoyé
-        $form->handleRequest($request);
+        $productForm->handleRequest($request);
+        $employeeForm->handleRequest($request);
 
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $data = $form->getData();
-//        }
+        if ($employeeForm->isSubmitted() && $employeeForm->isValid()){
+            $employee->setCompany($company);
+            $role = $request->get("dashboard_employee_form")["roles"];
+            $employee->setRoles([$role]);
+            $this->em->persist($employee);
+            $this->em->flush();
+        }
 
         return $this->render('dashboard/index.html.twig', [
-            'form' => $form->createView(),
             'first_name' => $firstName,
             'company_id'=> $this->getUser()->getCompany()->getId(),
-
+            'productForm' => $productForm->createView(),
+            'employeeForm' => $employeeForm->createView()
         ]);
 
     }

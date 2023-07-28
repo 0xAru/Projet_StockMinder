@@ -13,36 +13,81 @@
             <div>
                 <ul>
                     <li class="flex justify-center mt-52">
-                        <div id="employee" class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer" data-companyId="{{ company_id }}"><img
-                                        src=" {{ asset("assets/img/icon_employee.png") }}" class="w-10"
-                                        title="Employés"></div>
+                        <div id="employee"
+                             class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer"
+                             data-companyId="{{ company_id }}"><img
+                                    src=" {{ asset("assets/img/icon_employee.png") }}" class="w-10"
+                                    title="Employés"></div>
                     </li>
                     <li class="flex justify-center my-14">
-                        <div id="product" class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer" data-companyId="{{ company_id }}"><img
-                                        src=" {{ asset("assets/img/icon_product.png") }}" class="w-10" title="Produits">
+                        <div id="product"
+                             class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer"
+                             data-companyId="{{ company_id }}"><img
+                                    src=" {{ asset("assets/img/icon_product.png") }}" class="w-10" title="Produits">
                         </div>
                     </li>
                     <li class="flex justify-center my-14">
-                        <div id="event" class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer" data-companyId="{{ company_id }}"><img
-                                        src=" {{ asset("assets/img/icon_event.png") }}" class="w-10" title="Évènements">
+                        <div id="event"
+                             class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer"
+                             data-companyId="{{ company_id }}"><img
+                                    src=" {{ asset("assets/img/icon_event.png") }}" class="w-10" title="Évènements">
                         </div>
                     </li>
                 </ul>
             </div>
         </section>
-        <section class="col-start-2 col-end-13 flex flex-col items-center py-4 relative">
+        <section class="col-start-2 col-end-13 flex flex-col items-center py-4 relative mx-10">
             <div class="w-full flex flex-col justify-center">
                 <div class="w-full flex justify-center"><img src=" {{ asset("assets/img/logo-cheers-beers-wine.png") }}"
                                                              class="w-40"></div>
-                <div class="w-full flex justify-center my-4"><h1 class="text-stroke custom-h1sm md:mb-6">Bienvenue sur votre tableau de
+                <div class="w-full flex justify-center my-4">
+                    <h1 class="text-stroke custom-h1sm md:m-6">Bienvenue sur votre tableau de
                         bord {{ app.session.get('user_name') }}!</h1></div>
                 <a href="/logout"><img src=" {{ asset("assets/img/logout-wine.png") }}"
                                        class="w-8 h-8 absolute top-5 right-5" title="Déconnexion"></a>
             </div>
-            <div>
-                {{ form(form) }}
-            </div>
+            <div id="productForm" class="w-full flex flex-col justify-center rounded-lg">
+                {{ form_errors(productForm) }}
 
+                {{ form_start(productForm) }}
+                <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
+                    <h2 class="text-4xl m-6">Produits</h2>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(productForm.name) }}
+                        {{ form_row(productForm.brand) }}
+                        {{ form_row(productForm.degre_of_alcohol) }}
+                    </div>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(productForm.category) }}
+                        {{ form_row(productForm.style) }}
+                        {{ form_row(productForm.capacity) }}
+                    </div>
+                </div>
+                <div class="grid dashFormBg mb-16 pb-10 rounded-xl">
+                    <h2 class="text-4xl m-6">Vente / Gestion</h2>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(productForm.price) }}
+                        {{ form_row(productForm.promotion) }}
+                    </div>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(productForm.stock) }}
+                        {{ form_row(productForm.threshold) }}
+                    </div>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(productForm.customer_description) }}
+                        {{ form_row(productForm.employee_description) }}
+                    </div>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(productForm.Envoyer) }}
+                    </div>
+                </div>
+                {{ form_end(productForm) }}
+
+            {# Ajouter le tableau de produits ici #}
+            </div>
+            <div id="employeeForm">
+            {{ form(employeeForm) }}
+            </div>
         </section>
 
     </main>
