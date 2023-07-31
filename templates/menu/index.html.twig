@@ -14,17 +14,19 @@
 
 {% block body %}
 
-    <main>
+
+
+    <main class="mt-0">
         <!--menu avec les catégories de produits (blondes, brunes, softs...) -->
         {% include '/layouts/_menu-category.html.twig' %}
 
 
+        <!--section événements -->
+        {% include '/layouts/_menu-event.html.twig' %}
+
+
         <!--menu avec les filtres et la barre de recherche -->
         {% include '/layouts/_menu-filter.html.twig' %}
-
-
-
-
 
         <h2 class="flex justify-center text-2xl uppercase mt-5">Nos bières</h2>
         <!-- Affichage catégorie blondes -->
@@ -367,8 +369,7 @@
 
         <!-- Fin Affichage catégorie soft -->
 
-        <!--section événements -->
-        {% include '/layouts/_menu-event.html.twig' %}
+
 
 
         {% include '/layouts/_menu-legend.html.twig' %}

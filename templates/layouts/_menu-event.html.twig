@@ -1,65 +1,89 @@
-<div>
-<div class="my-event-container max-h-52 grid grid-cols-1">
-    <h2 class="text-2xl text-center pt-2">Nos prochains événements</h2>
-    <div class="my-carousel">
-        {% for event in events %}
-            <img class="my-left-arrow h-8 w-8 my-auto" src="{{ asset('assets/img/Left-arrow.svg') }}" alt="">
-            <div class="my-event flex text-center mx-auto mt-2 w-80 h-38">
-                <img class="h-20 w-20 flex my-auto" src="{{ event.image }}" alt="">
-                <div class="my-event-data flex flex-col p-2">
-                    <h3 class="text-lg capitalize">{{ event.name }}</h3>
-                    <p class="my-event-time text-center text-xs">Du {{ event.startDate | date('d-m-Y') }}
-                        au {{ event.endDate | date('d-m-Y') }}</p>
-                    <p class="my-event-time text-center text-xs">De {{ event.startTime | date('H:i') }}
-                        à {{ event.endTime | date('H:i') }}</p>
-                    <h4>{{ event.theme }}</h4>
-                    <p class="my-event-description text-center text-xs">{{ event.description }}</p>
+<div class="my-event-container overflow-hidden relative h-56 pb-6">
+    <div class="my-event-container grid grid-cols-1 max-h-52 pb-4">
+        <h2 class="text-2xl uppercase text-center pt-2">Nos prochains événements</h2>
+        <div class="my-carousel flex flex-col justify-center mb-6" id="myCarousel">
+            {% for event in events %}
+                <div class="my-event flex justify-center text-center mx-auto mt-3 w-80 h-38">
+                    <img class="h-20 w-20 flex my-auto" src="{{ event.image }}" alt="">
+                    <div class="my-event-data h-36 flex flex-col p-2">
+                        <h3 class="text-lg capitalize">{{ event.name }}</h3>
+                        <p class="my-event-time text-center text-xs">Du {{ event.startDate | date('d-m-Y') }}
+                            au {{ event.endDate | date('d-m-Y') }}</p>
+                        <p class="my-event-time text-center text-xs">De {{ event.startTime | date('H:i') }}
+                            à {{ event.endTime | date('H:i') }}</p>
+                        <h4>{{ event.theme }}</h4>
+                        <p class="my-event-description text-center text-xs">{{ event.description }}</p>
+                    </div>
                 </div>
+            {% endfor %}
+
+            <div class="my-indicators-container flex justify-center mt-2">
+                <ul class="my-indicators list-none p-0 m-0 flex justify-center" id="indicatorContainer">
+                    {% for event in events %}
+                        <li class="my-indicator rounded-full h-3 w-3 mx-1 cursor-pointer"></li>
+                    {% endfor %}
+                </ul>
             </div>
-            <img class="my-right-arrow h-8 w-8 my-auto" src="{{ asset('assets/img/Right-arrow.svg') }}" alt="">
-        {% endfor %}
+        </div>
+
+        <img class="my-left-arrow h-6 w-6 my-auto" src="{{ asset('assets/img/Left-arrow.svg') }}" alt="" id="leftArrow">
+        <img class="my-right-arrow h-6 w-6 my-auto" src="{{ asset('assets/img/Right-arrow.svg') }}" alt=""
+             id="rightArrow">
     </div>
-</div>
 </div>
 
 <script>
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const carouselContainer = document.querySelector('.my-event-carousel');
-        const carousel = document.querySelector('.my-carousel');
-        const carouselItems = document.querySelectorAll('.my-event');
+    // Carousel
+    const carousel = document.getElementById("myCarousel");
+    const events = carousel.getElementsByClassName("my-event");
+    const leftArrow = document.getElementById("leftArrow");
+    const rightArrow = document.getElementById("rightArrow");
+    const indicators = document.getElementsByClassName("my-indicator");
+    let currentIndex = 0;
 
-        const leftArrow = document.querySelector('.my-left-arrow');
-        const rightArrow = document.querySelector('.my-right-arrow');
 
-        let currentIndex = 0;
+    //Affichage de l'événement actif (index courant)
+    function showEvent(index) {
+        for (let i = 0; i < events.length; i++) {
+            events[i].style.display = i === index ? "flex" : "none";
+        }
 
-// Cacher la flèche gauche au chargement de la page
-        leftArrow.style.display = 'none';
+        //Affichage ou non des flèches selon si l'événement actif est le premier, le dernier ou entre les deux
 
-// Fonction pour déplacer le carousel vers la gauche
-        leftArrow.addEventListener('click', function () {
-            currentIndex--;
-            const translateValue = `${currentIndex * -81}%`; /* Ajustez la valeur en fonction de la largeur des éléments du carousel */
-            carousel.style.transform = `translateX(${translateValue})`;
+        leftArrow.style.display = index === 0 ? "none" : "block";
+        rightArrow.style.display = index === events.length - 1 ? "none" : "block";
 
-            if (currentIndex === 0) {
-                leftArrow.style.display = 'none';
-            }
-            rightArrow.style.display = 'block';
-        });
+        //Classe active de l'indicateur pour afficher le style
 
-// Fonction pour déplacer le carousel vers la droite
-        rightArrow.addEventListener('click', function () {
-            currentIndex++;
-            const translateValue = `${currentIndex * -100}%`; /* Ajustez la valeur en fonction de la largeur des éléments du carousel */
-            carousel.style.transform = `translateX(${translateValue})`;
+        for (let i = 0; i < indicators.length; i++) {
+            indicators[i].classList.toggle("active", i === index);
+        }
+    }
 
-            if (currentIndex === carouselItems.length - 1) {
-                rightArrow.style.display = 'none';
-            }
-            leftArrow.style.display = 'block';
-        });
-    });
+    function showNextEvent() {
+        currentIndex = (currentIndex + 1) % events.length;
+        console.log(currentIndex)
+        showEvent(currentIndex);
+    }
 
+    function showPrevEvent() {
+        currentIndex = (currentIndex - 1 + events.length) % events.length;
+        console.log(currentIndex)
+        showEvent(currentIndex);
+    }
+
+    // Cacher tous les événements sauf le premier
+    showEvent(currentIndex);
+
+    // Ajouter des écouteurs d'événements aux flèches
+    leftArrow.addEventListener("click", showPrevEvent);
+    rightArrow.addEventListener("click", showNextEvent);
+
+    // Ajouter des écouteurs d'événements aux indicateurs
+    const indicatorContainer = document.getElementById("indicatorContainer");
+    const indicatorItems = indicatorContainer.getElementsByClassName("my-indicator");
+    for (let i = 0; i < indicatorItems.length; i++) {
+        indicatorItems[i].addEventListener("click", () => showEvent(i));
+    }
 </script>

@@ -91,7 +91,7 @@ select:focus {
     background-color: var(--wine);
 }
 .my-event-container h2 {
-    font-family: Calligraffitti, serif, sans-serif;
+    font-family: Rancho, serif, sans-serif;
     color: var(--persian-orange);
     background-color: var(--raisin-black);
 }
@@ -116,37 +116,40 @@ select:focus {
 }
 
 /* carousel événements */
-
-.my-event-carousel {
+/* Ajouter ce style pour centrer horizontalement les flèches */
+.my-carousel-container {
     display: flex;
-    overflow: hidden;
+    justify-content: center;
+    align-items: center;
     position: relative;
 }
 
-.my-carousel {
-    display: flex;
-    transition: transform 0.3s ease;
+
+.my-indicators {
+    list-style: none;
+    padding: 0;
 }
 
-.my-event {
-    flex: 0 0 80%; /* Ajustez la largeur des éléments du carousel ici */
-    margin-right: 1rem; /* Espace entre les éléments du carousel */
+.my-indicator {
+    background-color: var(--dun);
 }
 
-/* Cacher les flèches du carousel lorsqu'il est en début ou fin de liste */
-.my-event-carousel img {
-    opacity: 0.5;
-    pointer-events: none;
+.my-indicator.active {
+    background-color: var(--persian-orange);
 }
 
-.my-event-carousel img:first-child {
-    margin-right: 0; /* Ajustez la marge pour aligner correctement les flèches */
+
+/* Ajouter ce style pour positionner correctement les flèches */
+.my-left-arrow {
+    position: absolute;
+    left: 0px;
+    top: 108px;
 }
 
-/* Rendre les flèches du carousel cliquables */
-.my-event-carousel:hover img {
-    opacity: 1;
-    pointer-events: auto;
+.my-right-arrow {
+    position: absolute;
+    right: 0px;
+    top: 108px;
 }
 /* fin carousel événements*/
 
