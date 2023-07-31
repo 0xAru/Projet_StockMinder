@@ -49,10 +49,6 @@ header {
     font-size: 32px;
 }
 
-h1 {
-    font-weight: bolder;
-}
-
 .left-aside {
     background-color: var(--wine);
 }
@@ -74,4 +70,8 @@ footer {
 
 .dashFormBg {
     background-color: var(--dun);
+}
+
+.activTab {
+    background-color: var(--persian-orange);
 }

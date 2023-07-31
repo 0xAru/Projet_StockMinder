@@ -14,7 +14,7 @@
                 <ul>
                     <li class="flex justify-center mt-52">
                         <div id="employee"
-                             class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer"
+                             class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer activTab"
                              data-companyId="{{ company_id }}"><img
                                     src=" {{ asset("assets/img/icon_employee.png") }}" class="w-10"
                                     title="Employés"></div>
@@ -22,8 +22,8 @@
                     <li class="flex justify-center my-14">
                         <div id="product"
                              class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer"
-                             data-companyId="{{ company_id }}"><img
-                                    src=" {{ asset("assets/img/icon_product.png") }}" class="w-10" title="Produits">
+                             data-companyId="{{ company_id }}">
+                            <img src=" {{ asset("assets/img/icon_product.png") }}" class="w-10" title="Produits">
                         </div>
                     </li>
                     <li class="flex justify-center my-14">
@@ -41,12 +41,12 @@
                 <div class="w-full flex justify-center"><img src=" {{ asset("assets/img/logo-cheers-beers-wine.png") }}"
                                                              class="w-40"></div>
                 <div class="w-full flex justify-center my-4">
-                    <h1 class="text-stroke custom-h1sm md:m-6">Bienvenue sur votre tableau de
+                    <h1 class="text-stroke custom-h1sm md:m-6 text-3xl">Bienvenue sur votre tableau de
                         bord {{ app.session.get('user_name') }}!</h1></div>
                 <a href="/logout"><img src=" {{ asset("assets/img/logout-wine.png") }}"
                                        class="w-8 h-8 absolute top-5 right-5" title="Déconnexion"></a>
             </div>
-            <div id="productForm" class="w-full flex flex-col justify-center rounded-lg">
+            <div id="productForm" class="w-full flex flex-col justify-center rounded-lg hidden">
                 {{ form_errors(productForm) }}
 
                 {{ form_start(productForm) }}
@@ -107,7 +107,7 @@
 
                 {# Ajouter le tableau des employés ici #}
             </div>
-            <div id="eventForm" class="w-full flex flex-col justify-center rounded-lg">
+            <div id="eventForm" class="w-full flex flex-col justify-center rounded-lg hidden">
                 {{ form_errors(eventForm) }}
 
                 {{ form_start(eventForm) }}
