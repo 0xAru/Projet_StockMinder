@@ -29,6 +29,3 @@ let test = "<option value =IPA><option value =pol>"
 styleSelect.innerHTML = test
 document.querySelector("#dashboard_product_form_style").insertAdjacentElement("afterend",styleSelect)
 
-
-// function async getProductStyles(){
-// }
