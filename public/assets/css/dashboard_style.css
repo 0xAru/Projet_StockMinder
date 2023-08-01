@@ -53,9 +53,8 @@ header {
     background-color: var(--wine);
 }
 
-footer {
+footer div {
     background-color: var(--wine);
-    height: 100px;
 }
 
 .btn {
