@@ -62,6 +62,10 @@
                         {{ form_row(productForm.style) }}
                         {{ form_row(productForm.capacity) }}
                     </div>
+                    <div class="flex justify-center gap-32 my-4">
+                        {{ form_row(productForm.label) }}
+                        {{ form_row(productForm.origin) }}
+                    </div>
                 </div>
                 <div class="grid dashFormBg mb-16 pb-10 rounded-xl">
                     <h2 class="text-4xl m-6">Vente / Gestion</h2>
@@ -137,7 +141,6 @@
                 {{ form_end(eventForm) }}
             </div>
         </section>
-
     </main>
 {% endblock %}
 

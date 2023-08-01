@@ -38,8 +38,8 @@ class AppFixtures extends Fixture
 
     function randomLabelChoices($faker)
     {
-        $choices = ['biologique', 'sans gluten', 'sans alcool', 'avec lactose', 'avec arachides', 'local', ' '];
-        $randomIndex = $faker->numberBetween(0, 6);
+        $choices = ['Biologique', 'Sans gluten', 'Sans alcool', 'Avec lactose', 'Avec arachides', 'Local'];
+        $randomIndex = $faker->numberBetween(0, 5);
         return $choices[$randomIndex];
     }
     public function load(ObjectManager $manager): void

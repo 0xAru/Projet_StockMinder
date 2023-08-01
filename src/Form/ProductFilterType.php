@@ -3,12 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Product;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType; // pour utiliser le type de champs EntityType
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType; // pour utiliser le type de champs ChoiceType (champs avec ou sans alcool)
-use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType; // pour utiliser le type de champs TextType (champs de recherche)
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -66,7 +63,7 @@ class ProductFilterType extends AbstractType
             ->add('capacity', ChoiceType::class, [
                 'choices' => array_combine($capacityChoices, $capacityChoices),
                 'required' => false,
-                'placeholder' => 'Contenance(cl)',
+                'placeholder' => 'Contenance',
                 'label' => false,
                 'attr' => [
                     'class' => 'focus:font-bold focus:ring-0 bg-transparent border-0 w-40 ',

@@ -42,15 +42,15 @@ class DashboardEventFormType extends AbstractType
                ]
            ])
            ->add("start_date", DateType::class, [
-               'label' => false,
+               'label' => "Date de début",
                'required' => true,
                'attr' => [
                    'placeholder' => "Date de début",
-                   'class' => 'rounded-full md:my-3 w-96'
+                   'class' => 'rounded-full md:my-3 w-96',
                ]
             ])
            ->add("end_date", DateType::class, [
-               'label' => false,
+               'label' => "Date de fin",
                'required' => true,
                'attr' => [
                    'placeholder' => "Date de fin",
@@ -58,7 +58,7 @@ class DashboardEventFormType extends AbstractType
                ]
            ])
            ->add("start_time", TimeType::class, [
-               'label' => false,
+               'label' => "Heure de début",
                'required' => true,
                'attr' => [
                    'placeholder' => "Heure de début",
@@ -66,7 +66,7 @@ class DashboardEventFormType extends AbstractType
                ]
            ])
            ->add("end_time", TimeType::class, [
-               'label' => false,
+               'label' => "Heure de fin",
                'required' => true,
                'attr' => [
                    'placeholder' => "Heure de fin",
