@@ -15,7 +15,6 @@ class CompanyController extends AbstractController
     #[Route('/{id}/employees', name: 'app_employee')]
     public function index(UserRepository $userRepository, Company $company): Response
     {
-
         $response = new Response();
         // Récupération tous les employés depuis le UserRepository
         $employees = $company->getUsers();

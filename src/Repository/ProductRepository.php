@@ -81,30 +81,14 @@ class ProductRepository extends ServiceEntityRepository
         return array_map('current', $query->getScalarResult());
     }
 
-//    /**
-//     * @return Product[] Returns an array of Product objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findUniqueLabels(): array{
+        $query = $this->entityManager->createQueryBuilder()
+            ->select('DISTINCT p.label')
+            ->from(Product::class, 'p')
+            ->getQuery();
 
-//    public function findOneBySomeField($value): ?Product
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        return array_map('current', $query->getScalarResult());
+    }
     public function findByFilters($data)
     {
         $em = $this->getEntityManager();

@@ -2,24 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Event;
-use App\Entity\Product;
-use App\Entity\User;
-use App\Form\DashboardEmployeeFormType;
-use App\Form\DashboardEventFormType;
-use App\Form\DashboardProductFormType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    public function __construct(private EntityManagerInterface $em) {
-
-    }
     #[Route(path: '/connexion', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
@@ -41,49 +30,5 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
-    #[Route(path: '/dashboard', name: 'app_dashboard')]
-    public function dashboard(Request $request): Response
-    {
-        // Vérifiez si l'utilisateur est connecté
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_login');
-        }
 
-        // Récupérer le prénom de l'utilisateur (remplacez 'getFirstName()' par la méthode réelle pour obtenir le prénom)
-        $firstName = $this->getUser()->getFirstname();
-
-        // Stocker le prénom dans une variable de session
-        $request->getSession()->set('user_name', $firstName);
-
-        $company = $this->getUser()->getCompany();
-        $product = new Product();
-        $employee = new User();
-        $event = new Event();
-
-        $productForm = $this->createForm(DashboardProductFormType::class, $product);
-        $employeeForm = $this->createForm(DashboardEmployeeFormType::class, $employee);
-        $eventForm = $this->createForm(DashboardEventFormType::class, $event);
-
-        // Traitez la soumission du formulaire s'il a été envoyé
-        $productForm->handleRequest($request);
-        $employeeForm->handleRequest($request);
-        $eventForm->handleRequest($request);
-
-        if ($employeeForm->isSubmitted() && $employeeForm->isValid()){
-            $employee->setCompany($company);
-            $role = $request->get("dashboard_employee_form")["roles"];
-            $employee->setRoles([$role]);
-            $this->em->persist($employee);
-            $this->em->flush();
-        }
-
-        return $this->render('dashboard/index.html.twig', [
-            'first_name' => $firstName,
-            'company_id'=> $this->getUser()->getCompany()->getId(),
-            'productForm' => $productForm->createView(),
-            'employeeForm' => $employeeForm->createView(),
-            'eventForm' => $eventForm->createView()
-        ]);
-
-    }
 }

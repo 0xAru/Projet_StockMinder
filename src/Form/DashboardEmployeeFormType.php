@@ -36,7 +36,8 @@ class DashboardEmployeeFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Matricule",
-                    'class' => 'rounded-full md:my-3 w-96'
+                    'class' => 'rounded-full md:my-3 w-96',
+                    'title' => 'deux chiffres pour un chef de salle et 3 chiffres pour un serveur'
                 ]
             ])
             ->add("roles", ChoiceType::class, [
