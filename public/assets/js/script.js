@@ -31,3 +31,32 @@ navbar.addEventListener('touchend', () => {
 
 
 
+
+//let quantity = document.querySelectorAll(".my-quantity");
+//let stock = document.querySelector(".my-stock-value");
+
+
+function minus(elem, index) {
+    let stock = document.querySelector("#stock"+index);
+    let quantity = document.getElementById("qty" + index)
+
+    if (quantity.value > 0) {
+        quantity.value --;
+    }
+}
+
+
+function plus(elem ,index) {
+    let stock = document.querySelector("#stock"+index);
+
+    let quantity = document.getElementById("qty" + index)
+
+    if (stock.value > 0 && quantity.value < parseInt(stock.value)) {
+        quantity.value ++;
+    }
+}
+
+
+
+
+

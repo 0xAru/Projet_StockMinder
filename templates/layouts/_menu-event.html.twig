@@ -1,3 +1,4 @@
+{% if events is not empty %}
 <div class="my-event-container overflow-hidden relative h-56 pb-6">
     <div class="my-event-container grid grid-cols-1 max-h-52 pb-4">
         <h2 class="text-2xl uppercase text-center pt-2">Nos prochains événements</h2>
@@ -31,6 +32,7 @@
              id="rightArrow">
     </div>
 </div>
+{% endif  %}
 
 <script>
 

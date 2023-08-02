@@ -91,7 +91,7 @@ select:focus {
     background-color: var(--wine);
 }
 .my-event-container h2 {
-    font-family: Rancho, serif, sans-serif;
+    font-family: rancho, serif, sans-serif;
     color: var(--persian-orange);
     background-color: var(--raisin-black);
 }

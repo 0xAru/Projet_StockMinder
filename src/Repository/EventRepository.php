@@ -21,6 +21,16 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+
+    public function findEventsAfterToday()
+    {
+        $qb = $this->createQueryBuilder('e');
+        $qb->andWhere('e.start_date >= :today')
+            ->andWhere(':today < DATE_SUB(e.start_date, e.display_time_period, \'day\')')
+            ->OrderBy('e.start_date', 'ASC')
+            ->setParameter('today', new \DateTime(), \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE);
+        return $qb->getQuery()->getResult();
+    }
 //    /**
 //     * @return Event[] Returns an array of Event objects
 //     */
