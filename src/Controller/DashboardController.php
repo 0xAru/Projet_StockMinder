@@ -11,16 +11,14 @@ use App\Form\DashboardProductFormType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 class DashboardController extends AbstractController
 {
     public function __construct(private EntityManagerInterface $em) {
-
     }
-
-    #[Route('/dashboard', name: 'app_dashboard')]
 
     #[Route(path: '/dashboard', name: 'app_dashboard')]
     public function index(Request $request, ProductRepository $productRepository): Response
@@ -35,7 +33,7 @@ class DashboardController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        // Récupérer le prénom de l'utilisateur (remplacez 'getFirstName()' par la méthode réelle pour obtenir le prénom)
+        // Récupérer le prénom de l'utilisateur
         $firstName = $this->getUser()->getFirstname();
 
         // Stocker le prénom dans une variable de session
@@ -57,7 +55,6 @@ class DashboardController extends AbstractController
 
         if ($productForm->isSubmitted() && $productForm->isValid()){
             $product->setCompany($company);
-
             $productName = $product->getName();
             $slug = str_replace(' ', '_', strtolower($productName));
             $product->setSlug($slug);
@@ -75,13 +72,22 @@ class DashboardController extends AbstractController
 
         if ($eventForm->isSubmitted() && $eventForm->isValid()){
             $event->setCompany($company);
-
             $eventName = $event->getName();
             $slug = str_replace(' ', '_', strtolower($eventName));
             $event->setSlug($slug);
-            $this->em->persist($event);
-            $this->em->flush();
-        }
+            $uploadedFile = $eventForm['image']->getData();
+
+            if ($uploadedFile instanceof UploadedFile) {
+                $newFilename = uniqid().'.'.$uploadedFile->getClientOriginalExtension();
+
+                    $uploadedFile->move($this->getParameter('uploads_path'), $newFilename);
+
+                    // Mettre à jour le chemin de l'image dans l'entité
+                    $event->setImage( $newFilename);
+                    $this->em->persist($event);
+                    $this->em->flush();
+                }
+            }
 
         return $this->render('dashboard/index.html.twig', [
             'first_name' => $firstName,

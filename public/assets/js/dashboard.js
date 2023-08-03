@@ -9,14 +9,12 @@ let isLoading = false;
 window.addEventListener("load", (event) => {
     getEmployees()
 });
-
 iconEmployee.addEventListener("click", async (e) => {
     getEmployees();
 });
 iconProduct.addEventListener("click", async (e) => {
     getProducts();
 });
-
 iconEvent.addEventListener("click", async (e) => {
     getEvents();
 });
@@ -36,8 +34,8 @@ document.querySelector("#dashboard_product_form_style").insertAdjacentElement("a
 //Recovery of the first words of a text
 function extractFirstWords(text, wordCount) {
     let words = text.trim().split(/\s+/);
-    let firstWords = words.slice(0, wordCount).join(' ');
-    return firstWords;
+    return words.slice(0, wordCount).join(' ');
+
 }
 
 //Reformat the date
@@ -54,7 +52,6 @@ function formatTime(dateTimeString) {
     let minutes = date.getMinutes();
 
     return (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
-
 }
 
 //Employees//
@@ -133,7 +130,6 @@ async function getProducts() {
     if (isLoading) {
         return
     }
-    let isDescription = false
     isLoading = true;
 
     if (document.getElementById("listProduct")) {
@@ -198,7 +194,6 @@ async function getProducts() {
         button2.classList.add("py-1", "rounded-xl", "bg-wine", "font-semibold", "text-persian-orange");
         button2.textContent = "Supprimer";
         buttonDiv.appendChild(button2);
-
         row.appendChild(buttonCell);
 
         let rowData = [
@@ -233,14 +228,11 @@ async function getProducts() {
             if (data == "null%") {
                 cellContent.textContent = "_";
             }
-
             cell.appendChild(cellContent);
             row.appendChild(cell);
         });
-
         tbody.appendChild(row);
     });
-
     table.appendChild(tbody);
     tableContainer.appendChild(table);
     productList.appendChild(tableContainer);
@@ -253,7 +245,6 @@ async function getEvents() {
     if (document.getElementById("listEvent")) {
         document.getElementById("listEvent").remove();
     }
-
     let events = await fetch(`/${companyId}/events`);
     events = await events.json();
     iconEvent.classList.add('activTab');
@@ -328,24 +319,29 @@ async function getEvents() {
         ];
 
         rowData.forEach(data => {
+
             let cell = document.createElement("td");
             cell.classList.add("text-center");
             let cellContent = document.createElement("div");
             cellContent.classList.add("h-28", "overflow-y-scroll", "flex", "flex-col", "justify-center", "font-semibold");
-            cellContent.textContent = data;
 
             if (data && data.length > 80) {
                 cellContent.classList.remove("justify-center")
                 cellContent.textContent = extractFirstWords(data, 10);
             }
 
+            if (event.image == data){
+                let img = document.createElement('img');
+                img.src = "../uploaded_img/" + data;
+                cellContent.appendChild(img);
+            }else{
+                cellContent.textContent = data;
+            }
             cell.appendChild(cellContent);
             row.appendChild(cell);
         });
-
         tbody.appendChild(row);
     });
-
     table.appendChild(tbody);
     tableContainer.appendChild(table);
     eventList.appendChild(tableContainer);
