@@ -89,7 +89,7 @@ class AppFixtures extends Fixture
                 $product->setStyle($this->randomStyleChoices($faker));
                 $product->setCustomerDescription($faker->text(50));
                 $product->setEmployeeDescription($faker->text(150));
-                $product->setDegreOfAlcohol($faker->randomDigitNotNull());
+                $product->setDegreeOfAlcohol($faker->randomDigitNotNull());
                 $product->setOrigin($faker->country());
                 $product->setCapacity($faker->randomElement([250, 330, 341, 355, 500]));
                 $product->setPrice($faker->numberBetween(300, 1500));

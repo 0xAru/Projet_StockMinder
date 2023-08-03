@@ -13,11 +13,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use App\Security\UserAuthenticator;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, EntityManagerInterface $entityManager, SessionInterface $session): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator,UserAuthenticator $authenticator, EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
         $stylesOptions = [
             'attr' => [
@@ -64,7 +65,11 @@ class RegistrationController extends AbstractController
 
             $session->set('user_firstname', $user->getFirstname());
             $session->set('company_id', $user->getCompany());
-
+            $userAuthenticator->authenticateUser(
+                $user,
+                $authenticator,
+                $request
+            );
             return $this->redirectToRoute('app_dashboard');
         }
         return $this->render('registration/register.html.twig', [

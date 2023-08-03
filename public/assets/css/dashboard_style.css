@@ -45,7 +45,7 @@ header {
     background-color: var(--dutch-white);
 }
 
-.custom-h1sm {
+.custom-h1 {
     font-size: 32px;
 }
 
@@ -73,4 +73,8 @@ footer div {
 
 .activTab {
     background-color: var(--persian-orange);
+}
+
+th, td{
+    width: 200px;
 }

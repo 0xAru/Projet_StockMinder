@@ -55,11 +55,31 @@ class DashboardController extends AbstractController
         $employeeForm->handleRequest($request);
         $eventForm->handleRequest($request);
 
+        if ($productForm->isSubmitted() && $productForm->isValid()){
+            $product->setCompany($company);
+
+            $productName = $product->getName();
+            $slug = str_replace(' ', '_', strtolower($productName));
+            $product->setSlug($slug);
+            $this->em->persist($product);
+            $this->em->flush();
+        }
+
         if ($employeeForm->isSubmitted() && $employeeForm->isValid()){
             $employee->setCompany($company);
             $role = $request->get("dashboard_employee_form")["roles"];
             $employee->setRoles([$role]);
             $this->em->persist($employee);
+            $this->em->flush();
+        }
+
+        if ($eventForm->isSubmitted() && $eventForm->isValid()){
+            $event->setCompany($company);
+
+            $eventName = $event->getName();
+            $slug = str_replace(' ', '_', strtolower($eventName));
+            $event->setSlug($slug);
+            $this->em->persist($event);
             $this->em->flush();
         }
 
