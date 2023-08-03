@@ -59,7 +59,7 @@ class Product
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups(['read:products'])]
-    private ?string $degre_of_alcohol = null;
+    private ?string $degree_of_alcohol = null;
 
     #[ORM\Column(length: 255)]
     #[Groups(['read:products'])]
@@ -170,14 +170,14 @@ class Product
         return $this;
     }
 
-    public function getDegreOfAlcohol(): ?string
+    public function getDegreeOfAlcohol(): ?string
     {
-        return $this->degre_of_alcohol;
+        return $this->degree_of_alcohol;
     }
 
-    public function setDegreOfAlcohol(string $degre_of_alcohol): static
+    public function setDegreeOfAlcohol(string $degree_of_alcohol): static
     {
-        $this->degre_of_alcohol = $degre_of_alcohol;
+        $this->degree_of_alcohol = $degree_of_alcohol;
 
         return $this;
     }

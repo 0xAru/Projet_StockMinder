@@ -38,7 +38,7 @@ class DashboardProductFormType extends AbstractType
                     'class' => 'rounded-full md:my-3 w-96'
                 ]
             ])
-            ->add('degre_of_alcohol', TextType::class,[
+            ->add('degree_of_alcohol', TextType::class,[
                 'label' => false,
                 'required' => true,
                 'attr' => [
@@ -93,6 +93,7 @@ class DashboardProductFormType extends AbstractType
             ])
             ->add('promotion', TextType::class, [
                 'label' => false,
+                'required' => false,
                 'attr' => [
                     'placeholder' => 'Promotion (%)',
                     'class' => 'rounded-full md:my-3 w-96'
