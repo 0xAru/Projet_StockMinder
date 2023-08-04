@@ -1,0 +1,21 @@
+<!-- info modal---------------------------------------------------------------------------------------------------------------------------------- -->
+<div class="my-info-modal grid grid-cols-2">
+    <div class="my-hidden z-10 w-full mx-auto p-2" id="infoModal{{ loop.index0 }}" aria-labelledby="Description détaillée"
+         role="dialog"
+         aria-modal="true">
+        <div class="z-40 col-start-1 col-end-2 items-center transform overflow-hidden rounded-xl my-modal-border text-center shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+            <div class="my-modal-description px-4 p-2">
+                <div class="flex justify-between">
+                    <img class="h-7 w-7 my-1" src="{{ asset('assets/img/info.svg') }}" alt="">
+                    <h2 class="text-lg">Description détaillée</h2>
+                    <img class="h-7 w-7 my-1" src="{{ asset('assets/img/close-cross.svg') }}"
+                         onclick="closeInfoModal(this, {{ loop.index0 }})" alt="">
+                </div>
+                <h3 class="capitalize text-sm">{{ product.name }}</h3>
+                <p class="text-lg">{{ product.employeeDescription }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end info modal--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
