@@ -60,6 +60,8 @@ class DashboardController extends AbstractController
             $product->setSlug($slug);
             $this->em->persist($product);
             $this->em->flush();
+            return $this->redirectToRoute('app_dashboard', ['action' => 2]);
+
         }
 
         if ($employeeForm->isSubmitted() && $employeeForm->isValid()){
@@ -84,18 +86,25 @@ class DashboardController extends AbstractController
 
                     // Mettre à jour le chemin de l'image dans l'entité
                     $event->setImage( $newFilename);
-                    $this->em->persist($event);
-                    $this->em->flush();
+
                 }
-            }
+            $this->em->persist($event);
+            $this->em->flush();
+            return $this->redirectToRoute('app_dashboard', ['action' => 1]);
+
+        }
 
         return $this->render('dashboard/index.html.twig', [
             'first_name' => $firstName,
             'company_id'=> $this->getUser()->getCompany()->getId(),
             'productForm' => $productForm->createView(),
             'employeeForm' => $employeeForm->createView(),
-            'eventForm' => $eventForm->createView()
+            'eventForm' => $eventForm->createView(),
+            'route' => "dashboard",
         ]);
-
     }
+
+
 }
+
+

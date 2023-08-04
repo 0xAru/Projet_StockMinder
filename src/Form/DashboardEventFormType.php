@@ -75,10 +75,11 @@ class DashboardEventFormType extends AbstractType
            ])
            ->add("image", FileType::class, [
                'label' => false,
-               'required' => true,
+               'required' => false,
                'attr' => [
                    'class' => 'rounded-full md:my-3 w-96'
-               ]
+               ],
+               "mapped" => false
            ])
            ->add("description", TextareaType::class, [
                'label' => false,

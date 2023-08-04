@@ -74,13 +74,13 @@ class DashboardProductFormType extends AbstractType
                 ],
                 'data' => 'NULL',
             ])
-            ->add('origin', ChoiceType::class, [
-                'choices' => array_combine($originChoices, $originChoices),
-                'required' => false,
-                'placeholder' => 'Provenance',
+            ->add('origin', TextType::class, [
                 'label' => false,
+                'required' => true,
                 'attr' => [
-                    'class' => 'rounded-full md:my-3 w-96 text-gray-500'
+                    'placeholder' => 'Provenance',
+                    'list' => "originOptions",
+                    'class' => 'rounded-full md:my-3 w-96'
                 ]
             ])
             ->add('price', TextType::class, [
