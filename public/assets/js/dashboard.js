@@ -7,7 +7,17 @@ const eventContainer = document.querySelector("#eventForm");
 let companyId = iconProduct.getAttribute("data-companyId");
 let isLoading = false;
 window.addEventListener("load", (event) => {
-    getEmployees()
+    switch (parseInt(window.location.search.split('=')[1])){
+        case 1:
+            getEvents()
+            break
+        case 2:
+            getProducts()
+            break
+        default:
+            getEmployees()
+            break
+    }
 });
 iconEmployee.addEventListener("click", async (e) => {
     getEmployees();
@@ -30,6 +40,12 @@ categorySelect.id = "categoryOptions";
 let category = "<option value = Blonde> <option value = Brune> <option value = Blanche> <option value = Ambrée> <option value = Fruitée> <option value = Sans-Alcool> <option value = Soft>";
 categorySelect.innerHTML = category;
 document.querySelector("#dashboard_product_form_style").insertAdjacentElement("afterend", categorySelect);
+
+let originSelect = document.createElement("datalist");
+originSelect.id = "originOptions";
+let origin = "<option value = France> <option value = Belgique> <option value = Allemagne> <option value = Pays-Bas> <option value = Chine> <option value = États-Unis> <option value = Brésil> <option value = Mexique> <option value = Russie>"
+originSelect.innerHTML = origin;
+document.querySelector("#dashboard_product_form_style").insertAdjacentElement("afterend", originSelect);
 
 //Recovery of the first words of a text
 function extractFirstWords(text, wordCount) {
@@ -93,12 +109,14 @@ async function getEmployees() {
         let divButton = document.createElement("div");
         divButton.classList.add("grid-cols-1", "flex", "flex-col", "gap-2", "my-5", "ml-5");
         employeeList.appendChild(divButton);
-        let button1 = document.createElement("button");
-        button1.classList.add("py-1", "rounded-xl", "bg-persian-orange", "font-semibold", "text-raisin-black");
+        let button1 = document.createElement("a");
+        button1.href = "/employee/" + employee.id + "/update";
+        button1.classList.add("py-1", "rounded-xl", "bg-persian-orange", "font-semibold", "text-raisin-black", "text-center");
         button1.innerHTML = "Modifier";
         divButton.appendChild(button1);
-        let button2 = document.createElement("button");
-        button2.classList.add("py-1", "rounded-xl", "bg-wine", "font-semibold", "text-persian-orange");
+        let button2 = document.createElement("a");
+        button2.href = "/employee/" + employee.id + "/delete";
+        button2.classList.add("py-1", "rounded-xl", "bg-wine", "font-semibold", "text-persian-orange", "text-center");
         button2.innerHTML = "Supprimer";
         divButton.appendChild(button2);
         let divId = document.createElement("div");
@@ -185,13 +203,15 @@ async function getProducts() {
         buttonDiv.classList.add("flex", "flex-col", "gap-2");
         buttonCell.appendChild(buttonDiv);
 
-        let button1 = document.createElement("button");
-        button1.classList.add("py-1", "rounded-xl", "bg-persian-orange", "font-semibold", "text-raisin-black");
-        button1.textContent = "Modifier";
+        let button1 = document.createElement("a");
+        button1.href = "/product/" + product.id + "/update";
+        button1.classList.add("py-1", "rounded-xl", "bg-persian-orange", "font-semibold", "text-raisin-black", "text-center");
+        button1.innerHTML = "Modifier";
         buttonDiv.appendChild(button1);
 
-        let button2 = document.createElement("button");
-        button2.classList.add("py-1", "rounded-xl", "bg-wine", "font-semibold", "text-persian-orange");
+        let button2 = document.createElement("a");
+        button2.href = "/product/" + product.id + "/delete";
+        button2.classList.add("py-1", "rounded-xl", "bg-wine", "font-semibold", "text-persian-orange", "text-center");
         button2.textContent = "Supprimer";
         buttonDiv.appendChild(button2);
         row.appendChild(buttonCell);
@@ -221,7 +241,6 @@ async function getProducts() {
             cellContent.textContent = data;
 
             if (data && data.length > 80) {
-                cellContent.classList.remove("justify-center")
                 cellContent.textContent = extractFirstWords(data, 10);
             }
 
@@ -294,13 +313,15 @@ async function getEvents() {
         buttonDiv.classList.add("flex", "flex-col", "gap-2");
         buttonCell.appendChild(buttonDiv);
 
-        let button1 = document.createElement("button");
-        button1.classList.add("py-1", "rounded-xl", "bg-persian-orange", "font-semibold", "text-raisin-black");
+        let button1 = document.createElement("a");
+        button1.href = "/event/" + event.id + "/update";
+        button1.classList.add("py-1", "rounded-xl", "bg-persian-orange", "font-semibold", "text-raisin-black", "text-center");
         button1.textContent = "Modifier";
         buttonDiv.appendChild(button1);
 
-        let button2 = document.createElement("button");
-        button2.classList.add("py-1", "rounded-xl", "bg-wine", "font-semibold", "text-persian-orange");
+        let button2 = document.createElement("a");
+        button2.href = "/event/" + event.id + "/delete";
+        button2.classList.add("py-1", "rounded-xl", "bg-wine", "font-semibold", "text-persian-orange", "text-center");
         button2.textContent = "Supprimer";
         buttonDiv.appendChild(button2);
 
@@ -326,7 +347,6 @@ async function getEvents() {
             cellContent.classList.add("h-28", "overflow-y-scroll", "flex", "flex-col", "justify-center", "font-semibold");
 
             if (data && data.length > 80) {
-                cellContent.classList.remove("justify-center")
                 cellContent.textContent = extractFirstWords(data, 10);
             }
 

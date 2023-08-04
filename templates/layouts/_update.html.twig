@@ -1,0 +1,95 @@
+{% if  action is defined and action == "update_employee" %}
+<div id="employeeForm" class="w-full flex flex-col justify-center rounded-lg">
+    {{ form_errors(updateForm) }}
+
+    {{ form_start(updateForm) }}
+    <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
+        <h2 class="text-4xl m-6">Employés</h2>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(updateForm.firstname) }}
+            {{ form_row(updateForm.lastname) }}
+        </div>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(updateForm.employee_number) }}
+            {{ form_row(updateForm.roles) }}
+        </div>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(updateForm.Envoyer) }}
+        </div>
+    </div>
+    {{ form_end(updateForm) }}
+
+    {% elseif action is defined and action == "update_product" %}
+    <div id="productForm" class="w-full flex flex-col justify-center rounded-lg">
+        {{ form_errors(updateForm) }}
+
+        {{ form_start(updateForm) }}
+        <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
+            <h2 class="text-4xl m-6">Produits</h2>
+            <div class="flex justify-center gap-32 my-4">
+                {{ form_row(updateForm.name) }}
+                {{ form_row(updateForm.brand) }}
+                {{ form_row(updateForm.degree_of_alcohol) }}
+            </div>
+            <div class="flex justify-center gap-32 my-4">
+                {{ form_row(updateForm.category) }}
+                {{ form_row(updateForm.style) }}
+                {{ form_row(updateForm.capacity) }}
+            </div>
+            <div class="flex justify-center gap-32 my-4">
+                {{ form_row(updateForm.label) }}
+                {{ form_row(updateForm.origin) }}
+            </div>
+        </div>
+        <div class="grid dashFormBg mb-16 pb-10 rounded-xl">
+            <h2 class="text-4xl m-6">Vente / Gestion</h2>
+            <div class="flex justify-center gap-32 my-4">
+                {{ form_row(updateForm.price) }}
+                {{ form_row(updateForm.promotion) }}
+            </div>
+            <div class="flex justify-center gap-32 my-4">
+                {{ form_row(updateForm.stock) }}
+                {{ form_row(updateForm.threshold) }}
+            </div>
+            <div class="flex justify-center gap-32 my-4">
+                {{ form_row(updateForm.customer_description) }}
+                {{ form_row(updateForm.employee_description) }}
+            </div>
+            <div class="flex justify-center gap-32 my-4">
+                {{ form_row(updateForm.Envoyer) }}
+            </div>
+        </div>
+        {{ form_end(updateForm) }}
+    </div>
+
+    {% elseif action is defined and action == "update_event" %}
+    <div id="eventForm" class="w-full flex flex-col justify-center rounded-lg">
+            {{ form_errors(updateForm) }}
+
+            {{ form_start(updateForm) }}
+            <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
+                <h2 class="text-4xl m-6">Évènements</h2>
+                <div class="flex justify-center gap-32 my-4">
+                    {{ form_row(updateForm.name) }}
+                    {{ form_row(updateForm.theme) }}
+                    {{ form_row(updateForm.display_time_period) }}
+                </div>
+                <div class="flex justify-center gap-32 my-4">
+                    {{ form_row(updateForm.start_date) }}
+                    {{ form_row(updateForm.end_date) }}
+                </div>
+                <div class="flex justify-center gap-32 my-4">
+                    {{ form_row(updateForm.start_time) }}
+                    {{ form_row(updateForm.end_time) }}
+                </div>
+                <div class="flex justify-center gap-32 my-4">
+                    {{ form_row(updateForm.image) }}
+                    {{ form_row(updateForm.description) }}
+                </div>
+                <div class="flex justify-center gap-32 my-4">
+                    {{ form_row(updateForm.Envoyer) }}
+                </div>
+            </div>
+            {{ form_end(updateForm) }}
+        </div>
+    {% endif %}
