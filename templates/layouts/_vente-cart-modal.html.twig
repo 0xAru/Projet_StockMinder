@@ -1,0 +1,35 @@
+<!-- cart modal---------------------------------------------------------------------------------------------------------------------------------- -->
+<div class="my-cart-modal grid grid-cols-2 overflow-y-auto">
+    <div class="my-hidden z-10 w-full mx-auto p-2" id="cartModal" aria-labelledby="panier"
+         role="dialog"
+         aria-modal="true">
+        <div class="z-40 col-start-1 col-end-2 items-center transform rounded-xl my-modal-border text-center shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+            <div class="my-modal-products px-4 p-2">
+                <div class="flex justify-between">
+                    <h2 class="text-lg">Panier</h2>
+                    <img class="my-close-btn h-7 w-7 my-1" src="{{ asset('assets/img/close-cross.svg') }}"
+                         onclick="closeCartModal(this)" alt="">
+                </div>
+                <div class="flex">
+                    <p class="flex-1 ">Produit</p>
+                    <p class="flex-1 ">Prix unit.</p>
+                    <p class="flex-1 ">Quantité</p>
+                    <p class="flex-1 ">Total</p>
+                </div>
+                <div id="cartData" class="py-3">
+                    <form action="/cart" method="post" class="flex flex-col" id="cartForm">
+
+
+                    </form>
+                </div>
+                <div class="flex pb-10">
+                    <p>Total: </p><span id="cartTotal">0 €</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- end cart modal--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->

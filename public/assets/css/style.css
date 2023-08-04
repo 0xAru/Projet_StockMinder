@@ -77,6 +77,10 @@ h1 {
     top: 2.75rem;
 }
 
+.fixed-cart {
+    top: 0;
+}
+
 
 .category-link:hover {
     background-color: var(--raisin-black);
@@ -126,3 +130,91 @@ h4 {
 .my-menu-footer h3 {
     font-family: Calligraffitti, serif, sans-serif;
 }
+
+
+
+.my-invisible {
+    display: none;
+}
+
+.my-minus, .my-plus {
+    background-color: var(--persian-orange);
+}
+
+.my-quantity, .my-stock-value {
+    background-color: var(--dutch-white);
+    color: var(--wine);
+    border: 2px solid var(--wine);
+    font-family: rancho, serif, sans-serif;
+}
+
+
+/* info modale */
+
+
+
+.my-info-modal {
+    font-family: deliusregular, serif, sans-serif;
+    color: var(--wine);
+}
+
+.my-info-modal h2, .my-info-modal h3{
+    font-family: deliusunicbold, serif, sans-serif;
+    background-color: var(--dutch-white);
+}
+
+
+
+.my-modal-description {
+    background-color: var(--dutch-white);
+}
+
+.my-modal-border {
+    border: 5px solid var(--persian-orange);
+}
+
+.my-active {
+    display: block;
+    position: fixed;
+    top: 50%;
+}
+
+.my-hidden {
+    display: none;
+}
+
+
+/* panier modale */
+
+
+
+
+.my-cart-modal {
+    font-family: deliusregular, serif, sans-serif;
+    color: var(--wine);
+}
+
+.my-cart-modal h2, .my-cart-modal h3{
+    font-family: deliusunicbold, serif, sans-serif;
+    background-color: var(--dutch-white);
+}
+
+
+.my-modal-products {
+    background-color: var(--dutch-white);
+}
+
+.my-modal-border {
+    border: 5px solid var(--persian-orange);
+}
+
+.my-active {
+    display: block;
+    position: fixed;
+    top: 50%;
+}
+
+.my-hidden {
+    display: none;
+}
+

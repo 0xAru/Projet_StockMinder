@@ -25,7 +25,11 @@
         <!--menu avec les filtres et la barre de recherche -->
         {% include '/layouts/_menu-filter.html.twig' %}
 
+        <!--modal panier -->
+        {% include '/layouts/_vente-cart-modal.html.twig' %}
+
         <h2 class="flex justify-center text-2xl uppercase mt-5">Nos bières</h2>
+        
         <!-- Affichage catégorie blondes -->
 
         {% set blondesHeadingDisplayed = false %}
@@ -39,11 +43,11 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="blondes">Les blondes</h3>
             {% endif %}
 
-
             <div class="my-product-card grid grid-cols-8 mb-5 pb-3">
                 <div class="my-product-data flex flex-col col-start-1 col-end-3">
-                    <h4 class="text-xs flex justify-center items-center">{{ product.name }}</h4>
+                    <h4 class="text-xs flex justify-center items-center" id="name{{ loop.index0 }}">{{ product.name }}</h4>
                     <p class="flex justify-center items-center text-center">{{ product.brand }}</p>
+                    <span class="my-invisible" id="id{{ loop.index0 }}">{{ product.id }}</span>
                     <div class="flex flex-col items-center">
                         {% if product.label != "" %}
                             {% if product.label == "local" %}
@@ -70,7 +74,8 @@
                                                        src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
                         {% endif %}
-                        <img class="h-7 w-7 my-1" src="{{ asset('assets/img/info.svg') }}" alt="">
+                        <img class="h-7 w-7 my-1" id="infoBtn{{ loop.index0 }}" onclick="infoModal(this, {{ loop.index0 }})" src="{{ asset('assets/img/info.svg') }}" alt="">
+
                     </div>
                 </div>
                 {% if product.stock >= product.threshold %}
@@ -80,7 +85,7 @@
                             <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
                             <span class="font-bold">{{ product.degreOfAlcohol }}%</span>
                             <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
-                            <span>{{ product.capacity / 10 }} cl</span>
+                            <span id="capacity{{ loop.index0 }}">{{ product.capacity / 10 }} cl</span>
                         </div>
                         <div class="flex flex-col">
                             <p>{{ product.customerDescription }}</p>
@@ -91,17 +96,16 @@
 
                     <div class="col-start-7 col-end-9 flex flex-col justify-between">
                         <div class="my-price flex justify-center font-bold">
-                            <p>{{ product.price / 100 }}€</p>
+                            <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
                         </div>
                         <div class="my-stock flex items-center">
-                            <p>Stock:</p>
-                            <input class="my-stock-value h-7 w-7 flex justify-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" type="number"
+                            <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" type="number"
                                    value="{{ product.stock }}">
                         </div>
                         <div class="flex">
-                            <button class="my-minus h-7 w-7 items-center mx-auto p-1 rounded-lg" onclick="minus(this, {{ loop.index0 }}) " ><img class="mx-auto" src="{{ asset('assets/img/minus.svg') }}" alt=""></button>
+                            <button class="my-minus h-7 w-7 items-center mx-auto p-1 rounded-lg" onclick="minus(this, {{ loop.index0 }}); createForm(this, {{ loop.index0 }})" ><img class="mx-auto" src="{{ asset('assets/img/minus.svg') }}" alt=""></button>
                             <input class="my-quantity h-7 w-7 flex justify-center text-center mx-auto p-1 rounded-lg" id="qty{{ loop.index0 }}"  type="number" value="0">
-                            <button class="my-plus h-7 w-7 items-center mx-auto p-1 rounded-lg" onclick="plus(this,  {{ loop.index0 }})"><img class="mx-auto" src="{{ asset('assets/img/plus.svg') }}" alt=""></button>
+                            <button class="my-plus h-7 w-7 items-center mx-auto p-1 rounded-lg" onclick="plus(this,  {{ loop.index0 }}); createForm(this, {{ loop.index0 }})"><img class="mx-auto" src="{{ asset('assets/img/plus.svg') }}" alt=""></button>
                         </div>
                     </div>
                 {% else %}
@@ -111,7 +115,7 @@
                 {% endif %}
             </div>
             {% endif %}
-
+            {% include '/layouts/_vente-info-modal.html.twig' %}
 
 
 
@@ -161,7 +165,7 @@
                                                        src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
                         {% endif %}
-                        <img class="h-7 w-7 my-1" src="{{ asset('assets/img/info.svg') }}" alt="">
+                        <img class="h-7 w-7 my-1" id="infoBtn{{ loop.index0 }}" onclick="infoModal(this, {{ loop.index0 }})" src="{{ asset('assets/img/info.svg') }}" alt="">
                     </div>
                 </div>
                 {% if product.stock >= product.threshold %}
@@ -185,8 +189,7 @@
                             <p>{{ product.price / 100 }}€</p>
                         </div>
                         <div class="my-stock flex items-center">
-                            <p>Stock:</p>
-                            <input class="my-stock-value h-7 w-7 flex justify-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" type="number"
+                            <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" type="number"
                                    value="{{ product.stock }}">
                         </div>
                         <div class="flex">
@@ -251,7 +254,7 @@
                                                        src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
                         {% endif %}
-                        <img class="h-7 w-7 my-1" src="{{ asset('assets/img/info.svg') }}" alt="">
+                        <img class="h-7 w-7 my-1" id="infoBtn{{ loop.index0 }}" onclick="infoModal(this, {{ loop.index0 }})" src="{{ asset('assets/img/info.svg') }}" alt="">
                     </div>
                 </div>
                 {% if product.stock >= product.threshold %}
@@ -275,8 +278,7 @@
                             <p>{{ product.price / 100 }}€</p>
                         </div>
                         <div class="my-stock flex items-center">
-                            <p>Stock:</p>
-                            <input class="my-stock-value h-7 w-7 flex justify-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" type="number"
+                            <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" type="number"
                                    value="{{ product.stock }}">
                         </div>
                         <div class="flex">
@@ -339,7 +341,7 @@
                                                        src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
                         {% endif %}
-                        <img class="h-7 w-7 my-1" src="{{ asset('assets/img/info.svg') }}" alt="">
+                        <img class="h-7 w-7 my-1" id="infoBtn{{ loop.index0 }}" onclick="infoModal(this, {{ loop.index0 }})" src="{{ asset('assets/img/info.svg') }}" alt="">
                     </div>
                 </div>
                 {% if product.stock >= product.threshold %}
@@ -363,8 +365,7 @@
                             <p>{{ product.price / 100 }}€</p>
                         </div>
                         <div class="my-stock flex items-center">
-                            <p>Stock:</p>
-                            <input class="my-stock-value h-7 w-7 flex justify-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" type="number"
+                            <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" type="number"
                                    value="{{ product.stock }}">
                         </div>
                         <div class="flex">
@@ -427,7 +428,7 @@
                                                        src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
                         {% endif %}
-                        <img class="h-7 w-7 my-1" src="{{ asset('assets/img/info.svg') }}" alt="">
+                        <img class="h-7 w-7 my-1" id="infoBtn{{ loop.index0 }}" onclick="infoModal(this, {{ loop.index0 }})" src="{{ asset('assets/img/info.svg') }}" alt="">
                     </div>
                 </div>
                 {% if product.stock >= product.threshold %}
@@ -451,8 +452,7 @@
                             <p>{{ product.price / 100 }}€</p>
                         </div>
                         <div class="my-stock flex items-center">
-                            <p>Stock:</p>
-                            <input class="my-stock-value h-7 w-7 flex justify-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" type="number"
+                            <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" type="number"
                                    value="{{ product.stock }}">
                         </div>
                         <div class="flex">
