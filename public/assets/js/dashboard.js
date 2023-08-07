@@ -353,6 +353,7 @@ async function getEvents() {
             if (event.image == data){
                 let img = document.createElement('img');
                 img.src = "../uploaded_img/" + data;
+                cellContent.classList.remove("justify-center")
                 cellContent.appendChild(img);
             }else{
                 cellContent.textContent = data;

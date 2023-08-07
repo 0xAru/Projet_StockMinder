@@ -16,86 +16,88 @@ class DashboardEventFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-       $builder
-           ->add("name", TextType::class, [
-               'label' => false,
-               'required' => true,
-               'attr' => [
-                   'placeholder' => "Nom de l'évènement",
-                   'class' => 'rounded-full md:my-3 w-96'
-               ]
-           ])
-           ->add("theme", TextType::class, [
-               'label' => false,
-               'required' => true,
-               'attr' => [
-                   'placeholder' => "Thème de l'évènement",
-                   'class' => 'rounded-full md:my-3 w-96'
-               ]
-           ])
-           ->add("display_time_period", TextType::class, [
-               'label' => false,
-               'required' => true,
-               'attr' => [
-                   'placeholder' => "Délai d'affichage",
-                   'class' => 'rounded-full md:my-3 w-96'
-               ]
-           ])
-           ->add("start_date", DateType::class, [
-               'label' => "Date de début",
-               'required' => true,
-               'attr' => [
-                   'placeholder' => "Date de début",
-                   'class' => 'rounded-full md:my-3 w-96',
-               ]
+        $builder
+            ->add("name", TextType::class, [
+                'label' => false,
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Nom de l'évènement",
+                    'class' => 'rounded-full md:my-3 w-96'
+                ]
             ])
-           ->add("end_date", DateType::class, [
-               'label' => "Date de fin",
-               'required' => true,
-               'attr' => [
-                   'placeholder' => "Date de fin",
-                   'class' => 'rounded-full md:my-3 w-96'
-               ]
-           ])
-           ->add("start_time", TimeType::class, [
-               'label' => "Heure de début",
-               'required' => true,
-               'attr' => [
-                   'placeholder' => "Heure de début",
-                   'class' => 'rounded-full md:my-3 w-96'
-               ]
-           ])
-           ->add("end_time", TimeType::class, [
-               'label' => "Heure de fin",
-               'required' => true,
-               'attr' => [
-                   'placeholder' => "Heure de fin",
-                   'class' => 'rounded-full md:my-3 w-96'
-               ]
-           ])
-           ->add("image", FileType::class, [
-               'label' => false,
-               'required' => false,
-               'attr' => [
-                   'class' => 'rounded-full md:my-3 w-96'
-               ],
-               "mapped" => false
-           ])
-           ->add("description", TextareaType::class, [
-               'label' => false,
-               'required' => true,
-               'attr' => [
-                   'placeholder' => "Description de l'évènement",
-                   'class' =>'rounded-xl md:my-3 w-96'
-               ]
-           ])
-           ->add("Envoyer", SubmitType::class, [
-               'attr' => [
-                   'class' => 'btn rounded-full px-10 py-2 font-semibold'
-               ],
-               'row_attr' => [
-                   'class' => 'flex justify-center md:my-3 w-96'
-               ]
-           ]);
+            ->add("theme", TextType::class, [
+                'label' => false,
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Thème de l'évènement",
+                    'class' => 'rounded-full md:my-3 w-96'
+                ]
+            ])
+            ->add("display_time_period", TextType::class, [
+                'label' => false,
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Délai d'affichage",
+                    'class' => 'rounded-full md:my-3 w-96'
+                ]
+            ])
+            ->add("start_date", DateType::class, [
+                'label' => "Date de début",
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Date de début",
+                    'class' => 'rounded-full md:my-3 w-96'
+                ],
+                'format' => 'dd MMMM yyyy',
+            ])
+            ->add("end_date", DateType::class, [
+                'label' => "Date de fin",
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Date de fin",
+                    'class' => 'rounded-full md:my-3 w-96'
+                ],
+                'format' => 'dd MMMM yyyy'
+            ])
+            ->add("start_time", TimeType::class, [
+                'label' => "Heure de début",
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Heure de début",
+                    'class' => 'rounded-full md:my-3 w-96'
+                ]
+            ])
+            ->add("end_time", TimeType::class, [
+                'label' => "Heure de fin",
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Heure de fin",
+                    'class' => 'rounded-full md:my-3 w-96'
+                ]
+            ])
+            ->add("image", FileType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'class' => 'md:my-3 w-96'
+                ],
+                "mapped" => false
+            ])
+            ->add("description", TextareaType::class, [
+                'label' => false,
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Description de l'évènement",
+                    'class' => 'rounded-xl md:my-3 w-96'
+                ]
+            ])
+            ->add("Envoyer", SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn rounded-full px-10 py-2 font-semibold'
+                ],
+                'row_attr' => [
+                    'class' => 'flex justify-center md:my-3 w-96'
+                ]
+            ]);
     }
 }
