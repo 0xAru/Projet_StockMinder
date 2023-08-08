@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main class="flex-1 container-register-form grid grid-cols-12">
+    {# Section latérale #}
+    <section class="left-aside grid-cols-1">
+        <div>
+            <ul>
+                <li class="flex justify-center mt-52">
+                    <div id="return"
+                         class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer" data-companyId="{{ company_id }}">
+                         <a href="/dashboard"><img src=" {{ asset("assets/img/bouton-retour.png") }}" class="w-16" title="Retour"></a>
+                    </div>
+            </ul>
+        </div>
+    </section>
+    {# Section principale #}
+    <section class="col-start-2 col-end-13 flex flex-col items-center py-4 relative mx-10">
+    <div class="w-full flex flex-col justify-center">
+        <div class="w-full flex justify-center">
+            <img src=" {{ asset("assets/img/logo-cheers-beers-wine.png") }}" class="w-40">
+        </div>
+        <div class="w-full flex justify-center my-4">
+            <h1 class="text-stroke custom-h1sm md:m-6 text-3xl">Bienvenue sur votre tableau de bord {{ app.session.get('user_name') }}!</h1>
+        </div>
+        <a href="/logout"><img src=" {{ asset("assets/img/logout-wine.png") }}"
+                               class="w-8 h-8 absolute top-5 right-5" title="Déconnexion"></a>
+    </div>
+    {% include "/layouts/_company_update.html.twig" %}
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script defer src="{{ asset("assets/js/dashboard.js") }}"></script>
+{% endblock %}

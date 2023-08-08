@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Entity\Product;
 use App\Entity\User;
+use App\Form\CompanyUpdateFormType;
 use App\Form\DashboardEmployeeFormType;
 use App\Form\DashboardEventFormType;
 use App\Form\DashboardProductFormType;
@@ -15,9 +16,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 class DashboardController extends AbstractController
 {
-    public function __construct(private EntityManagerInterface $em) {
+    public function __construct(private EntityManagerInterface $em)
+    {
     }
 
     #[Route(path: '/dashboard', name: 'app_dashboard')]
@@ -53,7 +56,7 @@ class DashboardController extends AbstractController
         $employeeForm->handleRequest($request);
         $eventForm->handleRequest($request);
 
-        if ($productForm->isSubmitted() && $productForm->isValid()){
+        if ($productForm->isSubmitted() && $productForm->isValid()) {
             $product->setCompany($company);
             $productName = $product->getName();
             $slug = str_replace(' ', '_', strtolower($productName));
@@ -61,10 +64,9 @@ class DashboardController extends AbstractController
             $this->em->persist($product);
             $this->em->flush();
             return $this->redirectToRoute('app_dashboard', ['action' => 2]);
-
         }
 
-        if ($employeeForm->isSubmitted() && $employeeForm->isValid()){
+        if ($employeeForm->isSubmitted() && $employeeForm->isValid()) {
             $employee->setCompany($company);
             $role = $request->get("dashboard_employee_form")["roles"];
             $employee->setRoles([$role]);
@@ -72,7 +74,7 @@ class DashboardController extends AbstractController
             $this->em->flush();
         }
 
-        if ($eventForm->isSubmitted() && $eventForm->isValid()){
+        if ($eventForm->isSubmitted() && $eventForm->isValid()) {
             $event->setCompany($company);
             $eventName = $event->getName();
             $slug = str_replace(' ', '_', strtolower($eventName));
@@ -80,14 +82,14 @@ class DashboardController extends AbstractController
             $uploadedFile = $eventForm['image']->getData();
 
             if ($uploadedFile instanceof UploadedFile) {
-                $newFilename = uniqid().'.'.$uploadedFile->getClientOriginalExtension();
+                $newFilename = uniqid() . '.' . $uploadedFile->getClientOriginalExtension();
 
-                    $uploadedFile->move($this->getParameter('uploads_path'), $newFilename);
+                $uploadedFile->move($this->getParameter('uploads_path'), $newFilename);
 
-                    // Mettre à jour le chemin de l'image dans l'entité
-                    $event->setImage( $newFilename);
+                // Mettre à jour le chemin de l'image dans l'entité
+                $event->setImage($newFilename);
 
-                }
+            }
             $this->em->persist($event);
             $this->em->flush();
             return $this->redirectToRoute('app_dashboard', ['action' => 1]);
@@ -96,7 +98,7 @@ class DashboardController extends AbstractController
 
         return $this->render('dashboard/index.html.twig', [
             'first_name' => $firstName,
-            'company_id'=> $this->getUser()->getCompany()->getId(),
+            'company_id' => $this->getUser()->getCompany()->getId(),
             'productForm' => $productForm->createView(),
             'employeeForm' => $employeeForm->createView(),
             'eventForm' => $eventForm->createView(),
@@ -104,7 +106,34 @@ class DashboardController extends AbstractController
         ]);
     }
 
+    #[Route(path: '/company_update', name: 'app_company_update')]
+    public function companyUpdate(Request $request): Response
+    {
+        // Vérifiez si l'utilisateur est connecté
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
 
+        // Récupérer l'entité Company associée à l'utilisateur connecté
+        $company = $this->getUser()->getCompany();
+
+        // Créer un formulaire pour la mise à jour des informations de l'entité Company
+        $companyForm = $this->createForm(CompanyUpdateFormType::class, $company);
+
+        // Traitez la soumission du formulaire s'il a été envoyé
+        $companyForm->handleRequest($request);
+
+        if ($companyForm->isSubmitted() && $companyForm->isValid()) {
+            $this->em->flush();
+
+            // Redirigez l'utilisateur vers la page de tableau de bord avec un message de succès
+            $this->addFlash('success', 'Les informations de l\'entreprise ont été mises à jour avec succès.');
+            return $this->redirectToRoute('app_dashboard');
+        }
+        // Rendre le formulaire de mise à jour de l'entité Company
+        return $this->render('dashboard/company_update.html.twig', [
+            'company_id' => $this->getUser()->getCompany()->getId(),
+            'companyForm' => $companyForm->createView()
+        ]);
+    }
 }
-
-

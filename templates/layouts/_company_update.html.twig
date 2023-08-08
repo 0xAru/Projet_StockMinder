@@ -1,0 +1,25 @@
+<div id="companyForm" class="w-full flex flex-col justify-center rounded-lg">
+    {{ form_errors(companyForm) }}
+
+    {{ form_start(companyForm) }}
+    <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
+        <h2 class="text-4xl m-6">Mon Entreprise</h2>
+        <div class="flex justify-center gap-28 my-4">
+            {{ form_row(companyForm.name) }}
+            {{ form_row(companyForm.siret) }}
+        </div>
+        <div class="flex justify-center gap-28 my-4">
+            {{ form_row(companyForm.director_firstname) }}
+            {{ form_row(companyForm.director_lastname) }}
+        </div>
+        <div class="flex justify-center gap-28 my-4">
+            {{ form_row(companyForm.address) }}
+            {{ form_row(companyForm.zipcode) }}
+            {{ form_row(companyForm.city) }}
+        </div>
+        <div class="flex justify-center my-4">
+            {{ form_row(companyForm.Envoyer) }}
+        </div>
+    </div>
+    {{ form_end(companyForm) }}
+</div>

@@ -1,96 +1,95 @@
+<div id="productForm" class="w-full flex flex-col justify-center rounded-lg hidden">
+    {{ form_errors(productForm) }}
 
-        <div id="productForm" class="w-full flex flex-col justify-center rounded-lg hidden">
-            {{ form_errors(productForm) }}
-
-            {{ form_start(productForm) }}
-            <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
-                <h2 class="text-4xl m-6">Produits</h2>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(productForm.name) }}
-                    {{ form_row(productForm.brand) }}
-                    {{ form_row(productForm.degree_of_alcohol) }}
-                </div>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(productForm.category) }}
-                    {{ form_row(productForm.style) }}
-                    {{ form_row(productForm.capacity) }}
-                </div>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(productForm.label) }}
-                    {{ form_row(productForm.origin) }}
-                </div>
-            </div>
-            <div class="grid dashFormBg mb-16 pb-10 rounded-xl">
-                <h2 class="text-4xl m-6">Vente / Gestion</h2>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(productForm.price) }}
-                    {{ form_row(productForm.promotion) }}
-                </div>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(productForm.stock) }}
-                    {{ form_row(productForm.threshold) }}
-                </div>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(productForm.customer_description) }}
-                    {{ form_row(productForm.employee_description) }}
-                </div>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(productForm.Envoyer) }}
-                </div>
-            </div>
-            {{ form_end(productForm) }}
-
-            {# Ajouter le tableau de produits ici #}
+    {{ form_start(productForm) }}
+    <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
+        <h2 class="text-4xl m-6">Produits</h2>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(productForm.name) }}
+            {{ form_row(productForm.brand) }}
+            {{ form_row(productForm.degree_of_alcohol) }}
         </div>
-        <div id="employeeForm" class="w-full flex flex-col justify-center rounded-lg">
-            {{ form_errors(employeeForm) }}
-
-            {{ form_start(employeeForm) }}
-            <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
-                <h2 class="text-4xl m-6">Employés</h2>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(employeeForm.firstname) }}
-                    {{ form_row(employeeForm.lastname) }}
-                </div>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(employeeForm.employee_number) }}
-                    {{ form_row(employeeForm.roles) }}
-                </div>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(employeeForm.Envoyer) }}
-                </div>
-            </div>
-            {{ form_end(employeeForm) }}
-
-            {# Ajouter le tableau des employés ici #}
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(productForm.category) }}
+            {{ form_row(productForm.style) }}
+            {{ form_row(productForm.capacity) }}
         </div>
-        <div id="eventForm" class="w-full flex flex-col justify-center rounded-lg hidden">
-            {{ form_errors(eventForm) }}
-
-            {{ form_start(eventForm) }}
-            <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
-                <h2 class="text-4xl m-6">Évènements</h2>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(eventForm.name) }}
-                    {{ form_row(eventForm.theme) }}
-                    {{ form_row(eventForm.display_time_period) }}
-                </div>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(eventForm.start_date) }}
-                    {{ form_row(eventForm.end_date) }}
-                </div>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(eventForm.start_time) }}
-                    {{ form_row(eventForm.end_time) }}
-                </div>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(eventForm.image) }}
-                    {{ form_row(eventForm.description) }}
-                </div>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(eventForm.Envoyer) }}
-                </div>
-            </div>
-            {{ form_end(eventForm) }}
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(productForm.label) }}
+            {{ form_row(productForm.origin) }}
         </div>
-        {# Ajouter le tableau d'évènements ici #}
+    </div>
+    <div class="grid dashFormBg mb-16 pb-10 rounded-xl">
+        <h2 class="text-4xl m-6">Vente / Gestion</h2>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(productForm.price) }}
+            {{ form_row(productForm.promotion) }}
+        </div>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(productForm.stock) }}
+            {{ form_row(productForm.threshold) }}
+        </div>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(productForm.customer_description) }}
+            {{ form_row(productForm.employee_description) }}
+        </div>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(productForm.Envoyer) }}
+        </div>
+    </div>
+    {{ form_end(productForm) }}
+
+    {# Ajouter le tableau de produits ici #}
+</div>
+<div id="employeeForm" class="w-full flex flex-col justify-center rounded-lg">
+    {{ form_errors(employeeForm) }}
+
+    {{ form_start(employeeForm) }}
+    <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
+        <h2 class="text-4xl m-6">Employés</h2>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(employeeForm.firstname) }}
+            {{ form_row(employeeForm.lastname) }}
+        </div>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(employeeForm.employee_number) }}
+            {{ form_row(employeeForm.roles) }}
+        </div>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(employeeForm.Envoyer) }}
+        </div>
+    </div>
+    {{ form_end(employeeForm) }}
+
+    {# Ajouter le tableau des employés ici #}
+</div>
+<div id="eventForm" class="w-full flex flex-col justify-center rounded-lg hidden">
+    {{ form_errors(eventForm) }}
+
+    {{ form_start(eventForm) }}
+    <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
+        <h2 class="text-4xl m-6">Évènements</h2>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(eventForm.name) }}
+            {{ form_row(eventForm.theme) }}
+            {{ form_row(eventForm.display_time_period) }}
+        </div>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(eventForm.start_date) }}
+            {{ form_row(eventForm.end_date) }}
+        </div>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(eventForm.start_time) }}
+            {{ form_row(eventForm.end_time) }}
+        </div>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(eventForm.image) }}
+            {{ form_row(eventForm.description) }}
+        </div>
+        <div class="flex justify-center gap-32 my-4">
+            {{ form_row(eventForm.Envoyer) }}
+        </div>
+    </div>
+    {{ form_end(eventForm) }}
+</div>
+{# Ajouter le tableau d'évènements ici #}
