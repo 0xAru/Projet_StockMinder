@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -30,5 +32,21 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
+//    #[Route(path: '/forgot-password', name: 'app_forgot_password')]
+//    public function forgotPassword(Request $request, EntityManagerInterface $entityManager, \Symfony\Component\Mailer\MailerInterface $mailer): Response
+//    {
+//        // Ton code de gestion de la réinitialisation du mot de passe
+//
+//        // Envoi de l'e-mail
+//        $email = (new \Symfony\Component\Mime\Email())
+//            ->from('noreply@example.com')
+//            ->to($email)
+//            ->subject('Réinitialisation de mot de passe')
+//            ->html($this->renderView('security/forgot_password.html.twig', ['token' => $token]));
+//
+//        $mailer->send($email);
+//
+//        return $this->redirectToRoute('app_dashboard');
+//    }
 
 }
