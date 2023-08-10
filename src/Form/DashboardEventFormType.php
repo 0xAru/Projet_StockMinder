@@ -42,16 +42,20 @@ class DashboardEventFormType extends AbstractType
                 ]
             ])
             ->add("start_date", DateType::class, [
-                'label' => "Date de début",
-                'required' => true,
+                'label' => "Date de début <img src='/assets/img/date-limite.png' class='ml-4 w-8 h-auto'>",
+                'label_html' => true,
+                'label_attr' => ['class' => 'flex items-center'],
                 'attr' => [
                     'placeholder' => "Date de début",
                     'class' => 'rounded-full md:my-3 w-96'
                 ],
+                'required' => true,
                 'format' => 'dd MMMM yyyy',
             ])
             ->add("end_date", DateType::class, [
-                'label' => "Date de fin",
+                'label' => "Date de fin <img src='/assets/img/date-limite.png' class='ml-4 w-8 h-auto'>",
+                'label_html' => true,
+                'label_attr' => ['class' => 'flex items-center'],
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Date de fin",
