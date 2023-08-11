@@ -24,7 +24,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Prénom du directeur",
-                    'class' => 'rounded-full md:my-3'
+                    'class' => 'rounded-full my-3'
                 ]
             ])
             ->add('director_lastname', TextType::class, [
@@ -32,7 +32,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Nom du directeur",
-                    'class' => 'rounded-full md:my-3'
+                    'class' => 'rounded-full my-3'
                 ]
             ])
             ->add('email', EmailType::class, [
@@ -40,7 +40,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "E-mail",
-                    'class' => 'w-full rounded-full md:my-3'
+                    'class' => 'w-full rounded-full my-3'
                 ]
             ])
             ->add('plainPassword', RepeatedType::class, [
@@ -51,14 +51,14 @@ class RegistrationFormType extends AbstractType
                     'label' => ' ',
                     'attr' => [
                         'placeholder' => 'Mot de passe',
-                        'class' => 'password-field rounded-full md:my-3'
+                        'class' => 'password-field rounded-full my-3'
                     ],
                 ],
                 'second_options' => [
                     'label' => ' ',
                     'attr' => [
                         'placeholder' => 'Confirmez le mot de passe',
-                        'class' => 'password-field rounded-full md:my-3'
+                        'class' => 'password-field rounded-full my-3'
                     ],
                 ],
                 'mapped' => false, // Vous pouvez retirer cette option si vous n'en avez pas besoin
@@ -81,7 +81,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Dénomination Sociale",
-                    'class' => 'rounded-full md:my-3'
+                    'class' => 'rounded-full my-3'
                 ]
             ])
             ->add('siret_number', TextType::class, [
@@ -89,7 +89,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Numéro SIRET",
-                    'class' => 'rounded-full md:my-3'
+                    'class' => 'rounded-full my-3'
                 ]
             ])
             ->add('address', TextType::class, [
@@ -97,7 +97,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Adresse",
-                    'class' => 'w-full rounded-full md:my-3'
+                    'class' => 'w-full rounded-full my-3'
                 ]
             ])
             ->add('zipcode', TextType::class, [
@@ -105,7 +105,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Code postal",
-                    'class' => 'rounded-full md:my-3'
+                    'class' => 'rounded-full my-3'
                 ]
             ])
             ->add('city', TextType::class, [
@@ -113,7 +113,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Ville",
-                    'class' => 'rounded-full md:my-3'
+                    'class' => 'rounded-full my-3'
                 ]
             ])
             ->add("Envoyer", SubmitType::class, [
@@ -121,7 +121,7 @@ class RegistrationFormType extends AbstractType
                     'class' => 'btn rounded-full px-10 py-2 font-semibold'
                 ],
                 'row_attr' => [
-                    'class' => 'flex justify-center md:my-3'
+                    'class' => 'flex justify-center my-3'
                 ]
             ]);
     }

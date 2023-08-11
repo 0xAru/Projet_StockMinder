@@ -14,39 +14,39 @@
                 <ul>
                     <li class="flex justify-center mt-52">
                         <div id="employee"
-                             class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer {% if action is defined and action != "update_event" and action != "update_product" %} activTab"
+                             class="rounded-full w-6 md:w-16 h-6 mx-1 md:h-16 div-img flex justify-center items-center cursor-pointer {% if action is defined and action != "update_event" and action != "update_product" %} activTab"
                              {% endif %}data-companyId="{{ company_id }}"><img
-                                    src=" {{ asset("assets/img/icon_employee.png") }}" class="w-10" title="Employés">
+                                    src=" {{ asset("assets/img/icon_employee.png") }}" class="w-4 md:w-10" title="Employés">
                         </div>
                     </li>
                     <li class="flex justify-center my-14">
                         <div id="product"
-                             class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer"
+                             class="rounded-full w-6 md:w-16 h-6 mx-1 md:h-16 div-img flex justify-center items-center cursor-pointer"
                              data-companyId="{{ company_id }}">
-                            <img src=" {{ asset("assets/img/icon_product.png") }}" class="w-10" title="Produits">
+                            <img src=" {{ asset("assets/img/icon_product.png") }}" class="w-4 md:w-10" title="Produits">
                         </div>
                     </li>
                     <li class="flex justify-center my-14">
                         <div id="event"
-                             class="rounded-full w-16 h-16 div-img flex justify-center items-center cursor-pointer"
+                             class="rounded-full w-6 md:w-16 h-6 mx-1 md:h-16 div-img flex justify-center items-center cursor-pointer"
                              data-companyId="{{ company_id }}">
-                            <img src=" {{ asset("assets/img/icon_event.png") }}" class="w-10" title="Évènements">
+                            <img src=" {{ asset("assets/img/calendar.png") }}" class="w-4 md:w-10" title="Évènements">
                         </div>
                     </li>
                 </ul>
             </div>
         </section>
         {# Section principale #}
-        <section class="col-start-2 col-end-13 flex flex-col items-center py-4 relative mx-10">
+        <section class="col-start-2 col-end-13 flex flex-col items-center md:py-4 relative md:mx-10 mx-2">
             <div class="w-full flex flex-col justify-center">
-                <a href="/company_update" class="underline text-wine mt-2">Modifier les information de l'entreprise</a>
+                <a href="/company_update" class="underline text-wine mt-0.5 md:mt-2">Modifier les information de l'entreprise</a>
                 <div class="w-full flex justify-center"><img src=" {{ asset("assets/img/logo-cheers-beers-wine.png") }}"
                                                              class="w-40"></div>
                 <div class="w-full flex justify-center my-4">
                     <h1 class="text-stroke custom-h1sm md:m-6 text-3xl">Bienvenue sur votre tableau de
                         bord {{ app.session.get('user_name') }}!</h1></div>
                 <a href="/logout"><img src=" {{ asset("assets/img/logout-wine.png") }}"
-                                       class="w-8 h-8 absolute top-5 right-5" title="Déconnexion"></a>
+                                       class="w-4 md:w-8 h-4 md:h-8 absolute top-2 md:top-5 right-0 md:right-5" title="Déconnexion"></a>
             </div>
 
             {# On affiche un layout différent en fonction de la route définie par le dashboardController #}

@@ -64,7 +64,9 @@ class DashboardEventFormType extends AbstractType
                 'format' => 'dd MMMM yyyy'
             ])
             ->add("start_time", TimeType::class, [
-                'label' => "Heure de début",
+                'label' => "Heure de début <img src='/assets/img/heure_event.png' class='ml-4 w-8 h-auto'>",
+                'label_html' => true,
+                'label_attr' => ['class' => 'flex items-center ml-2'],
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Heure de début",
@@ -72,7 +74,9 @@ class DashboardEventFormType extends AbstractType
                 ]
             ])
             ->add("end_time", TimeType::class, [
-                'label' => "Heure de fin",
+                'label' => "Heure de fin <img src='/assets/img/heure_event.png' class='ml-4 w-8 h-auto'>",
+                'label_html' => true,
+                'label_attr' => ['class' => 'flex items-center ml-2'],
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Heure de fin",
