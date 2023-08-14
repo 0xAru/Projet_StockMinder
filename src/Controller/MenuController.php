@@ -113,7 +113,7 @@ class MenuController extends AbstractController
             'products' => $products,
             'searchTerm' => $searchTerm,
             'form' => $form->createView(),
-            //'events' => $events,
+
         ]);
     }
 }

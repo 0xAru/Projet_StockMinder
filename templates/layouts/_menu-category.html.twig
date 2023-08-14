@@ -12,13 +12,10 @@
     </nav>
 </div>
 
-<div class="my-cart-btn fixed right-0 mr-3 mt-3" onclick="cartModal(this)">
-    <img src="{{ asset('assets/img/cart.svg') }}" alt="">
-</div>
+
 
 <script>
     let navBar = document.querySelector(".nav");
-    let cart = document.querySelector(".my-cart-btn");
 
     window.addEventListener('scroll', function() {
 
@@ -29,13 +26,13 @@
             navBar.classList.add("fixed-nav");
             burger.classList.add("fixed-menu");
             menu.classList.add("fixed-menu");
-            cart.classList.add("fixed-menu");
+
 
         } else {
             navBar.classList.remove("fixed-nav");
             burger.classList.remove("fixed-menu");
             menu.classList.remove("fixed-menu");
-            cart.classList.remove("fixed-menu");
+
         }
     });
 </script>

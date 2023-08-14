@@ -4,7 +4,7 @@ module.exports = {
       "./assets/**/*.js",
       "./templates/**/*.html.twig",
       "./src/Form/*.php",
-      "./public/assets/js/dashboard.js"
+      "./public/assets/js/*.js"
   ],
   theme: {
     extend: {

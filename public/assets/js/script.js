@@ -1,5 +1,6 @@
 // défilement de la navbar catergories avec la molette de la souris et fonction tactile mobile
 
+
 const navbar = document.querySelector('.nav');
 let isScrolling = false;
 let startX;
@@ -29,10 +30,6 @@ navbar.addEventListener('touchend', () => {
 });
 
 
-
-
-
-
 // augmentation et diminution des quantités de produits commandés par le client-----------------------------------------
 
 function minus(elem, index) {
@@ -55,7 +52,6 @@ function plus(elem, index) {
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-
 
 
 // Affichage de la modale de description détaillée du produit
@@ -115,16 +111,17 @@ function closeCartModal(elem) {
 }
 
 
-
-
 // gestion du panier ----------------------------------------------------------------------------------------------
 
 let parent = document.querySelector("#cartData");
 let cartForm = document.querySelector("#cartForm");
+let cartLines = document.querySelectorAll(".my-cart-lines");
+let cartTotal = document.querySelector("#cartTotal")
+let sum = 0;
 
 
 //Fonction création du panier---------------------------------------------------------------
-function createForm(elem, index){
+function createForm(elem, index) {
 
     let productName = document.querySelector("#name" + index);
     let productId = document.querySelector("#id" + index);
@@ -132,17 +129,18 @@ function createForm(elem, index){
     let unitPrice = parseFloat(productPrice.innerHTML);
     let productQuantity = document.querySelector("#qty" + index);
     let productStock = document.querySelector("#stock" + index);
-    let cartLine = document.querySelector("#bktLine" + index);
-    let oneTotal = document.querySelector("#oneTotal" + index);
+    let cartLine = document.querySelector("#cartLine" + index);
+    let productTotal = document.querySelector("#productTotal" + index);
     let quantityInput = document.querySelector("#cartQty" + index);
     let idInput = document.querySelector("#cartId" + index);
     let qty = productQuantity.value;
+
 
     //Bouton submit du panier
 
     let submitBtn = document.createElement("button");
     submitBtn.id = "cartSubmitBtn";
-    submitBtn.setAttribute("type", "submit");
+    submitBtn.type = "submit";
     submitBtn.classList.add("fixed", "bottom-0")
     submitBtn.innerHTML = "Valider";
     cartForm.appendChild(submitBtn);
@@ -151,119 +149,141 @@ function createForm(elem, index){
 
     if (!cartLine) {
         let cartLine = document.createElement("div");
-        cartLine.classList.add("cart-line", "flex");
-        cartLine.id = "bktLine" + index;
+        cartLine.classList.add("cart-line", "grid", "grid-cols-8", "flex", "justify-between", "my-cart-lines");
+        cartLine.id = "cartLine" + index;
         cartForm.appendChild(cartLine);
 
         //product.id
 
         idInput = document.createElement("input");
         idInput.id = "cartId" + index;
-        idInput.setAttribute("type", "text");
-        idInput.style.width = "50px";
-        idInput.style.height = "50px";
-        idInput.style.backgroundColor = "orange"
+        idInput.classList.add("hidden");
+        idInput.type = "text";
+        idInput.name = "id";
         idInput.value = productId.innerHTML;
         cartLine.appendChild(idInput);
 
         //product.name
 
-        let nameInput = document.createElement("input");
-        nameInput.setAttribute("type", "text");
-        nameInput.setAttribute("name", "name");
-        nameInput.style.width = "50px";
-        nameInput.style.height = "50px";
-        nameInput.style.backgroundColor = "orange";
-        nameInput.value = productName.innerHTML;
-        cartLine.appendChild(nameInput);
+        let cartName = document.createElement("p");
+        cartName.innerHTML = productName.innerHTML;
+        cartName.classList.add("col-start-1", "col-end-3", "flex", "items-center", "justify-center");
+        cartLine.appendChild(cartName);
 
 
         //product.price
 
-        let priceInput = document.createElement("input");
-        priceInput.setAttribute("type", "number");
-        priceInput.id = "cartPrice" + index;
-        priceInput.style.width = "50px";
-        priceInput.style.height = "50px";
-        priceInput.style.backgroundColor = "orange"
-        priceInput.value = unitPrice;
-        cartLine.appendChild(priceInput);
+        let cartPrice = document.createElement("p");
+        cartPrice.id = "cartPrice" + index;
+        cartPrice.classList.add("col-start-3", "col-end-5");
+        cartPrice.innerHTML = unitPrice + "€";
+        cartLine.appendChild(cartPrice);
 
         //product.quantity
 
         let qtyContainer = document.createElement("div");
+        qtyContainer.classList.add("flex", "col-start-5", "col-end-7", "items-center", "justify-center")
         cartLine.appendChild(qtyContainer);
 
         let cartMinus = document.createElement("button");
-        cartMinus.setAttribute("type", "button");
-        cartMinus.id = "bskMinus" + index;
+        cartMinus.type = "button";
+        cartMinus.id = "cartMinus" + index;
+        cartMinus.classList.add("my-minus", "w-5", "h-5", "rounded-md", "font-bold");
         cartMinus.innerHTML = "-";
         qtyContainer.appendChild(cartMinus);
         cartMinus.addEventListener("click", () => {
-            decreaseBsktQty(quantityInput, productQuantity, index, oneTotal, unitPrice)
+            decreaseCartQty(quantityInput, productQuantity, index, productTotal, unitPrice)
         });
 
         let quantityInput = document.createElement("input");
-        quantityInput.setAttribute("type", "number");
+        quantityInput.type = "number";
         quantityInput.id = "cartQty" + index;
-        quantityInput.style.width = "50px";
-        quantityInput.style.height = "50px";
-        quantityInput.style.backgroundColor = "orange"
+        quantityInput.classList.add("w-7", "p-0", "text-center", "focus:ring-0", "border-0", "bg-dutch-white", "pointer-events-none");
         quantityInput.value = productQuantity.value;
         qtyContainer.appendChild(quantityInput);
 
         let cartPlus = document.createElement("button");
-        cartPlus.setAttribute("type", "button");
-        cartPlus.id = "bskPlus" + index;
+        cartPlus.type = "button";
+        cartPlus.id = "cartPlus" + index;
+        cartPlus.classList.add("my-plus", "w-5", "h-5", "rounded-md", "font-bold");
         cartPlus.innerHTML = "+";
         qtyContainer.appendChild(cartPlus);
         cartPlus.addEventListener("click", () => {
-            increaseBsktQty(quantityInput, productStock, productQuantity, index, oneTotal, unitPrice)
+            increaseCartQty(quantityInput, productStock, productQuantity, index, productTotal, unitPrice)
         });
 
-        oneTotal = document.createElement("input");
-        oneTotal.type = "number";
-        oneTotal.id = "oneTotal" + index;
-        oneTotal.style.width = "50px";
-        oneTotal.style.height = "50px";
-        oneTotal.style.backgroundColor = "orange"
-        cartLine.appendChild(oneTotal);
+        productTotal = document.createElement("p");
+        productTotal.id = "productTotal" + index;
+        productTotal.classList.add("col-start-7", "col-end-9");
+        cartLine.appendChild(productTotal);
 
     } else { //Si ref. déjà ajoutée: augmentation de la quantité du produit dans le panier
         quantityInput.value = productQuantity.value;
     }
-    oneTotal.value = unitPrice * qty;
+
+    productTotal.innerHTML = (unitPrice * qty).toFixed(2) + "€";
+
+
 }
 
 
 //Fonction pour augmenter la quantité de produit depuis le panier
-function increaseBsktQty(elem, productStock, productQuantity, index, oneTotal, unitPrice) {
+function increaseCartQty(elem, productStock, productQuantity, index, productTotal, unitPrice) {
     let qty = productQuantity.value;
     if (parseInt(elem.value) < productStock.value) {
         elem.value++;
         productQuantity.value++;
         qty = productQuantity.value;
-        productPriceCalc(index, qty, oneTotal, unitPrice);
+        totalCartInc(index)
+        productPriceCalc(index, qty, productTotal, unitPrice);
     } else {
-        productPriceCalc(index, qty, oneTotal, unitPrice);
+        productPriceCalc(index, qty, productTotal, unitPrice);
     }
 }
 
 //Fonction pour diminuer la quantité de produit depuis le panier
-function decreaseBsktQty(elem, productQuantity, index, oneTotal, unitPrice) {
+function decreaseCartQty(elem, productQuantity, index, productTotal, unitPrice) {
     let qty = productQuantity.value;
     if (parseInt(elem.value) > 0) {
         elem.value--;
         productQuantity.value--;
         qty = productQuantity.value;
-        productPriceCalc(index, qty, oneTotal, unitPrice);
+        totalCartDec(index)
+        productPriceCalc(index, qty, productTotal, unitPrice);
     } else {
-        productPriceCalc(index, qty, oneTotal, unitPrice);
+        productPriceCalc(index, qty, productTotal, unitPrice);
     }
 }
 
 
 //Fonction pour calculer le total de chaque produit
-function productPriceCalc(index, qty, oneTotal, unitPrice) {
-    oneTotal.value = unitPrice * qty;
+function productPriceCalc(index, qty, productTotal, unitPrice) {
+    productTotal.innerHTML = (unitPrice * qty).toFixed(2) + "€";
+}
+
+function totalCartInc(index) {
+    let quantityInput = document.querySelector("#cartQty" + index);
+    if (cartLines) {
+        let unitPrice = parseFloat(document.querySelector("#price" + index).innerHTML);
+        cartLines.forEach((cartLine, index) => {
+            return unitPrice;
+        });
+            sum += unitPrice;
+        cartTotal.innerHTML = sum.toFixed(2);
+    }
+}
+
+function totalCartDec(index) {
+    let quantityInput = document.querySelector("#cartQty" + index);
+    if (cartLines) {
+        let unitPrice = parseFloat(document.querySelector("#price" + index).innerHTML);
+        cartLines.forEach((cartLine, index) => {
+            return unitPrice;
+        });
+        if (parseInt(quantityInput.value) > 0 && sum > 0){
+            console.log(sum)
+            sum -= unitPrice;
+        }
+        cartTotal.innerHTML = sum.toFixed(2);
+    }
 }

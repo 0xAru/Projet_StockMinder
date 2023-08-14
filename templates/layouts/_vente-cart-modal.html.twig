@@ -1,34 +1,55 @@
+<div class="my-cart-btn fixed right-0 mr-3 mt-3" onclick="cartModal(this)">
+    <img src="{{ asset('assets/img/cart.svg') }}" alt="">
+</div>
+
+<script>
+    // paramètres bouton panier
+    let cart = document.querySelector(".my-cart-btn");
+
+    window.addEventListener('scroll', function() {
+
+        // Hauteur à partir de laquelle nous voulons détecter le défilement (96px)
+        const scrollThreshold = 96;
+
+        if (window.scrollY > scrollThreshold) {
+
+            cart.classList.add("fixed-menu");
+
+        } else {
+
+            cart.classList.remove("fixed-menu");
+        }
+    });
+</script>
+
 <!-- cart modal---------------------------------------------------------------------------------------------------------------------------------- -->
 <div class="my-cart-modal grid grid-cols-2 overflow-y-auto">
     <div class="my-hidden z-10 w-full mx-auto p-2" id="cartModal" aria-labelledby="panier"
          role="dialog"
          aria-modal="true">
         <div class="z-40 col-start-1 col-end-2 items-center transform rounded-xl my-modal-border text-center shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-            <div class="my-modal-products px-4 p-2">
+            <div class="my-modal-products px-4 p-2 rounded-md">
                 <div class="flex justify-between">
                     <h2 class="text-lg">Panier</h2>
                     <img class="my-close-btn h-7 w-7 my-1" src="{{ asset('assets/img/close-cross.svg') }}"
                          onclick="closeCartModal(this)" alt="">
                 </div>
-                <div class="flex">
-                    <p class="flex-1 ">Produit</p>
-                    <p class="flex-1 ">Prix unit.</p>
-                    <p class="flex-1 ">Quantité</p>
-                    <p class="flex-1 ">Total</p>
+                <div class="grid grid-cols-8">
+                    <p class="col-start-1 col-end-3 flex items-center justify-center font-bold">Produit</p>
+                    <p class="col-start-3 col-end-5 flex items-center justify-center font-bold">Prix unit.</p>
+                    <p class="col-start-5 col-end-7 flex items-center justify-center font-bold">Quantité</p>
+                    <p class="col-start-7 col-end-9 flex items-center justify-center font-bold">Total</p>
                 </div>
                 <div id="cartData" class="py-3">
                     <form action="/cart" method="post" class="flex flex-col" id="cartForm">
-
-
+                        <!-- contenu du panier-->
                     </form>
                 </div>
-                <div class="flex pb-10">
-                    <p>Total: </p><span id="cartTotal">0 €</span>
+                <div class="flex justify-between pb-10 font-bold">
+                    <p>Total panier:</p><span id="cartTotal">0 €</span>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 

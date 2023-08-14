@@ -74,7 +74,7 @@ class ProductRepository extends ServiceEntityRepository
     public function findUniqueCapacities(): array
     {
         $query = $this->entityManager->createQueryBuilder()
-            ->select('DISTINCT p.capacity / 10 AS divided_capacity')
+            ->select('DISTINCT p.capacity')
             ->from(Product::class, 'p')
             ->getQuery();
 
