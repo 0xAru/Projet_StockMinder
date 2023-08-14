@@ -184,9 +184,11 @@ h4 {
 }
 
 
-/* panier modale */
+/* cart modal */
 
-
+.cart-line {
+    border-bottom: 1px solid var(--wine);
+}
 
 
 .my-cart-modal {
@@ -217,4 +219,5 @@ h4 {
 .my-hidden {
     display: none;
 }
+
 

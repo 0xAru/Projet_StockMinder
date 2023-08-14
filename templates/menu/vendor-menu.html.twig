@@ -50,26 +50,26 @@
                     <span class="my-invisible" id="id{{ loop.index0 }}">{{ product.id }}</span>
                     <div class="flex flex-col items-center">
                         {% if product.label != "" %}
-                            {% if product.label == "local" %}
+                            {% if product.label == "Local" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Local.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "biologique" %}
+                            {% elseif product.label == "Biologique" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
-                            {% elseif product.label == "sans gluten" %}
+                            {% elseif product.label == "Sans gluten" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "sans alcool" %}
+                            {% elseif product.label == "Sans alcool" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "avec lactose" %}
+                            {% elseif product.label == "Avec lactose" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Lactose.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "avec arachides" %}
+                            {% elseif product.label == "Avec arachides" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
@@ -103,9 +103,9 @@
                                    value="{{ product.stock }}">
                         </div>
                         <div class="flex">
-                            <button class="my-minus h-7 w-7 items-center mx-auto p-1 rounded-lg" onclick="minus(this, {{ loop.index0 }}); createForm(this, {{ loop.index0 }})" ><img class="mx-auto" src="{{ asset('assets/img/minus.svg') }}" alt=""></button>
+                            <button class="my-minus h-7 w-7 items-center mx-auto p-1 rounded-lg" onclick="  totalCartDec(this,{{ loop.index0 }})" ><img class="mx-auto" src="{{ asset('assets/img/minus.svg') }}" alt=""></button>
                             <input class="my-quantity h-7 w-7 flex justify-center text-center mx-auto p-1 rounded-lg" id="qty{{ loop.index0 }}"  type="number" value="0">
-                            <button class="my-plus h-7 w-7 items-center mx-auto p-1 rounded-lg" onclick="plus(this,  {{ loop.index0 }}); createForm(this, {{ loop.index0 }})"><img class="mx-auto" src="{{ asset('assets/img/plus.svg') }}" alt=""></button>
+                            <button class="my-plus h-7 w-7 items-center mx-auto p-1 rounded-lg" onclick="plus(this,  {{ loop.index0 }}); createForm(this, {{ loop.index0 }}); totalCartInc({{ loop.index0 }})"><img class="mx-auto" src="{{ asset('assets/img/plus.svg') }}" alt=""></button>
                         </div>
                     </div>
                 {% else %}
@@ -141,26 +141,26 @@
                     <p class="flex justify-center items-center text-center">{{ product.brand }}</p>
                     <div class="flex flex-col items-center">
                         {% if product.label != "" %}
-                            {% if product.label == "local" %}
+                            {% if product.label == "Local" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Local.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "biologique" %}
+                            {% elseif product.label == "Biologique" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
-                            {% elseif product.label == "sans gluten" %}
+                            {% elseif product.label == "Sans gluten" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "sans alcool" %}
+                            {% elseif product.label == "Sans alcool" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "avec lactose" %}
+                            {% elseif product.label == "Avec lactose" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Lactose.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "avec arachides" %}
+                            {% elseif product.label == "Avec arachides" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
@@ -230,26 +230,26 @@
                     <p class="flex justify-center items-center text-center">{{ product.brand }}</p>
                     <div class="flex flex-col items-center">
                         {% if product.label != "" %}
-                            {% if product.label == "local" %}
+                            {% if product.label == "Local" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Local.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "biologique" %}
+                            {% elseif product.label == "Biologique" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
-                            {% elseif product.label == "sans gluten" %}
+                            {% elseif product.label == "Sans gluten" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "sans alcool" %}
+                            {% elseif product.label == "Sans alcool" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "avec lactose" %}
+                            {% elseif product.label == "Avec lactose" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Lactose.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "avec arachides" %}
+                            {% elseif product.label == "Avec arachides" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
@@ -317,26 +317,26 @@
                     <p class="flex justify-center items-center text-center">{{ product.brand }}</p>
                     <div class="flex flex-col items-center">
                         {% if product.label != "" %}
-                            {% if product.label == "local" %}
+                            {% if product.label == "Local" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Local.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "biologique" %}
+                            {% elseif product.label == "Biologique" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
-                            {% elseif product.label == "sans gluten" %}
+                            {% elseif product.label == "Sans gluten" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "sans alcool" %}
+                            {% elseif product.label == "Sans alcool" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "avec lactose" %}
+                            {% elseif product.label == "Avec lactose" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Lactose.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "avec arachides" %}
+                            {% elseif product.label == "Avec arachides" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
@@ -404,26 +404,26 @@
                     <p class="flex justify-center items-center text-center">{{ product.brand }}</p>
                     <div class="flex flex-col items-center">
                         {% if product.label != "" %}
-                            {% if product.label == "local" %}
+                            {% if product.label == "Local" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Local.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "biologique" %}
+                            {% elseif product.label == "Biologique" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
-                            {% elseif product.label == "sans gluten" %}
+                            {% elseif product.label == "Sans gluten" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "sans alcool" %}
+                            {% elseif product.label == "Sans alcool" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "avec lactose" %}
+                            {% elseif product.label == "Avec lactose" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Lactose.svg') }}"
                                                        alt=""></a>
-                            {% elseif product.label == "avec arachides" %}
+                            {% elseif product.label == "Avec arachides" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}

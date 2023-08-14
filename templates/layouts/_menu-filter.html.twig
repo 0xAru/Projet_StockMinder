@@ -3,7 +3,15 @@
         <img src="{{ asset('assets/img/burger-menu.svg') }}" alt=""
              class="my-burger burger-hidden my-closed ml-0 mt-3 fixed">
         <div class="my-menu-container menu-hidden w-48 py-3.5 mt-3 rounded-br-lg fixed">
-            <form id="searchTermForm" action="/carte" method="get">
+            {% set action =  null %}
+            {% if app.request.get('_route') == 'app_menu' %}
+                {% set action = '/carte' %}
+            {% elseif app.request.get('_route') == 'app_sell' %}
+                {% set action = '/vente' %}
+            {% endif %}
+
+            {% if action is not null %}
+            <form id="searchTermForm" action="{{ action }}" method="get">
                 <div class="flex">
                     {% if searchTerm %}  <input type="text"
                                                 class="my-search-input w-32 rounded-full p-1 ml-2 focus:font-bold focus:ring-0 border-0"
@@ -12,11 +20,13 @@
                                       class="my-search-input w-32 rounded-full p-1 ml-2 focus:font-bold focus:ring-0 border-0"
                                       placeholder="Recherche..." name="search">
                     {% endif %}
-                    <button type="submit"><img class="mx-4" src="{{ asset('assets/img/search-icon.svg') }}" alt="">
+                    <button type="submit" id="submitBtn"><img class="mx-4"
+                                                              src="{{ asset('assets/img/search-icon.svg') }}"
+                                                              alt="">
                     </button>
                 </div>
             </form>
-
+            {% endif %}
 
             {{ form_start(form) }}
             <div class="my-filter-fields">
@@ -31,7 +41,7 @@
                 {{ form_row(form.brand) }}
             </div>
 
-            <div class="my-filter-fields">
+            <div class="my-filter-fields my-capacity">
                 {{ form_row(form.capacity) }}
             </div>
 
@@ -50,6 +60,7 @@
         </div>
     </div>
 </nav>
+
 <script>
 
     let selects = document.querySelectorAll("select");
@@ -96,7 +107,7 @@
         }
     });
 
-
+    //suppression des paramètres dans la barre URL
     function removeSearchParamFromURL() {
         let urlWithoutSearchParam = window.location.href.split('?')[0];
         history.replaceState({}, document.title, urlWithoutSearchParam);
@@ -111,6 +122,7 @@
 
         let selects = document.querySelectorAll('select');
         let search = document.querySelector('.my-search-input');
+        let submitBtn = document.querySelector('#submitBtn');
 
         selects.forEach(function (select) {
             select.value = "";
@@ -118,7 +130,7 @@
 
         search.value = "";
 
-        window.location = "/carte";
+        submitBtn.click();
 
     }
 
@@ -129,5 +141,22 @@
             setTimeout(myButton.blur(), 100); // Enlever le focus pour restaurer la boîte d'ombre par défaut
         });
     });
+
+    function capacityDisplay() {
+        let capacityOptions = document.querySelectorAll(".my-capacity option");
+
+        capacityOptions.forEach(option => {
+            let capacity = option.innerHTML;
+
+            // Vérifiez si la capacité a trois caractères
+            if (capacity.length >= 3 && capacity.length <= 4) {
+                // splice pour insérer une virgule après le deuxième caractère
+                let newCapacity = capacity.slice(0, 2) + ',' + capacity.slice(2) + ' cl';
+                option.innerHTML = newCapacity;
+            }
+        });
+    }
+
+    capacityDisplay();
 
 </script>
