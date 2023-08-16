@@ -237,11 +237,12 @@ async function getProducts() {
             let cell = document.createElement("td");
             cell.classList.add("text-center");
             let cellContent = document.createElement("div");
-            cellContent.classList.add("h-24", "overflow-hidden", "text-ellipsis", "flex", "flex-col", "justify-center", "mx-3", "font-semibold");
+            cellContent.classList.add("h-28", "overflow-y-scroll", "flex", "flex-col", "justify-center", "mx-3", "font-semibold");
             cellContent.textContent = data;
 
-            if (data && data.length > 80) {
+            if (data && data.length > 70) {
                 cellContent.textContent = extractFirstWords(data, 10);
+                cellContent.classList.remove("justify-center");
             }
 
             if (data == "null%") {

@@ -45,6 +45,9 @@ class Company
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: User::class, orphanRemoval: true)]
     private Collection $users;
 
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $logo = null;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -227,6 +230,18 @@ class Company
                 $user->setCompany(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): static
+    {
+        $this->logo = $logo;
 
         return $this;
     }

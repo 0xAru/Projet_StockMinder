@@ -88,8 +88,8 @@ class DashboardController extends AbstractController
 
                 // Mettre à jour le chemin de l'image dans l'entité
                 $event->setImage($newFilename);
-
             }
+
             $this->em->persist($event);
             $this->em->flush();
             return $this->redirectToRoute('app_dashboard', ['action' => 1]);
@@ -99,6 +99,7 @@ class DashboardController extends AbstractController
         return $this->render('dashboard/index.html.twig', [
             'first_name' => $firstName,
             'company_id' => $this->getUser()->getCompany()->getId(),
+            'company_logo' => $this->getUser()->getCompany()->getLogo(),
             'productForm' => $productForm->createView(),
             'employeeForm' => $employeeForm->createView(),
             'eventForm' => $eventForm->createView(),

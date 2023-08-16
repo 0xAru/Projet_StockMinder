@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Company;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -86,6 +87,16 @@ class CompanyUpdateFormType extends AbstractType
                 'attr' => [
                     'placeholder' => "Ville",
                     'class' => 'rounded-full md:my-3 w-96'
+                ],
+                'row_attr' => [
+                    'class' => "flex flex-col text-center"
+                ]
+            ])
+            ->add("logo", FileType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'class' => 'md:my-3 w-96'
                 ],
                 'row_attr' => [
                     'class' => "flex flex-col text-center"
