@@ -19,8 +19,8 @@ class DashboardEmployeeFormType extends AbstractType
                 'label' => false,
                 'required' => true,
                 'attr' => [
-                    'placeholder' => "Prénom de l'employé",
-                    'class' => 'rounded-full md:my-3 w-96'
+                    'placeholder' => " Prénom de l'employé",
+                    'class' => 'rounded-full md:my-3 h-6 md:h-11 md:w-96 text-xs md:text-base'
                 ]
             ])
             ->add("lastname", TextType::class,[
@@ -28,7 +28,7 @@ class DashboardEmployeeFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Nom de l'employé",
-                'class' => 'rounded-full md:my-3 w-96'
+                'class' => 'rounded-full md:my-3 h-6 md:h-11 md:w-96 text-xs md:text-base'
                 ]
             ])
             ->add("employee_number", TextType::class, [
@@ -36,7 +36,7 @@ class DashboardEmployeeFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Matricule",
-                    'class' => 'rounded-full md:my-3 w-96',
+                    'class' => 'rounded-full md:my-3 h-6 md:h-11 md:w-96 text-xs md:text-base',
                     'title' => 'deux chiffres pour un chef de salle et 3 chiffres pour un serveur'
                 ]
             ])
@@ -49,7 +49,7 @@ class DashboardEmployeeFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => 'Rôle',
-                    'class' => 'rounded-full md:my-3 w-96'
+                    'class' => 'rounded-full md:my-3 h-6 md:h-11 md:w-96 text-xs md:text-base py-0'
                 ],
                 'multiple' => false, // Empêche la sélection de plusieurs rôles
                 'mapped' => false
@@ -59,7 +59,7 @@ class DashboardEmployeeFormType extends AbstractType
                     'class' => 'btn rounded-full px-10 py-2 font-semibold'
                 ],
                 'row_attr' => [
-                    'class' => 'flex justify-center md:my-3 w-96'
+                    'class' => 'flex justify-center md:my-3 md:w-96'
                 ]
             ]);
     }

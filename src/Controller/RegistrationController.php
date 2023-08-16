@@ -7,6 +7,7 @@ use App\Entity\Company;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -55,6 +56,17 @@ class RegistrationController extends AbstractController
             $company->setAddress($data['address']);
             $company->setZipcode($data['zipcode']);
             $company->setCity($data['city']);
+
+            $uploadedFile = $data['logo'];
+
+            if ($uploadedFile instanceof UploadedFile) {
+                $newFilename = uniqid() . '.' . $uploadedFile->getClientOriginalExtension();
+
+                $uploadedFile->move($this->getParameter('uploads_path'), $newFilename);
+
+                // Mettre à jour le chemin de l'image dans l'entité
+                $company->setLogo($newFilename);
+            }
 
             // Associez la société à l'utilisateur
             $user->setCompany($company);

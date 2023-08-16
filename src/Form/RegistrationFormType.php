@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -114,6 +115,17 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'placeholder' => "Ville",
                     'class' => 'rounded-full my-3'
+                ]
+            ])
+            ->add("logo", FileType::class, [
+                'label' => "Sélectionner un logo",
+                'label_attr' => [
+                    'class' => 'block text-wine text-sm font-bold cursor-pointer text-center hover:text-persian-orange hover:bg-wine shadow appearance-none border border-wine rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline'
+                ],
+                'required' => false,
+                'attr' => [
+                    'class' => 'hidden',
+                    'onchange' => 'previewPicture(this)'
                 ]
             ])
             ->add("Envoyer", SubmitType::class, [

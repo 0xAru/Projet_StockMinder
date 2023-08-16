@@ -39,6 +39,14 @@
                 <div class="md:flex md:gap-10">
                     {{ form_row(registrationForm.plainPassword) }}
                 </div>
+                <div class="md:flex md:my-6 justify-center">
+                    {{ form_row(registrationForm.logo) }}
+                </div>
+                {% if registrationForm.logo%}
+                <div class="md:flex justify-center md:mb-6">
+                    <img id="image" alt="" class="rounded-full w-24 h-24">
+                </div>
+                {% endif %}
                 {{ form_row(registrationForm.Envoyer) }}
             </div>
             {{ form_end(registrationForm) }}
@@ -47,4 +55,8 @@
             </div>
         </section>
     </main>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ asset("assets/js/preview_img.js") }}"></script>
 {% endblock %}
