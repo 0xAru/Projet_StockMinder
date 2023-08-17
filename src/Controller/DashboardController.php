@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Entity\Product;
 use App\Entity\User;
-use App\Form\CompanyUpdateFormType;
 use App\Form\DashboardEmployeeFormType;
 use App\Form\DashboardEventFormType;
 use App\Form\DashboardProductFormType;
@@ -107,34 +106,4 @@ class DashboardController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/company_update', name: 'app_company_update')]
-    public function companyUpdate(Request $request): Response
-    {
-        // Vérifiez si l'utilisateur est connecté
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_login');
-        }
-
-        // Récupérer l'entité Company associée à l'utilisateur connecté
-        $company = $this->getUser()->getCompany();
-
-        // Créer un formulaire pour la mise à jour des informations de l'entité Company
-        $companyForm = $this->createForm(CompanyUpdateFormType::class, $company);
-
-        // Traitez la soumission du formulaire s'il a été envoyé
-        $companyForm->handleRequest($request);
-
-        if ($companyForm->isSubmitted() && $companyForm->isValid()) {
-            $this->em->flush();
-
-            // Redirigez l'utilisateur vers la page de tableau de bord avec un message de succès
-            $this->addFlash('success', 'Les informations de l\'entreprise ont été mises à jour avec succès.');
-            return $this->redirectToRoute('app_dashboard');
-        }
-        // Rendre le formulaire de mise à jour de l'entité Company
-        return $this->render('dashboard/company_update.html.twig', [
-            'company_id' => $this->getUser()->getCompany()->getId(),
-            'companyForm' => $companyForm->createView()
-        ]);
-    }
 }

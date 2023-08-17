@@ -17,9 +17,14 @@
             {{ form_row(companyForm.zipcode) }}
             {{ form_row(companyForm.city) }}
         </div>
-        <div class="flex justify-center gap-28 my-8 ml-20">
+        <div class="flex justify-center gap-28 my-8">
             {{ form_row(companyForm.logo) }}
         </div>
+        {% if companyForm.logo%}
+            <div class="md:flex justify-center md:mb-6">
+                <img id="image" alt="" class="rounded-full w-24 h-24" src="{{ asset("uploaded_img/"~company_logo) }}">
+            </div>
+        {% endif %}
         <div class="flex justify-center">
             {{ form_row(companyForm.Envoyer) }}
         </div>

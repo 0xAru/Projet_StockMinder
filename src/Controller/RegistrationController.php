@@ -56,12 +56,10 @@ class RegistrationController extends AbstractController
             $company->setAddress($data['address']);
             $company->setZipcode($data['zipcode']);
             $company->setCity($data['city']);
-
             $uploadedFile = $data['logo'];
 
             if ($uploadedFile instanceof UploadedFile) {
                 $newFilename = uniqid() . '.' . $uploadedFile->getClientOriginalExtension();
-
                 $uploadedFile->move($this->getParameter('uploads_path'), $newFilename);
 
                 // Mettre à jour le chemin de l'image dans l'entité
