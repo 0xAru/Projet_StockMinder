@@ -69,11 +69,26 @@ function closeCartModal(elem) {
 let modal = document.querySelector("#modal")
 let companyId = modal.getAttribute("data-companyId")
 let products;
+
 window.addEventListener('load', async () => {
-    products = await fetch(`/${companyId}/products`);
-    products = await products.json();
-    products = products.products
-})
+    try {
+        const response = await fetch(`/${companyId}/products`);
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch products');
+        }
+
+        const data = await response.json();
+        products = data.products;
+
+        console.log(products);
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+
+
 let parent = document.querySelector("#cartData");
 let cartForm = document.querySelector("#cartForm");
 let cartLines = document.querySelectorAll(".my-cart-lines");
@@ -111,7 +126,7 @@ async function createForm(elem, index, product) {
         idInput.id = "cartId" + index;
         idInput.classList.add("hidden");
         idInput.type = "text";
-        idInput.name = "id";
+        idInput.name = "productId";
         idInput.value = product.id;
 
         cartLine.appendChild(idInput);
@@ -176,8 +191,11 @@ async function createForm(elem, index, product) {
 
         let submitBtn = document.createElement("button");
         submitBtn.id = "cartSubmitBtn";
-        submitBtn.type = "submit";
-        submitBtn.classList.add("fixed", "bottom-0")
+        submitBtn.type = "button";
+        submitBtn.addEventListener('click', ()=>{
+           sendData();
+        });
+        submitBtn.classList.add("fixed", "bottom-0");
         submitBtn.innerHTML = "Valider";
         cartForm.appendChild(submitBtn);
 
@@ -251,17 +269,19 @@ function totalCartDec(index, product) {
 
 //fonction de déduction d'un produit dans le panier
 function minus(elem, index) {
-
-    let product = getProduct(index)
-    let quantity = document.getElementById("qty" + index)
+    let cartLineContainer = document.querySelector("#cartLineContainer" + index);
+    let product = getProduct(index);
+    let quantity = document.getElementById("qty" + index);
 
     if (quantity.value > 0) {
         quantity.value--;
-        product.stock++
+        product.stock++;
         createForm(elem, index, product);
         totalCartDec(index, product);
-    } else {
-        document.querySelector("#cartLineContainer" + index).remove()
+
+        if (cartLineContainer && quantity.value <= 0) {
+            cartLineContainer.remove();
+        }
     }
 }
 
@@ -284,4 +304,21 @@ function plus(elem, index) {
 function getProduct(index) {
     let prodId = document.querySelector("#id" + index).getAttribute("data-productId")
     return products.find((prod) => prod.id == prodId)
+}
+
+async function sendData(){
+
+    // Options pour la requête Fetch
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // Indique que vous envoyez des données JSON
+        },
+        body: JSON.stringify(products) // Convertit les données en JSON
+    };
+
+    let response = await fetch ('/order', options)
+    window.location.reload();
+
+
 }

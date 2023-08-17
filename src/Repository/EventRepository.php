@@ -22,12 +22,14 @@ class EventRepository extends ServiceEntityRepository
     }
 
 
-    public function findEventsAfterToday()
+    public function findEventsAfterToday($companyId)
     {
         $qb = $this->createQueryBuilder('e');
-        $qb->andWhere('e.start_date >= :today')
+        $qb->where('e.company = :companyId')
+            ->andWhere('e.start_date >= :today')
             ->andWhere(':today < DATE_SUB(e.start_date, e.display_time_period, \'day\')')
             ->OrderBy('e.start_date', 'ASC')
+            ->setParameter('companyId' , $companyId)
             ->setParameter('today', new \DateTime(), \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE);
         return $qb->getQuery()->getResult();
     }

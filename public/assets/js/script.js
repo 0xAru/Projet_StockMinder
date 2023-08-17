@@ -17,14 +17,14 @@ navBar.addEventListener('wheel', (event) => {
 
 navBar.addEventListener('touchstart', (event) => {
     isScrolling = true;
-    startX = event.touches[0].pageX - navbar.offsetLeft;
+    startX = event.touches[0].pageX - navBar.offsetLeft;
     scrollLeft = navBar.scrollLeft;
 });
 
 navBar.addEventListener('touchmove', (event) => {
     if (!isScrolling) return;
     event.preventDefault();
-    const x = event.touches[0].pageX - navbar.offsetLeft;
+    const x = event.touches[0].pageX - navBar.offsetLeft;
     const walk = (x - startX) * 2; // Ajustez la valeur de défilement selon vos besoins
     navBar.scrollLeft = scrollLeft - walk;
 });
@@ -78,7 +78,7 @@ selects.forEach(function (select) {
 burger.addEventListener('click', () => {
 
     if (burger.classList.contains('my-closed')) {
-        burger.src = "{{ asset('assets/img/burger-menu-cross.svg') }}";
+        burger.src = "assets/img/burger-menu-cross.svg";
         burger.classList.remove("my-closed");
         burger.classList.add("my-opened");
         burger.classList.add("burger-visible")
@@ -87,7 +87,7 @@ burger.addEventListener('click', () => {
         menu.classList.add("menu-visible");
 
     } else {
-        burger.src = "{{ asset('assets/img/burger-menu.svg') }}";
+        burger.src = "assets/img/burger-menu.svg";
         burger.classList.remove("my-opened");
         burger.classList.add("my-closed");
         burger.classList.add("burger-hidden")
