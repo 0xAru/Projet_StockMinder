@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Company;
 use App\Form\ProductFilterType;
 use App\Repository\EventRepository;
 use App\Repository\ProductRepository;
@@ -113,7 +114,8 @@ class MenuController extends AbstractController
             'products' => $products,
             'searchTerm' => $searchTerm,
             'form' => $form->createView(),
-
+            'companyId' => '57',
         ]);
     }
+
 }

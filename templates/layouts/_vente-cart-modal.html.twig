@@ -1,29 +1,10 @@
-<div class="my-cart-btn fixed right-0 mr-3 mt-3" onclick="cartModal(this)">
+<div class="my-cart-btn fixed right-0 mr-3 mt-3" onclick="openCartModal(this)">
     <img src="{{ asset('assets/img/cart.svg') }}" alt="">
 </div>
 
-<script>
-    // paramètres bouton panier
-    let cart = document.querySelector(".my-cart-btn");
-
-    window.addEventListener('scroll', function() {
-
-        // Hauteur à partir de laquelle nous voulons détecter le défilement (96px)
-        const scrollThreshold = 96;
-
-        if (window.scrollY > scrollThreshold) {
-
-            cart.classList.add("fixed-menu");
-
-        } else {
-
-            cart.classList.remove("fixed-menu");
-        }
-    });
-</script>
 
 <!-- cart modal---------------------------------------------------------------------------------------------------------------------------------- -->
-<div class="my-cart-modal grid grid-cols-2 overflow-y-auto">
+<div class="my-cart-modal grid grid-cols-2 overflow-y-auto" id="modal" data-companyId= {{ companyId }}>
     <div class="my-hidden z-10 w-full mx-auto p-2" id="cartModal" aria-labelledby="panier"
          role="dialog"
          aria-modal="true">
@@ -54,3 +35,4 @@
 </div>
 
 <!-- end cart modal--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
