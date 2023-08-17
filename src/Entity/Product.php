@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 use App\Controller\ProductController;
 use App\Repository\ProductRepository;
 use App\Entity\Trait\SlugTrait;
@@ -20,6 +21,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
         controller: ProductController::class,
         name: 'app_product'
     ),
+        new Post(
+            uriTemplate: '/order',
+            controller: ProductController::class,
+            name: 'app_order'
+        ),
 
 ],
     normalizationContext: ['groups' => ['read:products']])]

@@ -24,78 +24,100 @@ class ProductRepository extends ServiceEntityRepository
         $this->entityManager = $entityManager;
     }
 
-        public function findProductByKeyword($searchTerm): array
+    public function findProductsByCompany($companyId): array
+    {
+
+        return $this->createQueryBuilder('p')
+            ->where('p.company = :companyId')
+            ->setParameter('companyId', $companyId)
+            ->getQuery()
+            ->getResult();
+
+    }
+
+
+    public function findProductByKeyword($searchTerm, $companyId): array
     {
 
 
         return $this->createQueryBuilder('p')
-
-            ->orWhere('p.name LIKE :searchTerm')
-            ->orWhere('p.style LIKE :searchTerm')
-            ->orWhere('p.origin LIKE :searchTerm')
-            ->orWhere('p.brand LIKE :searchTerm')
-            ->orWhere('p.capacity LIKE :searchTerm')
-           ->setParameter('searchTerm', "%".$searchTerm."%")
+            ->where('p.company = :companyId')
+            ->andWhere('p.name LIKE :searchTerm OR p.style LIKE :searchTerm OR p.origin LIKE :searchTerm OR p.brand LIKE :searchTerm OR p.capacity LIKE :searchTerm')
+            ->setParameter('companyId', $companyId)
+            ->setParameter('searchTerm', "%" . $searchTerm . "%")
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
 
-    public function findUniqueStyles(): array
+    public function findUniqueStyles($companyId): array
     {
         $query = $this->entityManager->createQueryBuilder()
             ->select('DISTINCT p.style')
             ->from(Product::class, 'p')
+            ->where('p.company = :companyId')
+            ->setParameter('companyId', $companyId)
             ->getQuery();
 
         return array_map('current', $query->getScalarResult());
     }
 
-    public function findUniqueOrigins(): array
+    public function findUniqueOrigins($companyId): array
     {
         $query = $this->entityManager->createQueryBuilder()
             ->select('DISTINCT p.origin')
             ->from(Product::class, 'p')
+            ->where('p.company = :companyId')
+            ->setParameter('companyId', $companyId)
             ->getQuery();
 
         return array_map('current', $query->getScalarResult());
     }
 
-    public function findUniqueBrands(): array
+    public function findUniqueBrands($companyId): array
     {
         $query = $this->entityManager->createQueryBuilder()
             ->select('DISTINCT p.brand')
             ->from(Product::class, 'p')
+            ->where('p.company = :companyId')
+            ->setParameter('companyId', $companyId)
             ->getQuery();
 
         return array_map('current', $query->getScalarResult());
     }
 
-    public function findUniqueCapacities(): array
+    public function findUniqueCapacities($companyId): array
     {
         $query = $this->entityManager->createQueryBuilder()
             ->select('DISTINCT p.capacity')
             ->from(Product::class, 'p')
+            ->where('p.company = :companyId')
+            ->setParameter('companyId', $companyId)
             ->getQuery();
 
         return array_map('current', $query->getScalarResult());
     }
 
-    public function findUniqueLabels(): array{
+    public function findUniqueLabels($companyId): array
+    {
         $query = $this->entityManager->createQueryBuilder()
             ->select('DISTINCT p.label')
             ->from(Product::class, 'p')
+            ->where('p.company = :companyId')
+            ->setParameter('companyId', $companyId)
             ->getQuery();
 
         return array_map('current', $query->getScalarResult());
     }
-    public function findByFilters($data)
+
+    public function findByFilters($data, $companyId)
     {
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
 
         $qb->select('p')
-            ->from(Product::class, 'p');
+            ->from(Product::class, 'p')
+            ->where('p.company = :companyId')
+            ->setParameter('companyId', $companyId);
 
         // Filtrage par style
         if ($data->getStyle()) {
