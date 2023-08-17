@@ -11,28 +11,3 @@
         </ul>
     </nav>
 </div>
-
-
-
-<script>
-    let navBar = document.querySelector(".nav");
-
-    window.addEventListener('scroll', function() {
-
-        // Hauteur à partir de laquelle nous voulons détecter le défilement (96px)
-        const scrollThreshold = 96;
-
-        if (window.scrollY > scrollThreshold) {
-            navBar.classList.add("fixed-nav");
-            burger.classList.add("fixed-menu");
-            menu.classList.add("fixed-menu");
-
-
-        } else {
-            navBar.classList.remove("fixed-nav");
-            burger.classList.remove("fixed-menu");
-            menu.classList.remove("fixed-menu");
-
-        }
-    });
-</script>

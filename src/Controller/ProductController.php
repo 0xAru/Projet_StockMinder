@@ -29,6 +29,8 @@ class ProductController extends AbstractController
         ]);
     }
 
+
+
     //Route de modification de produits
     #[Route(path: '/product/{id}/update', name: 'app_product_update')]
     function updateProduct(Request $request, Product $product): Response
