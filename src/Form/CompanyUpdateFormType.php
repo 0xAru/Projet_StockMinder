@@ -93,14 +93,20 @@ class CompanyUpdateFormType extends AbstractType
                 ]
             ])
             ->add("logo", FileType::class, [
-                'label' => false,
+                'label' => "Modifier le logo",
+                'label_attr' => [
+                    'class' => 'block text-wine text-sm font-bold cursor-pointer text-center hover:text-persian-orange hover:bg-wine shadow appearance-none border border-wine rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline'
+                ],
                 'required' => false,
+                'data_class' => null,
                 'attr' => [
-                    'class' => 'md:my-3 w-96'
+                    'class' => 'hidden',
+                    'onchange' => 'previewPicture(this)'
                 ],
                 'row_attr' => [
-                    'class' => "flex flex-col text-center"
-                ]
+                    'class' => 'flex justify-center md:my-3'
+                ],
+                'mapped' =>false
             ])
             ->add("Envoyer", SubmitType::class, [
                 'attr' => [

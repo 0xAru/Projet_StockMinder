@@ -36,6 +36,9 @@ class Company
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $logo = null;
+
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: Product::class, orphanRemoval: true)]
     private Collection $products;
 
@@ -44,9 +47,6 @@ class Company
 
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: User::class, orphanRemoval: true)]
     private Collection $users;
-
-    #[ORM\Column(length: 500, nullable: true)]
-    private ?string $logo = null;
 
     public function __construct()
     {
@@ -218,14 +218,12 @@ class Company
             $this->users->add($user);
             $user->setCompany($this);
         }
-
         return $this;
     }
 
     public function removeUser(User $user): static
     {
         if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
             if ($user->getCompany() === $this) {
                 $user->setCompany(null);
             }
