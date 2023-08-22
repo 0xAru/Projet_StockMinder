@@ -25,10 +25,12 @@ class DashboardController extends AbstractController
     #[Route(path: '/dashboard', name: 'app_dashboard')]
     public function index(Request $request, ProductRepository $productRepository): Response
     {
+        $company = $this->getUser()->getCompany();
+
         //Récupération des différentes options pour les champs select du formulaire
         $filterOptions = [
-            'label_choices' => $productRepository->findUniqueLabels(),
-            'origin_choices' => $productRepository->findUniqueOrigins()
+            'label_choices' => $productRepository->findUniqueLabels($company),
+            'origin_choices' => $productRepository->findUniqueOrigins($company)
         ];
         // Vérifiez si l'utilisateur est connecté
         if (!$this->getUser()) {
@@ -41,7 +43,7 @@ class DashboardController extends AbstractController
         // Stocker le prénom dans une variable de session
         $request->getSession()->set('user_name', $firstName);
 
-        $company = $this->getUser()->getCompany();
+
         $product = new Product();
         $employee = new User();
         $event = new Event();
@@ -92,7 +94,6 @@ class DashboardController extends AbstractController
             $this->em->persist($event);
             $this->em->flush();
             return $this->redirectToRoute('app_dashboard', ['action' => 1]);
-
         }
 
         return $this->render('dashboard/index.html.twig', [

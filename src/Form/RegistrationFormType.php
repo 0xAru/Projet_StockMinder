@@ -21,7 +21,7 @@ class RegistrationFormType extends AbstractType
         $builder
             // Champs pour l'utilisateur
             ->add('director_firstname', TextType::class, [
-                'label' => " ",
+                'label' => false,
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Prénom du directeur",
@@ -62,8 +62,9 @@ class RegistrationFormType extends AbstractType
                         'class' => 'password-field rounded-full my-3'
                     ],
                 ],
-                'mapped' => false, // Vous pouvez retirer cette option si vous n'en avez pas besoin
-                'constraints' => [ // Vous pouvez conserver les contraintes de validation pour le premier champ de mot de passe
+                'mapped' => false,
+                // contraintes de validation pour le premier champ de mot de passe
+                'constraints' => [
                     new NotBlank([
                         'message' => 'Entrez votre mot de passe',
                     ]),

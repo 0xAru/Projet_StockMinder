@@ -17,6 +17,8 @@
                 <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
+            {% include "layouts/_flash.html.twig" %}
+
             <form method="POST">
                 <div class="grid gap-2">
                     <div class="flex">
@@ -31,14 +33,17 @@
                     <input type="hidden" name="_csrf_token"
                            value="{{ csrf_token('authenticate') }}">
                     <div class="flex justify-center md:my-3">
-                        <button class="btn rounded-full px-10 py-2 font-semibold" type="submit">
+                        <button class="btn rounded-full px-8 py-1 font-semibold" type="submit">
                             Envoyer
                         </button>
                     </div>
                 </div>
             </form>
             <div class="mt-3">
-                <a href="/inscription">Pas encore de compte ?</a>
+                <a href="/inscription">Pas encore de compte?</a>
+            </div>
+            <div class="mt-3">
+                <a href="/forgot-password">Mot de passe oublié?</a>
             </div>
         </section>
     </main>
