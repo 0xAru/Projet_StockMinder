@@ -47,6 +47,7 @@ class RegistrationController extends AbstractController
             );
             $user->setEmployeeNumber(1);
             $user->setRoles(['ROLE_ADMIN']);
+            $user->setResetToken('');
 
             $company = new Company();
             $company->setName($data['company_name']);

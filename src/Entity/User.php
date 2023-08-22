@@ -17,7 +17,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
 
     operations: [
-
         new Get(
             uriTemplate: '/{id}/employees',
             controller: CompanyController::class,
@@ -59,6 +58,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     #[Groups(['read:employees'])]
     private ?string $employee_number = null;
+
+    #[ORM\Column(length: 100, nullable:true)]
+    private ?string $reset_token = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     #[ORM\JoinColumn(nullable: false)]
@@ -168,6 +170,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getResetToken(): ?string
+    {
+        return $this->reset_token;
+    }
+
+    public function setResetToken(string $reset_token): self
+    {
+        $this->reset_token = $reset_token;
+
+        return $this;
+    }
+
     public function getCompany(): ?Company
     {
         return $this->company;
@@ -179,4 +193,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+
 }
