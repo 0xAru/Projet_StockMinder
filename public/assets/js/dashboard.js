@@ -134,6 +134,9 @@ async function getEmployees() {
         let divEmployeeNumber = document.createElement('div');
         divEmployeeNumber.classList.add("grid-cols-5", "flex", "flex-col", "items-center", "justify-center", "font-semibold");
         divEmployeeNumber.innerHTML = employee.employee_number;
+        if (parseInt(employee.employee_number) === 1 ) {
+            button2.classList.add('hidden');
+        }
         employeeList.appendChild(divEmployeeNumber);
         let divRole = document.createElement('div');
         divRole.classList.add("grid-cols-6", "flex", "flex-col", "items-center", "justify-center", "font-semibold");

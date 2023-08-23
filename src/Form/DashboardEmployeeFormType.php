@@ -40,20 +40,7 @@ class DashboardEmployeeFormType extends AbstractType
                     'title' => 'deux chiffres pour un chef de salle et 3 chiffres pour un serveur'
                 ]
             ])
-            ->add("roles", ChoiceType::class, [
-                'choices' => [
-                    'Chef de Salle' => 'ROLE_CHEF',
-                    'Serveur' => 'ROLE_SERVEUR',
-                ],
-                'label' => false,
-                'required' => true,
-                'attr' => [
-                    'placeholder' => 'Rôle',
-                    'class' => 'rounded-full md:my-3 h-6 md:h-11 md:w-96 text-xs md:text-base py-0'
-                ],
-                'multiple' => false, // Empêche la sélection de plusieurs rôles
-                'mapped' => false
-            ])
+
             ->add("Envoyer", SubmitType::class, [
                 'attr' => [
                     'class' => 'btn rounded-full px-10 py-2 font-semibold'
