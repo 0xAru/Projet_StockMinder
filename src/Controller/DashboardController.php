@@ -69,8 +69,14 @@ class DashboardController extends AbstractController
 
         if ($employeeForm->isSubmitted() && $employeeForm->isValid()) {
             $employee->setCompany($company);
-            $role = $request->get("dashboard_employee_form")["roles"];
-            $employee->setRoles([$role]);
+            $employeeNumber = $request->get("dashboard_employee_form")["employee_number"];
+            $employeeNumber = intval($employeeNumber);
+            if ($employeeNumber >= 2 && $employeeNumber < 100){
+                $employee->setRoles(["ROLE_CHEF"]);
+            } else {
+                $employee->setRoles(["ROLE_SERVEUR"]);
+            }
+            $employee->setResetToken('');
             $this->em->persist($employee);
             $this->em->flush();
         }

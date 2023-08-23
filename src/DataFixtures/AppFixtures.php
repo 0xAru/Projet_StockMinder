@@ -65,6 +65,7 @@ class AppFixtures extends Fixture
             $adminUser->setEmployeeNumber(1);
             $adminUser->setFirstname($company->getDirectorFirstname());
             $adminUser->setLastname($company->getDirectorLastname());
+            $adminUser->setResetToken('');
             $adminUser->setRoles(["ROLE_ADMIN"]);
             $manager->persist($adminUser);
 
@@ -73,7 +74,8 @@ class AppFixtures extends Fixture
                 $user->setFirstname($faker->firstName($gender = null));
                 $user->setLastname($faker->lastname());
                 $user->setEmployeeNumber($faker->numberBetween(10, 200));
-                if($user->getEmployeeNumber() < 100){
+                $user->setResetToken('');
+                if($user->getEmployeeNumber() > 2 && $user->getEmployeeNumber() < 100){
                     $user->setRoles(["ROLE_CHEF"]);
                 } else {
                     $user->setRoles(["ROLE_SERVEUR"]);
