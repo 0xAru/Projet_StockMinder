@@ -41,7 +41,7 @@
         <section class="col-start-2 col-end-13 flex flex-col items-center md:py-4 relative md:mx-10 mx-2">
             <div class="w-full flex flex-col justify-center">
                 <a href="/company_update" class="underline text-wine mt-0.5 md:mt-2 text-xs md:text-base">Modifier les informations de l'entreprise</a>
-                {% if company_logo %}
+                {% if company_logo is defined %}
                     <div class="w-full flex justify-center"><img src=" {{ asset("uploaded_img/" ~ company_logo) }}" class="w-20 md:w-40 mt-5 md:mt-0">
                     </div>
                 {% else %}
