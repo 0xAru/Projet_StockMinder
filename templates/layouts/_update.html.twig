@@ -6,11 +6,17 @@
     <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
         <h2 class="text-4xl m-6">Employés</h2>
         <div class="flex justify-center gap-32 my-4">
+
             {{ form_row(updateForm.firstname) }}
             {{ form_row(updateForm.lastname) }}
         </div>
         <div class="flex justify-center gap-32 my-4">
+         {% if user_matricule == 1 %}
+            {{ form_row(updateForm.employee_number, {'attr': {'disabled':'disabled', 'class':'bg-gray-200 rounded-full md:my-3 h-6 md:h-11 md:w-96 text-xs md:text-base' }}) }}
+         {% else %}
             {{ form_row(updateForm.employee_number) }}
+         {% endif %}
+
         </div>
         <div class="flex justify-center gap-32 my-4">
             {{ form_row(updateForm.Envoyer) }}

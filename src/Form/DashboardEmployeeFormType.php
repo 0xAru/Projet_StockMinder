@@ -4,7 +4,6 @@ namespace  App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,7 +27,7 @@ class DashboardEmployeeFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Nom de l'employé",
-                'class' => 'rounded-full md:my-3 h-6 md:h-11 md:w-96 text-xs md:text-base'
+                    'class' => 'rounded-full md:my-3 h-6 md:h-11 md:w-96 text-xs md:text-base'
                 ]
             ])
             ->add("employee_number", TextType::class, [
@@ -37,8 +36,9 @@ class DashboardEmployeeFormType extends AbstractType
                 'attr' => [
                     'placeholder' => "Matricule",
                     'class' => 'rounded-full md:my-3 h-6 md:h-11 md:w-96 text-xs md:text-base',
-                    'title' => 'deux chiffres pour un chef de salle et 3 chiffres pour un serveur'
-                ]
+                    'title' => 'entrez un matricule entre 2 et 99 pour le ROLE_CHEF et superieur ou égal à 100 pour le ROLE_SERVEUR'
+                ],
+                'mapped' => false
             ])
 
             ->add("Envoyer", SubmitType::class, [
