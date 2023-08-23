@@ -42,8 +42,9 @@
     {# Ajouter le tableau de produits ici #}
 </div>
 <div id="employeeForm" class="w-full flex flex-col justify-center rounded-lg">
-    {{ form_errors(employeeForm) }}
 
+    {{ form_errors(employeeForm) }}
+    {% include "/layouts/_flash.html.twig" %}
     {{ form_start(employeeForm) }}
     <div class="flex flex-col items-center md:grid dashFormBg mb-16 pb-14 rounded-xl">
         <h2 class="md:text-4xl m-2 md:m-6">Employés</h2>
