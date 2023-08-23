@@ -26,6 +26,7 @@ class DashboardController extends AbstractController
     public function index(Request $request, ProductRepository $productRepository): Response
     {
         $company = $this->getUser()->getCompany();
+        $repository = $this->em->getRepository(User::class);
 
         //Récupération des différentes options pour les champs select du formulaire
         $filterOptions = [
@@ -69,13 +70,31 @@ class DashboardController extends AbstractController
 
         if ($employeeForm->isSubmitted() && $employeeForm->isValid()) {
             $employee->setCompany($company);
-            $employeeNumber = $request->get("dashboard_employee_form")["employee_number"];
-            $employeeNumber = intval($employeeNumber);
-            if ($employeeNumber >= 2 && $employeeNumber < 100){
-                $employee->setRoles(["ROLE_CHEF"]);
-            } else {
-                $employee->setRoles(["ROLE_SERVEUR"]);
+            try {
+                if ($employeeForm["employee_number"]->getData() != null) {
+                    if (!$repository->findBy(['employee_number' => $employeeForm["employee_number"]->getData(), "company" => $this->getUser()->getCompany()->getId()])) {
+                        $employee->setEmployeeNumber($employeeForm["employee_number"]->getData());
+                        $employeeNumber = $employee->getEmployeeNumber();
+                        $employeeNumber = intval($employeeNumber);
+                        if ($employeeNumber >= 2 && $employeeNumber < 100) {
+                            $employee->setRoles(["ROLE_CHEF"]);
+                        } else if ($employeeNumber === 1) {
+                            $employee->setEmployeeNumber('1');
+                            $employee->setRoles(["ROLE_ADMIN"]);
+                        } else {
+                            $employee->setRoles(["ROLE_SERVEUR"]);
+                        }
+                    } else {
+                        throw new \Exception("Ce matricule est déjà utilisé");
+                    }
+                }
+
+            } catch (\Exception $e) {
+                $this->addFlash('danger', $e->getMessage());
+                return $this->redirectToRoute('app_dashboard');
             }
+            $this->em->flush();
+            $this->addFlash('success', "Employé mis à jour avec succès");
             $employee->setResetToken('');
             $this->em->persist($employee);
             $this->em->flush();
