@@ -29,6 +29,13 @@
         {% include '/layouts/_menu-filter.html.twig' %}
 
         <h2 class="flex justify-center text-2xl uppercase mt-5">Nos bières</h2>
+
+        {% if products is empty %}
+            <div class="my-product-empty p-2">
+                <p class="text-center text-xl">Aucun produit ne correspond à votre  recherche</p>
+            </div>
+        {% endif %}
+
         <!-- Affichage catégorie blondes -->
 
         {% set blondesHeadingDisplayed = false %}
@@ -363,9 +370,127 @@
 
         <!-- Affichage catégorie sans alcool -->
 
+        {% set sansalcoolHeadingDisplayed = false %}
+
+        {% for product in products %}
+        {% if product.category == "Sansalcool" %}
+        {% if not sansalcoolHeadingDisplayed %}
+        {% set sansalcoolHeadingDisplayed = true %}
+        <div class="flex flex-col justify-center my-brunes my-container">
+            <h3 class="ml-5 my-5 !important text-2xl" id="sansalcool">Les sans alcool</h3>
+            {% endif %}
+            <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                <div class="justify-center col-start-1 col-end-2">
+                    {% if product.label != "" %}
+                        {% if product.label == "Local" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Local.svg') }}" alt=""></a>
+                        {% elseif product.label == "Biologique" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
+                        {% elseif product.label == "Sans gluten" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
+                                                   alt=""></a>
+                        {% elseif product.label == "Sans alcool" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
+                                                   alt=""></a>
+                        {% elseif product.label == "Avec lactose" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt=""></a>
+                        {% elseif product.label == "Avec arachides" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="col-start-2 col-end-6">
+                    <h4 class="text-xs flex">{{ product.name }}</h4>
+                    {% if product.stock >= product.threshold %}
+                        <div class="my-product-data">
+                            <div class="flex">
+                                <span>{{ product.style }}</span>
+                                <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                                <span class="font-bold">{{ product.degreeOfAlcohol }}%</span>
+                                <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                                <span>{{ product.capacity / 10 }} cl</span>
+                            </div>
+                            <!-- {{ dump(product) }} -->
+                            <div class="flex">
+                                <p>{{ product.customerDescription }}</p>
+                            </div>
+                            <div class="flex">
+                                <span>{{ product.brand }}</span>
+                                <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
+                                <span>{{ product.origin }}</span>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="my-product-data">
+                            <img src="{{ asset('assets/img/Stock.svg') }}" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
+                    <p>{{ product.price / 100 }}€</p>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
         <!-- Fin Affichage catégorie sans alcool -->
 
-        <!-- Affichage catégorie sans soft -->
+        <!-- Affichage catégorie soft -->
+
+        {% set softHeadingDisplayed = false %}
+
+        {% for product in products %}
+        {% if product.category == "Soft" %}
+        {% if not softHeadingDisplayed %}
+        {% set softHeadingDisplayed = true %}
+        <div class="flex flex-col justify-center my-brunes my-container">
+            <h3 class="ml-5 my-5 !important text-2xl" id="softs">Les softs</h3>
+            {% endif %}
+            <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                <div class="justify-center col-start-1 col-end-2">
+                    {% if product.label != "" %}
+                        {% if product.label == "Local" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Local.svg') }}" alt=""></a>
+                        {% elseif product.label == "Biologique" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
+                        {% elseif product.label == "Sans gluten" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
+                                                   alt=""></a>
+                        {% elseif product.label == "Sans alcool" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
+                                                   alt=""></a>
+                        {% elseif product.label == "Avec lactose" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt=""></a>
+                        {% elseif product.label == "Avec arachides" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="col-start-2 col-end-6">
+                    <h4 class="text-xs flex">{{ product.name }}</h4>
+                    {% if product.stock >= product.threshold %}
+                        <div class="my-product-data">
+                            <div class="flex">
+                                <span>{{ product.capacity / 10 }} cl</span>
+                            </div>
+                            <div class="flex">
+                                <p>{{ product.customerDescription }}</p>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="my-product-data">
+                            <img src="{{ asset('assets/img/Stock.svg') }}" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
+                    <p>{{ product.price / 100 }}€</p>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
 
         <!-- Fin Affichage catégorie soft -->
 

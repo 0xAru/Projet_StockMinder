@@ -141,6 +141,12 @@ h4 {
     background-color: var(--persian-orange);
 }
 
+.my-stock-btn {
+    background-color: var(--persian-orange);
+    color: var(--wine);
+    font-family: deliusunicbold, serif, sans-serif;
+}
+
 .my-quantity, .my-stock-value {
     background-color: var(--dutch-white);
     color: var(--wine);
@@ -218,6 +224,13 @@ h4 {
 
 .my-hidden {
     display: none;
+}
+
+
+#cartModal, .my-stock-modal {
+    top: 45%;
+    transform: translate(-50%, -50%);
+    left: 50%;
 }
 
 

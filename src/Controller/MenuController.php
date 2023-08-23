@@ -26,15 +26,15 @@ class MenuController extends AbstractController
     {
 
         // Appeler l'action index du ProductController pour récupérer les événements
-        $events = $eventRepository->findEventsAfterToday('66');
+        $events = $eventRepository->findEventsAfterToday('68');
 
 
         // Récupérer les options uniques pour les champs du formulaire
         $filterOptions = [
-            'style_choices' => $productRepository->findUniqueStyles('66'),
-            'origin_choices' => $productRepository->findUniqueOrigins('66'),
-            'brand_choices' => $productRepository->findUniqueBrands('66'),
-            'capacity_choices' => $productRepository->findUniqueCapacities('66'),
+            'style_choices' => $productRepository->findUniqueStyles('68'),
+            'origin_choices' => $productRepository->findUniqueOrigins('68'),
+            'brand_choices' => $productRepository->findUniqueBrands('68'),
+            'capacity_choices' => $productRepository->findUniqueCapacities('68'),
             'attr' => [
                 'class' => 'my-menu w-48', // Ajoutez la classe parent ici
             ],
@@ -51,16 +51,16 @@ class MenuController extends AbstractController
 
         if ($searchTerm !== null) {
             // Filtrez les produits en fonction du terme de recherche
-            $products = $productRepository->findProductByKeyword($searchTerm, '66');
+            $products = $productRepository->findProductByKeyword($searchTerm, '68');
         } else if ($form->isSubmitted() && $form->isValid()) {
             // Récupérez les données du formulaire
             $data = $form->getData();
 
             // Filtrez les produits en fonction des critères choisis dans le formulaire
-            $products = $productRepository->findByFilters($data, '66');
+            $products = $productRepository->findByFilters($data, '68');
         } else {
             // Appeler l'action index du ProductController pour récupérer les produits
-            $products = $productRepository->findProductsByCompany('66');
+            $products = $productRepository->findProductsByCompany('68');
         }
 
 
@@ -69,7 +69,7 @@ class MenuController extends AbstractController
             'products' => $products,
             'searchTerm' => $searchTerm,
             'form' => $form->createView(),
-            'companyId' => '66',
+            'companyId' => '68',
         ]);
     }
 
@@ -82,10 +82,10 @@ class MenuController extends AbstractController
 
         // Récupérer les options uniques pour les champs du formulaire
         $filterOptions = [
-            'style_choices' => $productRepository->findUniqueStyles('66'),
-            'origin_choices' => $productRepository->findUniqueOrigins('66'),
-            'brand_choices' => $productRepository->findUniqueBrands('66'),
-            'capacity_choices' => $productRepository->findUniqueCapacities('66'),
+            'style_choices' => $productRepository->findUniqueStyles('68'),
+            'origin_choices' => $productRepository->findUniqueOrigins('68'),
+            'brand_choices' => $productRepository->findUniqueBrands('68'),
+            'capacity_choices' => $productRepository->findUniqueCapacities('68'),
             'attr' => [
                 'class' => 'my-menu w-48', // Ajoutez la classe parent ici
             ],
@@ -102,23 +102,23 @@ class MenuController extends AbstractController
 
         if ($searchTerm !== null) {
             // Filtrez les produits en fonction du terme de recherche
-            $products = $productRepository->findProductByKeyword($searchTerm, '66');
+            $products = $productRepository->findProductByKeyword($searchTerm, '68');
         } else if ($form->isSubmitted() && $form->isValid()) {
             // Récupérez les données du formulaire
             $data = $form->getData();
 
             // Filtrez les produits en fonction des critères choisis dans le formulaire
-            $products = $productRepository->findByFilters($data, '66');
+            $products = $productRepository->findByFilters($data, '68');
         } else {
             // Appeler l'action index du ProductController pour récupérer les produits
-            $products = $productRepository->findProductsByCompany('66');
+            $products = $productRepository->findProductsByCompany('68');
         }
 
         return $this->render('menu/vendor-menu.html.twig', [
             'products' => $products,
             'searchTerm' => $searchTerm,
             'form' => $form->createView(),
-            'companyId' => '66',
+            'companyId' => '68',
         ]);
     }
 
@@ -127,7 +127,7 @@ class MenuController extends AbstractController
     //Route commande avec mise à jour des stocks (employés)
     #[Route('/order', name: 'app_order',methods: ['POST'])]
 
-    public function order(ProductRepository $productRepository, request $request)
+    public function order(ProductRepository $productRepository, Request $request): void
     {
         $products = json_decode($request->getContent());
         foreach ($products as $product) {
@@ -137,7 +137,23 @@ class MenuController extends AbstractController
         }
 
     $this->em->flush();
-        return 'yahou';
+
 
     }
+
+    //Route commande avec mise à jour des stocks (employés)
+    #[Route('/stock-update', name: 'app_stockupdate',methods: ['POST'])]
+
+    public function stockUpdate(ProductRepository $productRepository, Request $request): void
+    {
+        $products = json_decode($request->getContent());
+        foreach ($products as $product) {
+            $dataProd = $productRepository->find($product->id);
+            $dataProd->setStock($product->stock);
+            $this->em->persist($dataProd);
+        }
+
+            $this->em->flush();
+
+        }
 }

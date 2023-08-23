@@ -24,8 +24,8 @@ class AppFixtures extends Fixture
 
     function randomCategoryChoices($faker)
     {
-        $choices = ['Blonde', 'Brune', 'Blanche', 'Ambrée', 'Fruitée'];
-        $randomIndex = $faker->numberBetween(0, 4);
+        $choices = ['Blonde', 'Brune', 'Blanche', 'Ambrée', 'Fruitée', 'Sansalcool', 'Soft'];
+        $randomIndex = $faker->numberBetween(0, 6);
         return $choices[$randomIndex];
     }
 
