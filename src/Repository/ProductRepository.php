@@ -26,20 +26,16 @@ class ProductRepository extends ServiceEntityRepository
 
     public function findProductsByCompany($companyId): array
     {
-
         return $this->createQueryBuilder('p')
             ->where('p.company = :companyId')
             ->setParameter('companyId', $companyId)
             ->getQuery()
             ->getResult();
-
     }
 
 
     public function findProductByKeyword($searchTerm, $companyId): array
     {
-
-
         return $this->createQueryBuilder('p')
             ->where('p.company = :companyId')
             ->andWhere('p.name LIKE :searchTerm OR p.style LIKE :searchTerm OR p.origin LIKE :searchTerm OR p.brand LIKE :searchTerm OR p.capacity LIKE :searchTerm')
@@ -145,5 +141,4 @@ class ProductRepository extends ServiceEntityRepository
 
         return $qb->getQuery()->getResult();
     }
-
 }

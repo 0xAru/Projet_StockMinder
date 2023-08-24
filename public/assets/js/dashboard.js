@@ -120,26 +120,26 @@ async function getEmployees() {
         button2.innerHTML = "Supprimer";
         divButton.appendChild(button2);
         let divId = document.createElement("div");
-        divId.classList.add("grid-cols-2", "flex", "flex-col", "items-center", "justify-center", "font-semibold");
+        divId.classList.add("grid-cols-2", "flex", "flex-col", "items-center", "justify-center");
         divId.innerHTML = employee.id
         employeeList.appendChild(divId);
         let divLastname = document.createElement("div");
-        divLastname.classList.add("grid-cols-3", "flex", "flex-col", "items-center", "justify-center", "font-semibold");
+        divLastname.classList.add("grid-cols-3", "flex", "flex-col", "items-center", "justify-center");
         divLastname.innerHTML = employee.lastname
         employeeList.appendChild(divLastname);
         let divFirstname = document.createElement("div");
-        divFirstname.classList.add("grid-cols-4", "flex", "flex-col", "items-center", "justify-center", "font-semibold");
+        divFirstname.classList.add("grid-cols-4", "flex", "flex-col", "items-center", "justify-center");
         divFirstname.innerHTML = employee.firstname;
         employeeList.appendChild(divFirstname);
         let divEmployeeNumber = document.createElement('div');
-        divEmployeeNumber.classList.add("grid-cols-5", "flex", "flex-col", "items-center", "justify-center", "font-semibold");
+        divEmployeeNumber.classList.add("grid-cols-5", "flex", "flex-col", "items-center", "justify-center");
         divEmployeeNumber.innerHTML = employee.employee_number;
         if (parseInt(employee.employee_number) === 1 ) {
             button2.classList.add('hidden');
         }
         employeeList.appendChild(divEmployeeNumber);
         let divRole = document.createElement('div');
-        divRole.classList.add("grid-cols-6", "flex", "flex-col", "items-center", "justify-center", "font-semibold");
+        divRole.classList.add("grid-cols-6", "flex", "flex-col", "items-center", "justify-center");
         divRole.innerHTML = employee.roles;
         employeeList.appendChild(divRole);
     })
@@ -240,7 +240,7 @@ async function getProducts() {
             let cell = document.createElement("td");
             cell.classList.add("text-center");
             let cellContent = document.createElement("div");
-            cellContent.classList.add("h-28", "overflow-y-scroll", "flex", "flex-col", "justify-center", "mx-3", "font-semibold");
+            cellContent.classList.add("h-28", "overflow-y-scroll", "flex", "flex-col", "justify-center", "mx-3");
             cellContent.textContent = data;
 
             if (data && data.length > 70) {
@@ -344,11 +344,10 @@ async function getEvents() {
         ];
 
         rowData.forEach(data => {
-
             let cell = document.createElement("td");
             cell.classList.add("text-center");
             let cellContent = document.createElement("div");
-            cellContent.classList.add("h-28", "overflow-y-scroll", "flex", "flex-col", "justify-center", "font-semibold");
+            cellContent.classList.add("h-28", "overflow-y-scroll", "flex", "flex-col", "justify-center");
 
             if (data && data.length > 80) {
                 cellContent.textContent = extractFirstWords(data, 10);
