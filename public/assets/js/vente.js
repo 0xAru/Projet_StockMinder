@@ -38,9 +38,11 @@ function infoModal(elem, index) {
 function closeInfoModal(elem, index) {
 
     let informationModal = document.querySelector("#infoModal" + index);
+    let myOverlay = document.querySelector(".my-overlay");
 
     informationModal.classList.add("my-hidden");
     informationModal.classList.remove("my-active");
+    myOverlay.classList.add("hidden");
     body.style.overflow = "visible";
 
 }
@@ -53,11 +55,13 @@ function stockModal(elem, index) {
     let myStockModal = document.querySelector("#stockUpdateModal" + index);
     let productStock = document.querySelector("#stock" + index).value;
     let myNewStock = document.querySelector(("#myNewStock" + index));
+    let myOverlay = document.querySelector(".my-overlay");
 
 
     myStockModal.classList.remove("my-hidden");
     myStockModal.classList.add("my-active");
     myNewStock.innerHTML = productStock;
+    myOverlay.classList.remove("hidden");
     body.style.overflow = "hidden";
 
 }
@@ -65,9 +69,11 @@ function stockModal(elem, index) {
 function closeStockModal(elem, index) {
 
     let myStockModal = document.querySelector("#stockUpdateModal" + index);
+    let myOverlay = document.querySelector(".my-overlay");
 
     myStockModal.classList.add("my-hidden");
     myStockModal.classList.remove("my-active");
+    myOverlay.classList.add("hidden");
     body.style.overflow = "visible";
 
 }
@@ -79,10 +85,11 @@ function closeStockModal(elem, index) {
 function openCartModal(elem) {
 
     let modal = document.querySelector("#cartModal")
-
+    let myOverlay = document.querySelector(".my-overlay");
 
     modal.classList.remove("my-hidden");
     modal.classList.add("my-active");
+    myOverlay.classList.remove("hidden");
     body.style.overflow = "hidden";
 
 }
@@ -90,12 +97,16 @@ function openCartModal(elem) {
 function closeCartModal(elem) {
 
     let modal = document.querySelector("#cartModal")
+    let myOverlay = document.querySelector(".my-overlay");
 
     modal.classList.add("my-hidden");
     modal.classList.remove("my-active");
+    myOverlay.classList.add("hidden");
     body.style.overflow = "visible";
 
 }
+
+
 
 // gestion du panier ----------------------------------------------------------------------------------------------
 
@@ -112,11 +123,10 @@ window.addEventListener('load', async () => {
         if (!response.ok) {
             throw new Error('Echec de récupération des données produit.');
         }
-
         const data = await response.json();
         products = data.products;
 
-        console.log(products);
+
     } catch (error) {
         error = "Echec de récupération des données produit."
         console.error(error);

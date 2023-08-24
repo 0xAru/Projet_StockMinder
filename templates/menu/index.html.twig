@@ -49,6 +49,10 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="blondes">Les blondes</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
                 <div class="justify-center col-start-1 col-end-2">
                     {% if product.label != "" %}
                         {% if product.label == "Local" %}
@@ -93,7 +97,13 @@
                     {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
-                    <p>{{ product.price / 100 }}€</p>
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
+                                    class="text-wine text-sm line-through" id="normalPrice{{ loop.index0 }}">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -114,6 +124,10 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="brunes">Les brunes</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
                 <div class="justify-center col-start-1 col-end-2">
                     {% if product.label != "" %}
                         {% if product.label == "Local" %}
@@ -137,9 +151,9 @@
                     <div class="my-product-data">
                         <div class="flex">
                             <span>{{ product.style }}</span>
-                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
                             <span class="font-bold">{{ product.degreeOfAlcohol }}%</span>
-                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
                             <span>{{ product.capacity / 10 }} cl</span>
                         </div>
                         <!-- {{ dump(product) }} -->
@@ -159,7 +173,13 @@
                     {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
-                    <p>{{ product.price / 100 }}€</p>
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
+                                    class="text-dutch-white text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -180,6 +200,10 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="blanches">Les blanches</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
                 <div class="justify-center col-start-1 col-end-2">
                     {% if product.label != "" %}
                         {% if product.label == "Local" %}
@@ -225,7 +249,13 @@
                     {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
-                    <p>{{ product.price / 100 }}€</p>
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
+                                    class="text-raisin-black text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -246,6 +276,10 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="ambrees">Les ambrées</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
                 <div class="justify-center col-start-1 col-end-2">
                     {% if product.label != "" %}
                         {% if product.label == "Local" %}
@@ -291,7 +325,13 @@
                     {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
-                    <p>{{ product.price / 100 }}€</p>
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
+                                    class="text-dun text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -312,6 +352,10 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="fruitees">Les fruitées</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
                 <div class="justify-center col-start-1 col-end-2">
                     {% if product.label != "" %}
                         {% if product.label == "Local" %}
@@ -359,7 +403,13 @@
                     {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
-                    <p>{{ product.price / 100 }}€</p>
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
+                                    class="text-wine text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -380,6 +430,10 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="sansalcool">Les sans alcool</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
                 <div class="justify-center col-start-1 col-end-2">
                     {% if product.label != "" %}
                         {% if product.label == "Local" %}
@@ -405,9 +459,9 @@
                         <div class="my-product-data">
                             <div class="flex">
                                 <span>{{ product.style }}</span>
-                                <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                                <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
                                 <span class="font-bold">{{ product.degreeOfAlcohol }}%</span>
-                                <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                                <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
                                 <span>{{ product.capacity / 10 }} cl</span>
                             </div>
                             <!-- {{ dump(product) }} -->
@@ -416,7 +470,7 @@
                             </div>
                             <div class="flex">
                                 <span>{{ product.brand }}</span>
-                                <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_wine.svg') }}" alt="">
+                                <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
                                 <span>{{ product.origin }}</span>
                             </div>
                         </div>
@@ -427,7 +481,13 @@
                     {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
-                    <p>{{ product.price / 100 }}€</p>
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
+                                    class="text-dutch-white text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -448,6 +508,10 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="softs">Les softs</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
                 <div class="justify-center col-start-1 col-end-2">
                     {% if product.label != "" %}
                         {% if product.label == "Local" %}
@@ -485,7 +549,12 @@
                     {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
-                    <p>{{ product.price / 100 }}€</p>
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span class="text-dutch-white text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
