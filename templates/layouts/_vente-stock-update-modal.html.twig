@@ -1,0 +1,24 @@
+<!-- update stock modal---------------------------------------------------------------------------------------------------------------------------------- -->
+<div class="my-info-modal grid grid-cols-2">
+    <div class="my-hidden my-stock-modal z-30 w-full mx-auto p-2" data-companyId= "{{ companyId }}" id="stockUpdateModal{{ loop.index0 }}" aria-labelledby="Modification manuelle du stock"
+         role="dialog"
+         aria-modal="true">
+        <div class="z-30 col-start-1 col-end-2 items-center transform overflow-hidden rounded-xl my-modal-border text-center shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+            <div class="my-modal-description px-4 p-2">
+                <div class="flex justify-between">
+                    <img class="h-10 w-10 my-1" src="{{ asset('assets/img/warning.svg') }}" alt="">
+                    <h2 class="text-lg">Mise à jour stock</h2>
+                    <img class="h-7 w-7 my-1" src="{{ asset('assets/img/close-cross.svg') }}"
+                         onclick="closeStockModal(this, {{ loop.index0 }})" alt="">
+                </div>
+                <p class="text-lg m-4">Souhaiter-vous mettre à jour le stock du produit <em class="font-bold">{{ product.name }}</em> avec cette valeur:</p><span class="font-bold text-2xl" id="myNewStock{{ loop.index0 }}"></span>
+                <div class="flex justify-around m-4">
+                    <button class="uppercase w-28 my-cart-button rounded-full focus:font-bold" onclick="stockUpdate({{ loop.index0 }})">oui</button>
+                    <button class="uppercase w-28 my-cart-button rounded-full focus:font-bold" onclick="closeStockModal(this, {{ loop.index0 }})">non</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end update stock modal--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->

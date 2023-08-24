@@ -83,6 +83,10 @@ class Product
     #[Groups(['read:products'])]
     private ?int $promotion = null;
 
+    #[ORM\Column]
+    #[Groups(['read:products'])]
+    private ?int $totalPrice = null;
+
     #[ORM\Column(nullable: true)]
     #[Groups(['read:products'])]
     private ?int $stock = null;
@@ -220,6 +224,7 @@ class Product
     public function setPrice(int $price): static
     {
         $this->price = $price;
+        $this->setTotalPrice();
 
         return $this;
     }
@@ -232,8 +237,26 @@ class Product
     public function setPromotion(?int $promotion): static
     {
         $this->promotion = $promotion;
+        $this->setTotalPrice();
 
         return $this;
+    }
+
+    public function getTotalPrice(): ?int
+    {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice(): Static
+    {
+        $this->totalPrice = $this->calculateTotalPrice();
+
+        return $this;
+    }
+
+    public function calculateTotalPrice(): int
+    {
+        return $this->getPrice() - ($this->getPrice() * ($this->getPromotion() / 100));
     }
 
     public function getStock(): ?int

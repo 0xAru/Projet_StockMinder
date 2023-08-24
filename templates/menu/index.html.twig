@@ -29,6 +29,13 @@
         {% include '/layouts/_menu-filter.html.twig' %}
 
         <h2 class="flex justify-center text-2xl uppercase mt-5">Nos bières</h2>
+
+        {% if products is empty %}
+            <div class="my-product-empty p-2">
+                <p class="text-center text-xl">Aucun produit ne correspond à votre  recherche</p>
+            </div>
+        {% endif %}
+
         <!-- Affichage catégorie blondes -->
 
         {% set blondesHeadingDisplayed = false %}
@@ -42,6 +49,10 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="blondes">Les blondes</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
                 <div class="justify-center col-start-1 col-end-2">
                     {% if product.label != "" %}
                         {% if product.label == "Local" %}
@@ -86,7 +97,13 @@
                     {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
-                    <p>{{ product.price / 100 }}€</p>
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
+                                    class="text-wine text-sm line-through" id="normalPrice{{ loop.index0 }}">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -107,6 +124,10 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="brunes">Les brunes</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
                 <div class="justify-center col-start-1 col-end-2">
                     {% if product.label != "" %}
                         {% if product.label == "Local" %}
@@ -130,9 +151,9 @@
                     <div class="my-product-data">
                         <div class="flex">
                             <span>{{ product.style }}</span>
-                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
                             <span class="font-bold">{{ product.degreeOfAlcohol }}%</span>
-                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dun.svg') }}" alt="">
+                            <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
                             <span>{{ product.capacity / 10 }} cl</span>
                         </div>
                         <!-- {{ dump(product) }} -->
@@ -152,7 +173,13 @@
                     {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
-                    <p>{{ product.price / 100 }}€</p>
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
+                                    class="text-dutch-white text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -173,6 +200,10 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="blanches">Les blanches</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
                 <div class="justify-center col-start-1 col-end-2">
                     {% if product.label != "" %}
                         {% if product.label == "Local" %}
@@ -218,7 +249,13 @@
                     {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
-                    <p>{{ product.price / 100 }}€</p>
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
+                                    class="text-raisin-black text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -239,6 +276,10 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="ambrees">Les ambrées</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
                 <div class="justify-center col-start-1 col-end-2">
                     {% if product.label != "" %}
                         {% if product.label == "Local" %}
@@ -284,7 +325,13 @@
                     {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
-                    <p>{{ product.price / 100 }}€</p>
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
+                                    class="text-dun text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -305,6 +352,10 @@
             <h3 class="ml-5 my-5 !important text-2xl" id="fruitees">Les fruitées</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
                 <div class="justify-center col-start-1 col-end-2">
                     {% if product.label != "" %}
                         {% if product.label == "Local" %}
@@ -352,7 +403,13 @@
                     {% endif %}
                 </div>
                 <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
-                    <p>{{ product.price / 100 }}€</p>
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
+                                    class="text-wine text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
                 </div>
             </div>
             {% endif %}
@@ -363,9 +420,146 @@
 
         <!-- Affichage catégorie sans alcool -->
 
+        {% set sansalcoolHeadingDisplayed = false %}
+
+        {% for product in products %}
+        {% if product.category == "Sansalcool" %}
+        {% if not sansalcoolHeadingDisplayed %}
+        {% set sansalcoolHeadingDisplayed = true %}
+        <div class="flex flex-col justify-center my-brunes my-container">
+            <h3 class="ml-5 my-5 !important text-2xl" id="sansalcool">Les sans alcool</h3>
+            {% endif %}
+            <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
+                <div class="justify-center col-start-1 col-end-2">
+                    {% if product.label != "" %}
+                        {% if product.label == "Local" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Local.svg') }}" alt=""></a>
+                        {% elseif product.label == "Biologique" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
+                        {% elseif product.label == "Sans gluten" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
+                                                   alt=""></a>
+                        {% elseif product.label == "Sans alcool" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
+                                                   alt=""></a>
+                        {% elseif product.label == "Avec lactose" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt=""></a>
+                        {% elseif product.label == "Avec arachides" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="col-start-2 col-end-6">
+                    <h4 class="text-xs flex">{{ product.name }}</h4>
+                    {% if product.stock >= product.threshold %}
+                        <div class="my-product-data">
+                            <div class="flex">
+                                <span>{{ product.style }}</span>
+                                <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
+                                <span class="font-bold">{{ product.degreeOfAlcohol }}%</span>
+                                <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
+                                <span>{{ product.capacity / 10 }} cl</span>
+                            </div>
+                            <!-- {{ dump(product) }} -->
+                            <div class="flex">
+                                <p>{{ product.customerDescription }}</p>
+                            </div>
+                            <div class="flex">
+                                <span>{{ product.brand }}</span>
+                                <img class="mx-2 my-auto" src="{{ asset('assets/img/Puce_dutch.svg') }}" alt="">
+                                <span>{{ product.origin }}</span>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="my-product-data">
+                            <img src="{{ asset('assets/img/Stock.svg') }}" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
+                                    class="text-dutch-white text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
         <!-- Fin Affichage catégorie sans alcool -->
 
-        <!-- Affichage catégorie sans soft -->
+        <!-- Affichage catégorie soft -->
+
+        {% set softHeadingDisplayed = false %}
+
+        {% for product in products %}
+        {% if product.category == "Soft" %}
+        {% if not softHeadingDisplayed %}
+        {% set softHeadingDisplayed = true %}
+        <div class="flex flex-col justify-center my-brunes my-container">
+            <h3 class="ml-5 my-5 !important text-2xl" id="softs">Les softs</h3>
+            {% endif %}
+            <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
+                {% if product.promotion is not null %}
+                    <p class="text-center capitalize text-lg col-start-1 col-end-9 font-bold text-red-500">promotion
+                        -{{ product.promotion }}%</p>
+                {% endif %}
+                <div class="justify-center col-start-1 col-end-2">
+                    {% if product.label != "" %}
+                        {% if product.label == "Local" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Local.svg') }}" alt=""></a>
+                        {% elseif product.label == "Biologique" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
+                        {% elseif product.label == "Sans gluten" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
+                                                   alt=""></a>
+                        {% elseif product.label == "Sans alcool" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
+                                                   alt=""></a>
+                        {% elseif product.label == "Avec lactose" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt=""></a>
+                        {% elseif product.label == "Avec arachides" %}
+                            <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="col-start-2 col-end-6">
+                    <h4 class="text-xs flex">{{ product.name }}</h4>
+                    {% if product.stock >= product.threshold %}
+                        <div class="my-product-data">
+                            <div class="flex">
+                                <span>{{ product.capacity / 10 }} cl</span>
+                            </div>
+                            <div class="flex">
+                                <p>{{ product.customerDescription }}</p>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="my-product-data">
+                            <img src="{{ asset('assets/img/Stock.svg') }}" alt="">
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-start-6 col-end-6 justify-center font-bold my-price flex items-center">
+                    {% if product.promotion is not null %}
+                        <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span class="text-dutch-white text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
+                            €</p>
+                    {% else %}
+                        <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
 
         <!-- Fin Affichage catégorie soft -->
 

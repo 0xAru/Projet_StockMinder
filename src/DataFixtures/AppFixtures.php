@@ -24,8 +24,8 @@ class AppFixtures extends Fixture
 
     function randomCategoryChoices($faker)
     {
-        $choices = ['Blonde', 'Brune', 'Blanche', 'Ambrée', 'Fruitée'];
-        $randomIndex = $faker->numberBetween(0, 4);
+        $choices = ['Blonde', 'Brune', 'Blanche', 'Ambrée', 'Fruitée', 'Sansalcool', 'Soft'];
+        $randomIndex = $faker->numberBetween(0, 6);
         return $choices[$randomIndex];
     }
 
@@ -42,6 +42,14 @@ class AppFixtures extends Fixture
         $randomIndex = $faker->numberBetween(0, 5);
         return $choices[$randomIndex];
     }
+
+    function randomPromotionChoice($faker)
+    {
+        $choices = [null, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
+        $randomIndex = $faker->numberBetween(0, 10);
+        return $choices[$randomIndex];
+    }
+
     public function load(ObjectManager $manager): void
 
     {
@@ -96,6 +104,7 @@ class AppFixtures extends Fixture
                 $product->setOrigin($faker->country());
                 $product->setCapacity($faker->randomElement([250, 330, 341, 355, 500]));
                 $product->setPrice($faker->numberBetween(300, 1500));
+                $product->setPromotion($this->randomPromotionChoice($faker));
                 $product->setStock($faker->numberBetween(0, 150));
                 $product->setThreshold(5);
                 $product->setSlug($this->generateSlug($product->getName()));
