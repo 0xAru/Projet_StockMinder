@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\Event;
 use App\Entity\Product;
 use App\Entity\User;
@@ -32,15 +33,13 @@ class DashboardController extends AbstractController
         }
 
         $company = $this->getUser()->getCompany();
-
         $repository = $this->em->getRepository(User::class);
 
         //Récupération des différentes options pour les champs select du formulaire
         $filterOptions = [
-            'label_choices' => $productRepository->findUniqueLabels($company),
+            'label_choices' => $productRepository->findUniqueLabels(),
             'origin_choices' => $productRepository->findUniqueOrigins($company)
         ];
-
 
         // Récupérer le prénom de l'utilisateur
         $firstName = $this->getUser()->getFirstname();
@@ -97,6 +96,9 @@ class DashboardController extends AbstractController
                 $this->addFlash('danger', $e->getMessage());
                 return $this->redirectToRoute('app_dashboard');
             }
+
+            $employee->setEmail($employee->getEmployeeNumber() . "@" .$company->getId());
+            $employee->setPassword($this->em->getRepository(Company::class)->findOneBy(['id'=> $company])->getEmployeePassword());
             $this->em->flush();
             $this->addFlash('success', "Employé mis à jour avec succès");
             $employee->setResetToken('');

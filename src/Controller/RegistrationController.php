@@ -57,6 +57,12 @@ class RegistrationController extends AbstractController
             $company->setAddress($data['address']);
             $company->setZipcode($data['zipcode']);
             $company->setCity($data['city']);
+            $company->setEmployeePassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('employee_password')->getData()
+                )
+            );
             $uploadedFile = $data['logo'];
 
             if ($uploadedFile instanceof UploadedFile) {

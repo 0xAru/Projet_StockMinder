@@ -48,6 +48,9 @@ class Company
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: User::class, orphanRemoval: true)]
     private Collection $users;
 
+    #[ORM\Column(length: 255)]
+    private ?string $employee_password = null;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
@@ -240,6 +243,18 @@ class Company
     public function setLogo(?string $logo): static
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function getEmployeePassword(): ?string
+    {
+        return $this->employee_password;
+    }
+
+    public function setEmployeePassword(string $employee_password): static
+    {
+        $this->employee_password = $employee_password;
 
         return $this;
     }
