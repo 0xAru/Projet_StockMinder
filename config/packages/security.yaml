@@ -13,8 +13,8 @@ security:
 
     access_control:
         - { path: ^/dashboard, roles: ROLE_ADMIN }
-        - { path: ^/vente, roles: ROLE_CHEF }
-    access_denied_url: /connexion
+        - { path: ^/vente, roles: [ROLE_CHEF, ROLE_SERVEUR] }
+    access_denied_url: "/connexion"
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
