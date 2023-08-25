@@ -118,6 +118,14 @@ class RegistrationFormType extends AbstractType
                     'class' => 'rounded-full my-3'
                 ]
             ])
+            ->add('employee_password', PasswordType::class, [
+                'label' => false,
+                'required' => true,
+                'attr' => [
+                    'placeholder' => 'Mot de passe employés',
+                    'class' => 'w-full rounded-full my-3'
+                ]
+            ])
             ->add("logo", FileType::class, [
                 'label' => "Sélectionner un logo",
                 'label_attr' => [
