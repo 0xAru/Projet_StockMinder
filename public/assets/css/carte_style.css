@@ -123,6 +123,11 @@ select:focus {
     color: var(--dun);
 }
 
+.my-event-theme {
+    font-family: deliusregular, Serif, sans-serif, Serif, sans-serif;
+    color: var(--dun);
+}
+
 .my-event-container h4{
     font-family: deliusbold, Serif, sans-serif;
     color: var(--dun);
@@ -130,6 +135,7 @@ select:focus {
 
 .my-event-description {
     color: var(--persian-orange);
+    font-family: deliusregular, Serif, sans-serif;
 }
 
 /* carousel événements */

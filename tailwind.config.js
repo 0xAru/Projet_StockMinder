@@ -16,6 +16,15 @@ module.exports = {
                 'dun': '#DBCCA8',
                 'dutch-white': '#F4E6C3',
             },
+            width: {
+                //Largeurs personnalisées
+                'lg': '775px',
+                '700': '700px',
+            },
+            fontSize: {
+                //font-size personnalisées
+                'h1': ['2.5rem', '3rem']
+            },
         },
     },
     plugins: [

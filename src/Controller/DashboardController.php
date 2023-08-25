@@ -25,7 +25,14 @@ class DashboardController extends AbstractController
     #[Route(path: '/dashboard', name: 'app_dashboard')]
     public function index(Request $request, ProductRepository $productRepository): Response
     {
+
+        // Vérifiez si l'utilisateur est connecté
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
+
         $company = $this->getUser()->getCompany();
+
         $repository = $this->em->getRepository(User::class);
 
         //Récupération des différentes options pour les champs select du formulaire
@@ -33,10 +40,7 @@ class DashboardController extends AbstractController
             'label_choices' => $productRepository->findUniqueLabels($company),
             'origin_choices' => $productRepository->findUniqueOrigins($company)
         ];
-        // Vérifiez si l'utilisateur est connecté
-        if (!$this->getUser()) {
-            return $this->redirectToRoute('app_login');
-        }
+
 
         // Récupérer le prénom de l'utilisateur
         $firstName = $this->getUser()->getFirstname();

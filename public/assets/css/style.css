@@ -29,21 +29,21 @@
     --dutch-white: rgb(244, 230, 195);
     --dun: rgb(219, 204, 168);
     --wine: rgb(91, 38, 47);
+    --bg-grey: rgb(65, 61, 56);
 }
+
+
 
 body {
     margin: 0;
     height: 100vh;
+    background-color: var(--bg-grey);
 }
 
 header {
     background-color: var(--raisin-black)
 }
 
-.logo {
-    width: 72px;
-    height: 72px;
-}
 
 h1 {
     font-family: Calligraffitti, serif, sans-serif;
@@ -62,7 +62,6 @@ h1 {
 
 .nav {
     position: relative;
-    background-color: var(--dutch-white);
     font-family: rancho, serif, sans-serif;
 }
 
@@ -233,4 +232,13 @@ h4 {
     left: 50%;
 }
 
+@media screen and (min-width: 1024px) {
 
+    .custom-size-h1 {
+        font-size: 80px;
+    }
+h4 {
+    font-size: 18px !important;
+}
+
+}

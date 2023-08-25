@@ -1,19 +1,19 @@
 {% if events is not empty %}
-<div class="my-event-container overflow-hidden relative h-56 pb-6">
-    <div class="my-event-container grid grid-cols-1 max-h-52 pb-4">
-        <h2 class="text-2xl uppercase text-center pt-2">Nos prochains événements</h2>
+<div class="my-event-container overflow-hidden relative h-56 pb-6 lg:w-lg lg:h-72">
+    <div class="my-event-container grid grid-cols-1 max-h-52 pb-4 lg:h-64">
+        <h2 class="text-2xl uppercase text-center pt-2 lg:text-4xl">Nos prochains événements</h2>
         <div class="my-carousel flex flex-col justify-center mb-6" id="myCarousel">
             {% for event in events %}
-                <div class="my-event flex justify-center text-center mx-auto mt-3 w-80 h-38">
-                    <img class="h-20 w-20 flex my-auto" src="{{ event.image }}" alt="">
-                    <div class="my-event-data h-36 flex flex-col p-2">
-                        <h3 class="text-lg capitalize">{{ event.name }}</h3>
-                        <p class="my-event-time text-center text-xs">Du {{ event.startDate | date('d-m-Y') }}
+                <div class="my-event flex justify-center text-center mx-auto mt-3 w-80 h-38 lg:w-700 lg:h-48 lg:justify-between">
+                    <img class="h-20 w-20 flex my-auto lg:w-96 lg:h-48" src="{{ event.image }}" alt="">
+                    <div class="my-event-data h-36 flex flex-col p-2 lg:h-48 lg:justify-between">
+                        <h3 class="text-lg capitalize lg:text-4xl">{{ event.name }}</h3>
+                        <p class="my-event-time text-center text-xs lg:text-lg">Du {{ event.startDate | date('d-m-Y') }}
                             au {{ event.endDate | date('d-m-Y') }}</p>
-                        <p class="my-event-time text-center text-xs">De {{ event.startTime | date('H:i') }}
+                        <p class="my-event-time text-center text-xs lg:text-lg">De {{ event.startTime | date('H:i') }}
                             à {{ event.endTime | date('H:i') }}</p>
-                        <h4>{{ event.theme }}</h4>
-                        <p class="my-event-description text-center text-xs">{{ event.description }}</p>
+                        <p class="my-event-theme font-bold capitalize lg:text-xl">{{ event.theme }}</p>
+                        <p class="my-event-description text-center text-xs lg:text-lg">{{ event.description }}</p>
                     </div>
                 </div>
             {% endfor %}
