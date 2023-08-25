@@ -63,6 +63,7 @@ class AppFixtures extends Fixture
             $company->setSiret($faker->siret());
             $company->setDirectorFirstname($faker->firstName($gender = null));
             $company->setDirectorLastname($faker->lastname());
+            $company->setEmployeePassword("123");
             $company->setLogo($faker->imageUrl($width = 400, $height = 400));
             $manager->persist($company);
 

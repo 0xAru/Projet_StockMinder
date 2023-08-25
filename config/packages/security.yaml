@@ -10,6 +10,11 @@ security:
                 class: App\Entity\User
                 property: email
         # used to reload user from session & other features (e.g. switch_user)
+
+    access_control:
+        - { path: ^/dashboard, roles: ROLE_ADMIN }
+        - { path: ^/vente, roles: [ROLE_CHEF, ROLE_SERVEUR] }
+    access_denied_url: "/connexion"
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -22,18 +27,19 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 target: app_login
-
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800
                 path: /
                 always_remember_me: true
 
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
+
 
 
 when@test:

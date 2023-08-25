@@ -116,7 +116,6 @@ class MenuController extends AbstractController
         } else {
             // Appeler l'action index du ProductController pour récupérer les produits
             $products = $productRepository->findProductsByCompany('109');
-
         }
 
         return $this->render('menu/vente-menu.html.twig', [
