@@ -79,8 +79,6 @@ function closeStockModal(elem, index) {
 }
 
 
-
-
 // Affichage de la modale du panier
 function openCartModal(elem) {
 
@@ -105,7 +103,6 @@ function closeCartModal(elem) {
     body.style.overflow = "visible";
 
 }
-
 
 
 // gestion du panier ----------------------------------------------------------------------------------------------
@@ -134,7 +131,6 @@ window.addEventListener('load', async () => {
 });
 
 
-
 let parent = document.querySelector("#cartData");
 let cartForm = document.querySelector("#cartForm");
 let cartLines = document.querySelectorAll(".my-cart-lines");
@@ -142,11 +138,10 @@ let cartTotal = document.querySelector("#cartTotal");
 let sum = 0;
 
 
-
 //Fonction création du panier---------------------------------------------------------------
 async function createForm(elem, index, product) {
 
-    let unitPrice = parseFloat(product.price / 100); // prix unitaire
+    let unitPrice = parseFloat(product.totalPrice / 100); // prix unitaire
     let productQuantity = document.querySelector("#qty" + index); // quantité de produit commandé coté menu
     let productStock = document.querySelector("#stock" + index).getAttribute("data-productStock"); // stock produit côté carte
     let cartLine = document.querySelector("#cartLine" + index); // ligne d'un produit dans le panier
@@ -252,8 +247,8 @@ async function createForm(elem, index, product) {
         let submitBtn = document.createElement("button");
         submitBtn.id = "cartSubmitBtn";
         submitBtn.type = "button";
-        submitBtn.addEventListener('click', ()=>{
-           sendData();
+        submitBtn.addEventListener('click', () => {
+            sendData();
         });
         submitBtn.classList.add("w-28", "my-cart-button", "rounded-full", "focus:font-bold", "mx-6", "bottom-2");
         submitBtn.innerHTML = "Valider";
@@ -264,7 +259,7 @@ async function createForm(elem, index, product) {
         let cancelBtn = document.createElement("button");
         cancelBtn.id = "cartCancelBtn";
         cancelBtn.type = "button";
-        cancelBtn.addEventListener('click', ()=>{
+        cancelBtn.addEventListener('click', () => {
             closeCartModal();
         });
         cancelBtn.classList.add("w-28", "my-cart-button", "rounded-full", "focus:font-bold", "mx-6", "bottom-2");
@@ -314,7 +309,6 @@ function decreaseCartQty(elem, productQuantity, index, productTotal, product) {
     let qty = productQuantity.value;
     if (qty <= 0) {
         document.querySelector("#cartLineContainer" + index).remove();
-        document.querySelector(".my-cart-button").remove();
     }
     productPriceCalc(index, qty, productTotal, product);
     totalCartDec(index, product);
@@ -323,16 +317,16 @@ function decreaseCartQty(elem, productQuantity, index, productTotal, product) {
 
 //Fonction pour calculer le total de chaque produit
 function productPriceCalc(index, qty, productTotal, product) {
-    productTotal.innerHTML = ((product.price / 100) * qty).toFixed(2) + "€";
+    productTotal.innerHTML = ((product.totalPrice / 100) * qty).toFixed(2) + "€";
 }
 
 function totalCartInc(index, product) {
 
     if (cartLines) {
         cartLines.forEach((cartLine, index) => {
-            return product.price;
+            return product.totalPrice;
         });
-        sum += (product.price / 100);
+        sum += (product.totalPrice / 100);
         cartTotal.innerHTML = sum.toFixed(2) + "€";
     }
 }
@@ -342,16 +336,23 @@ function totalCartDec(index, product) {
     if (cartLines) {
         cartLines.forEach((cartLine, index) => {
 
-            return product.price;
+            return product.totalPrice;
         });
 
 
         if (parseInt(quantityInput.value) > 0 || sum > 0) {
-            sum -= (product.price / 100);
+            sum -= (product.totalPrice / 100);
         }
         cartTotal.innerHTML = sum.toFixed(2) + "€";
-
+        if ( parseFloat(cartTotal.innerHTML) <= 0) {
+            let cartButtons = document.querySelectorAll(".my-cart-button");
+            cartButtons.forEach((cartButton) => {
+                cartButton.remove();
+            })
+        }
     }
+
+
 }
 
 //fonction de déduction d'un produit dans le panier
@@ -368,13 +369,11 @@ function minus(elem, index) {
             product.stock++;
             existingProduct.stock = product.stock;
         }
-        //product.stock++;
         createForm(elem, index, product);
         totalCartDec(index, product);
 
         if (cartLineContainer && quantity.value <= 0) {
             cartLineContainer.remove();
-            document.querySelector(".my-cart-button").remove();
         }
     }
 }
@@ -409,7 +408,7 @@ function getProduct(index) {
     return products.find((prod) => prod.id == prodId)
 }
 
-async function sendData(){
+async function sendData() {
 
     // Options pour la requête Fetch
     const options = {
@@ -420,13 +419,13 @@ async function sendData(){
         body: JSON.stringify(cartProducts) // Convertit les données en JSON
     };
 
-    let response = await fetch ('/order', options)
+    let response = await fetch('/order', options)
     window.location.reload();
 
 
 }
 
-async function stockUpdate(index){
+async function stockUpdate(index) {
     let product = getProduct(index)
     product.stock = parseInt(document.querySelector("#myNewStock" + index).innerHTML)
     newStock.push({id: product.id, stock: product.stock});
@@ -440,7 +439,7 @@ async function stockUpdate(index){
         body: JSON.stringify(newStock) // Convertit les données en JSON
     };
 
-    let response = await fetch ('/stock-update', options)
+    let response = await fetch('/stock-update', options)
     window.location.reload();
 
 }

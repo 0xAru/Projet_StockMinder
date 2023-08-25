@@ -29,7 +29,7 @@
         {% include '/layouts/_vente-cart-modal.html.twig' %}
 
 
-        <h2 class="flex justify-center text-2xl uppercase mt-5">Nos bières</h2>
+        <h2 class="flex justify-center text-2xl uppercase py-2">Nos bières</h2>
 
         {% if products is empty %}
             <div class="my-product-empty p-2">
@@ -113,8 +113,7 @@
                         <div class="my-price flex justify-center font-bold">
                             {% if product.promotion is not null %}
                                 <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
-                                            class="text-dutch-white text-sm line-through">{{ product.price / 100 }}€</span> {{ product.totalPrice / 100 | number_format(2, '.', '') }}
-                                    €</p>
+                                            class="text-wine text-sm line-through">{{ product.price / 100 }}€</span> {{ product.totalPrice / 100 | number_format(2, '.', '') }}€</p>
                             {% else %}
                                 <p id="price{{ loop.index0 }}">{{ product.totalPrice / 100 }}€</p>
                             {% endif %}
@@ -235,10 +234,9 @@
                         <div class="my-price flex justify-center font-bold">
                             {% if product.promotion is not null %}
                                 <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
-                                            class="text-dutch-white text-sm line-through">{{ product.price / 100 }}€</span> {{ product.totalPrice / 100 | number_format(2, '.', '') }}
-                                    €</p>
+                                            class="text-dutch-white text-sm line-through">{{ product.price / 100 }}€</span> {{ product.totalPrice / 100 | number_format(2, '.', '') }}€</p>
                             {% else %}
-                                <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                                <p id="price{{ loop.index0 }}">{{ product.totalPrice / 100 }}€</p>
                             {% endif %}
                         </div>
                         <div class="my-stock flex items-center">
@@ -356,10 +354,9 @@
                         <div class="my-price flex justify-center font-bold">
                             {% if product.promotion is not null %}
                                 <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
-                                            class="text-raisin-black text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
-                                    €</p>
+                                            class="text-raisin-black text-sm line-through">{{ product.price / 100 }}€</span> {{ product.totalPrice / 100 | number_format(2, '.', '') }}€</p>
                             {% else %}
-                                <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                                <p id="price{{ loop.index0 }}">{{ product.totalPrice / 100 }}€</p>
                             {% endif %}
                         </div>
                         <div class="my-stock flex items-center">
@@ -478,10 +475,9 @@
                         <div class="my-price flex justify-center font-bold">
                             {% if product.promotion is not null %}
                                 <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
-                                            class="text-dun text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
-                                    €</p>
+                                            class="text-raisin-black text-sm line-through">{{ product.price / 100 }}€</span> {{ product.totalPrice / 100 | number_format(2, '.', '') }}€</p>
                             {% else %}
-                                <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                                <p id="price{{ loop.index0 }}">{{ product.totalPrice / 100 }}€</p>
                             {% endif %}
                         </div>
                         <div class="my-stock flex items-center">
@@ -602,10 +598,9 @@
                         <div class="my-price flex justify-center font-bold">
                             {% if product.promotion is not null %}
                                 <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
-                                            class="text-wine text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
-                                    €</p>
+                                            class="text-wine text-sm line-through">{{ product.price / 100 }}€</span> {{ product.totalPrice / 100 | number_format(2, '.', '') }}€</p>
                             {% else %}
-                                <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                                <p id="price{{ loop.index0 }}">{{ product.totalPrice / 100 }}€</p>
                             {% endif %}
                         </div>
                         <div class="my-stock flex items-center">
@@ -724,10 +719,9 @@
                         <div class="my-price flex justify-center font-bold">
                             {% if product.promotion is not null %}
                                 <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
-                                            class="text-dutch-white text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
-                                    €</p>
+                                            class="text-dutch-white text-sm line-through">{{ product.price / 100 }}€</span> {{ product.totalPrice / 100 | number_format(2, '.', '') }}€</p>
                             {% else %}
-                                <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                                <p id="price{{ loop.index0 }}">{{ product.totalPrice / 100 }}€</p>
                             {% endif %}
 
                         </div>
@@ -844,10 +838,9 @@
                         <div class="my-price flex justify-center font-bold py-0.5">
                             {% if product.promotion is not null %}
                                 <p class="text-red-500 text-lg" id="price{{ loop.index0 }}"><span
-                                            class="text-dutch-white text-sm line-through">{{ (((product.price) / 100) +  ((product.price) / 100) * (product.promotion / 100)) | number_format(2, '.', '') }}€</span> {{ (product.price | number_format(2, '.', '')) / 100 }}
-                                    €</p>
+                                            class="text-dutch-white text-sm line-through">{{ product.price / 100 }}€</span> {{ product.totalPrice / 100 | number_format(2, '.', '') }}€</p>
                             {% else %}
-                                <p id="price{{ loop.index0 }}">{{ product.price / 100 }}€</p>
+                                <p id="price{{ loop.index0 }}">{{ product.totalPrice / 100 }}€</p>
                             {% endif %}
                         </div>
                         <div class="my-stock flex items-center py-0.5">

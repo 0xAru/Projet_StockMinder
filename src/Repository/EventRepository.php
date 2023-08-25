@@ -27,7 +27,7 @@ class EventRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('e');
         $qb->where('e.company = :companyId')
             ->andWhere('e.start_date >= :today')
-            ->andWhere(':today < DATE_SUB(e.start_date, e.display_time_period, \'day\')')
+            ->andWhere('DATE_SUB(e.start_date, e.display_time_period, \'day\') <= :today')
             ->OrderBy('e.start_date', 'ASC')
             ->setParameter('companyId' , $companyId)
             ->setParameter('today', new \DateTime(), \Doctrine\DBAL\Types\Types::DATETIME_MUTABLE);
