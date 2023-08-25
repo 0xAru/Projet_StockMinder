@@ -32,7 +32,7 @@
         <h2 class="flex justify-center text-2xl uppercase py-2">Nos bières</h2>
 
         {% if products is empty %}
-            <div class="my-product-empty p-2">
+            <div class="my-product-empty p-2 bg-dun">
                 <p class="text-center text-xl">Aucun produit ne correspond à votre recherche</p>
             </div>
         {% endif %}
@@ -887,6 +887,7 @@
 
         {% include '/layouts/_menu-legend.html.twig' %}
         {% block scripts %}
+            <script src="{{ asset("assets/js/script.js") }}"></script>
             <script src="{{ asset('assets/js/vente.js') }}"></script>
         {% endblock %}
 

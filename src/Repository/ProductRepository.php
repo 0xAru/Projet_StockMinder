@@ -93,13 +93,11 @@ class ProductRepository extends ServiceEntityRepository
         return array_map('current', $query->getScalarResult());
     }
 
-    public function findUniqueLabels($companyId): array
+    public function findUniqueLabels(): array
     {
         $query = $this->entityManager->createQueryBuilder()
             ->select('DISTINCT p.label')
             ->from(Product::class, 'p')
-            ->where('p.company = :companyId')
-            ->setParameter('companyId', $companyId)
             ->getQuery();
 
         return array_map('current', $query->getScalarResult());
