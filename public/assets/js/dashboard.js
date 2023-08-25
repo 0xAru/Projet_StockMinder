@@ -103,6 +103,7 @@ async function getEmployees() {
         '<span class="w-full grid-cols-5 flex justify-center font-bold">Matricule</span>' +
         '<span class="w-full grid-cols-6 flex justify-center font-bold">Rôle</span>';
     employeeList.appendChild(labelContainer);
+    console.log(employees)
 
     //creation of the employee table
     employees.employees.forEach(employee => {

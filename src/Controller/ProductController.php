@@ -17,7 +17,6 @@ class ProductController extends AbstractController
     public function __construct(private EntityManagerInterface $em)
     {
     }
-
     #[Route('/{id}/products', name: 'app_product')]
     public function index(ProductRepository $productRepository, Company $company): Response
     {
