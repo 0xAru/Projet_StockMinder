@@ -52,6 +52,7 @@ class EventController extends AbstractController
         return $this->render('dashboard/index.html.twig', [
             'action' => 'update_event',
             'company_id' => $this->getUser()->getCompany()->getId(),
+            'company_logo' => $this->getUser()->getCompany()->getLogo(),
             'updateForm' => $updateForm->createView()
         ]);
     }

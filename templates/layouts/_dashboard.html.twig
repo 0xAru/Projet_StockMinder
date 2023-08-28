@@ -1,5 +1,5 @@
 <div id="productForm" class="w-full flex flex-col justify-center rounded-lg hidden">
-    {{ form_errors(productForm) }}
+    {{ form_errors(productForm, {'attr': { 'class': 'text-red-400'}}) }}
 
     {{ form_start(productForm) }}
     <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
@@ -67,7 +67,7 @@
     {{ form_errors(eventForm) }}
 
     {{ form_start(eventForm) }}
-    <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
+    <div class="grid dashFormBg mb-16 pb-10 rounded-xl">
         <h2 class="text-4xl m-6">Évènements</h2>
         <div class="flex justify-center gap-32 my-4">
             {{ form_row(eventForm.name) }}
@@ -82,10 +82,17 @@
             {{ form_row(eventForm.start_time) }}
             {{ form_row(eventForm.end_time) }}
         </div>
-        <div class="flex justify-center gap-32 my-4">
-            {{ form_row(eventForm.image) }}
+        <div class="flex justify-center my-4">
             {{ form_row(eventForm.description) }}
         </div>
+        <div class="flex justify-center my-4">
+            {{ form_row(eventForm.image) }}
+        </div>
+        {% if eventForm.image%}
+            <div class="flex justify-center">
+                <img id="image" alt="" class="w-24 h-24" src="{{ asset("assets/img/icon_image.png") }}">
+            </div>
+        {% endif %}
         <div class="flex justify-center gap-32 my-4">
             {{ form_row(eventForm.Envoyer) }}
         </div>

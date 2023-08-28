@@ -66,7 +66,7 @@ class DashboardEventFormType extends AbstractType
             ->add("start_time", TimeType::class, [
                 'label' => "Heure de début <img src='/assets/img/heure_event.png' class='ml-4 w-8 h-auto'>",
                 'label_html' => true,
-                'label_attr' => ['class' => 'flex items-center ml-2'],
+                'label_attr' => ['class' => 'flex items-center'],
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Heure de début",
@@ -76,7 +76,7 @@ class DashboardEventFormType extends AbstractType
             ->add("end_time", TimeType::class, [
                 'label' => "Heure de fin <img src='/assets/img/heure_event.png' class='ml-4 w-8 h-auto'>",
                 'label_html' => true,
-                'label_attr' => ['class' => 'flex items-center ml-2'],
+                'label_attr' => ['class' => 'flex items-center'],
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Heure de fin",
@@ -84,10 +84,17 @@ class DashboardEventFormType extends AbstractType
                 ]
             ])
             ->add("image", FileType::class, [
-                'label' => false,
+                'label' => "Sélectionner une image",
+                'label_attr' => [
+                    'class' => 'block text-wine text-sm font-bold cursor-pointer text-center hover:text-persian-orange hover:bg-wine shadow appearance-none border border-wine rounded w-full my-3 py-2 px-3 focus:outline-none focus:shadow-outline'
+                ],
                 'required' => false,
                 'attr' => [
-                    'class' => 'md:my-3 w-96'
+                    'class' => 'hidden',
+                    'onchange' => 'previewPicture(this)'
+                ],
+                'row_attr' => [
+                    'class' => "flex justify-center items-center"
                 ],
                 "mapped" => false
             ])
@@ -101,7 +108,7 @@ class DashboardEventFormType extends AbstractType
             ])
             ->add("Envoyer", SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn rounded-full px-10 py-2 font-semibold'
+                    'class' => 'btn rounded-full px-10 py-2'
                 ],
                 'row_attr' => [
                     'class' => 'flex justify-center md:my-3 w-96'

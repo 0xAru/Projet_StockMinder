@@ -30,9 +30,14 @@ class ProductController extends AbstractController
 
     //Route de modification de produits
     #[Route(path: '/product/{id}/update', name: 'app_product_update')]
-    function updateProduct(Request $request, Product $product): Response
+    function updateProduct(Request $request, Product $product, ProductRepository $productRepository): Response
     {
-        $updateForm = $this->createForm(DashboardProductFormType::class, $product);
+        //Récupération des différentes options pour les champs select du formulaire
+        $filterOptions = [
+            'label_choices' => $productRepository->findUniqueLabels(),
+        ];
+
+        $updateForm = $this->createForm(DashboardProductFormType::class, $product, $filterOptions);
         $updateForm->handleRequest($request);
 
         if ($updateForm->isSubmitted() && $updateForm->isValid()) {
@@ -46,6 +51,7 @@ class ProductController extends AbstractController
         return $this->render('dashboard/index.html.twig', [
             'action' => 'update_product',
             'company_id' => $this->getUser()->getCompany()->getId(),
+            'company_logo' => $this->getUser()->getCompany()->getLogo(),
             'updateForm' => $updateForm->createView()
         ]);
     }

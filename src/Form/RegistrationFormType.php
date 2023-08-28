@@ -129,7 +129,7 @@ class RegistrationFormType extends AbstractType
             ->add("logo", FileType::class, [
                 'label' => "Sélectionner un logo",
                 'label_attr' => [
-                    'class' => 'block text-wine text-sm font-bold cursor-pointer text-center hover:text-persian-orange hover:bg-wine shadow appearance-none border border-wine rounded w-full py-2 px-3 focus:outline-none focus:shadow-outline'
+                    'class' => 'block text-wine text-sm font-bold cursor-pointer text-center hover:text-persian-orange hover:bg-wine shadow appearance-none border border-wine rounded w-full my-3 py-2 px-3 focus:outline-none focus:shadow-outline'
                 ],
                 'required' => false,
                 'attr' => [
@@ -139,7 +139,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add("Envoyer", SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn rounded-full px-10 py-2 font-semibold'
+                    'class' => 'btn rounded-full px-10 py-2'
                 ],
                 'row_attr' => [
                     'class' => 'flex justify-center my-3'

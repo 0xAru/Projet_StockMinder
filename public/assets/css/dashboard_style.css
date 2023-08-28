@@ -91,20 +91,16 @@ th, td{
 
 #dashboard_event_form_start_date > select {
     border-radius: 3em;
-    margin-right: 0.5em;
 }
 
 #dashboard_event_form_end_date > select {
     border-radius: 3em;
-    margin-right: 0.5em;
 }
 
 #dashboard_event_form_start_time > select {
     border-radius: 3em;
-    margin: 0 0.5em;
 }
 
 #dashboard_event_form_end_time > select {
     border-radius: 3em;
-    margin: 0 0.5em;
 }
