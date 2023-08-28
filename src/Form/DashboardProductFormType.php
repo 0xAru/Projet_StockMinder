@@ -19,7 +19,6 @@ class DashboardProductFormType extends AbstractType
     {
         //Récupération des différents styles et labels de l'entité Product
         $labelChoices = array_values(array_unique($options['label_choices']));
-        $originChoices = array_values(array_unique($options['origin_choices']));
 
         $builder
             ->add('name', TextType::class, [
@@ -28,6 +27,9 @@ class DashboardProductFormType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Nom du produit',
                     'class' => 'rounded-full md:my-3 w-96'
+                ],
+                'row_attr' => [
+                    'class' => 'text-red-500'
                 ]
             ])
             ->add('brand', TextType::class, [
@@ -113,6 +115,9 @@ class DashboardProductFormType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Stock',
                     'class' => 'rounded-full md:my-3 w-96'
+                ],
+                'row_attr' => [
+                    'class' => 'text-red-500'
                 ]
             ])
             ->add('threshold', IntegerType::class, [
@@ -121,6 +126,9 @@ class DashboardProductFormType extends AbstractType
                 'attr' => [
                     'placeholder' => "Seuil de réapprovisionnement",
                     'class' => 'rounded-full md:my-3 w-96'
+                ],
+                'row_attr' => [
+                    'class' => 'text-red-500'
                 ]
             ])
             ->add('customer_description', TextareaType::class, [
@@ -141,7 +149,7 @@ class DashboardProductFormType extends AbstractType
             ])
             ->add("Envoyer", SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn rounded-full px-10 py-2 font-semibold'
+                    'class' => 'btn rounded-full px-10 py-2'
                 ],
                 'row_attr' => [
                     'class' => 'flex justify-center md:my-3 w-96'

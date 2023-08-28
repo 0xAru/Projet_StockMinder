@@ -43,7 +43,7 @@ class DashboardEmployeeFormType extends AbstractType
 
             ->add("Envoyer", SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn rounded-full px-10 py-2 font-semibold'
+                    'class' => 'btn rounded-full px-10 py-2'
                 ],
                 'row_attr' => [
                     'class' => 'flex justify-center md:my-3 md:w-96'

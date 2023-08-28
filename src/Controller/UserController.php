@@ -58,6 +58,7 @@ class UserController extends AbstractController
             'action' => 'update_employee',
             'user_matricule' => $employee->getEmployeeNumber(),
             'company_id' => $this->getUser()->getCompany()->getId(),
+            'company_logo' => $this->getUser()->getCompany()->getLogo(),
             'updateForm' => $updateForm->createView()
         ]);
     }

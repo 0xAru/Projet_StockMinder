@@ -182,7 +182,7 @@ async function getProducts() {
     let headerRow = document.createElement("tr");
     headerRow.classList.add("mb-4", "flex", "items-center");
 
-    let headers = ["", "Id", "Nom", "Marque", "Catégorie", "Style", "Degré d'alcool", "Provenance", "Contenance", "Prix Unitaire", "Promotion", "Stock", "Seuil de réaprovisionnement", "Description Client", "Description Serveur"];
+    let headers = ["", "Id", "Nom", "Marque", "Catégorie", "Style", "Degré d'alcool", "Provenance", "Contenance", "Prix Unitaire", "Promotion", "Stock", "Seuil de réaprovisionnement", "Label", "Description Client", "Description Serveur"];
     headers.forEach(headerText => {
         let th = document.createElement("th");
         th.classList.add("py-4", "px-8", "font-bold", "text-center");
@@ -231,6 +231,7 @@ async function getProducts() {
             product.promotion + "%",
             product.stock,
             product.threshold,
+            product.label,
             product.customer_description,
             product.employee_description
         ];

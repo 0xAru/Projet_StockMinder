@@ -10,6 +10,7 @@ use App\Repository\ProductRepository;
 use App\Entity\Trait\SlugTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ApiResource(
@@ -40,6 +41,7 @@ class Product
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le nom du produit ne peut pas être vide')]
     #[Groups(['read:products'])]
     private ?string $name = null;
 
@@ -88,10 +90,12 @@ class Product
     private ?int $totalPrice = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\PositiveOrZero(message: 'Le stock ne peut pas être négatif')]
     #[Groups(['read:products'])]
     private ?int $stock = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\PositiveOrZero(message: 'Le seuil de réapprovisionnement ne peut pas être négatif')]
     #[Groups(['read:products'])]
     private ?int $threshold = null;
 
