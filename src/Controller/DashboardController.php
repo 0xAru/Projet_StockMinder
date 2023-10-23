@@ -27,7 +27,7 @@ class DashboardController extends AbstractController
     public function index(Request $request, ProductRepository $productRepository): Response
     {
 
-        // Vérifiez si l'utilisateur est connecté
+        // Check if the user is logged in
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
@@ -35,16 +35,16 @@ class DashboardController extends AbstractController
         $company = $this->getUser()->getCompany();
         $repository = $this->em->getRepository(User::class);
 
-        //Récupération des différentes options pour les champs select du formulaire
+        // Retrieval of the different options for the select fields of the form
         $filterOptions = [
             'label_choices' => $productRepository->findUniqueLabels(),
             'origin_choices' => $productRepository->findUniqueOrigins($company)
         ];
 
-        // Récupérer le prénom de l'utilisateur
+        // Get the user's first name
         $firstName = $this->getUser()->getFirstname();
 
-        // Stocker le prénom dans une variable de session
+        // Storing the first name in a session variable
         $request->getSession()->set('user_name', $firstName);
 
 
@@ -56,19 +56,23 @@ class DashboardController extends AbstractController
         $employeeForm = $this->createForm(DashboardEmployeeFormType::class, $employee);
         $eventForm = $this->createForm(DashboardEventFormType::class, $event);
 
-        // Traitez la soumission du formulaire s'il a été envoyé
+        // Process the form submission if it has been sent
         $productForm->handleRequest($request);
         $employeeForm->handleRequest($request);
         $eventForm->handleRequest($request);
 
         if ($productForm->isSubmitted() && $productForm->isValid()) {
-            $product->setCompany($company);
-            $productName = $product->getName();
-            $slug = str_replace(' ', '_', strtolower($productName));
-            $product->setSlug($slug);
-            $this->em->persist($product);
-            $this->em->flush();
-            return $this->redirectToRoute('app_dashboard', ['action' => 2]);
+            try {
+                $product->setCompany($company);
+                $productName = $product->getName();
+                $slug = str_replace(' ', '_', strtolower($productName));
+                $product->setSlug($slug);
+                $this->em->persist($product);
+                $this->em->flush();
+                return $this->redirectToRoute('app_dashboard', ['action' => 2]);
+            } catch (\Exception $e) {
+                $this->addFlash('danger', 'Une erreur est survenue lors du traitement du formulaire.');
+            }
         }
 
         if ($employeeForm->isSubmitted() && $employeeForm->isValid()) {
@@ -91,42 +95,43 @@ class DashboardController extends AbstractController
                         throw new \Exception("Ce matricule est déjà utilisé");
                     }
                 }
-
             } catch (\Exception $e) {
                 $this->addFlash('danger', $e->getMessage());
                 return $this->redirectToRoute('app_dashboard');
             }
 
-            $employee->setEmail($employee->getEmployeeNumber() . "@" .$company->getId());
-            $employee->setPassword($this->em->getRepository(Company::class)->findOneBy(['id'=> $company])->getEmployeePassword());
+            $employee->setEmail($employee->getEmployeeNumber() . "@" . $company->getId());
+            $employee->setPassword($this->em->getRepository(Company::class)->findOneBy(['id' => $company])->getEmployeePassword());
             $this->em->flush();
-            $this->addFlash('success', "Employé mis à jour avec succès");
             $employee->setResetToken('');
             $this->em->persist($employee);
             $this->em->flush();
         }
 
         if ($eventForm->isSubmitted() && $eventForm->isValid()) {
-            $event->setCompany($company);
-            $eventName = $event->getName();
-            $slug = str_replace(' ', '_', strtolower($eventName));
-            $event->setSlug($slug);
-            $uploadedFile = $eventForm['image']->getData();
+            try {
+                $event->setCompany($company);
+                $eventName = $event->getName();
+                $slug = str_replace(' ', '_', strtolower($eventName));
+                $event->setSlug($slug);
+                $uploadedFile = $eventForm['image']->getData();
 
-            if ($uploadedFile instanceof UploadedFile) {
-                $newFilename = uniqid() . '.' . $uploadedFile->getClientOriginalExtension();
+                if ($uploadedFile instanceof UploadedFile) {
+                    $newFilename = uniqid() . '.' . $uploadedFile->getClientOriginalExtension();
 
-                $uploadedFile->move($this->getParameter('uploads_path'), $newFilename);
+                    $uploadedFile->move($this->getParameter('uploads_path'), $newFilename);
 
-                // Mettre à jour le chemin de l'image dans l'entité
-                $event->setImage($newFilename);
+                    // Update image path in entity
+                    $event->setImage($newFilename);
+                }
+
+                $this->em->persist($event);
+                $this->em->flush();
+                return $this->redirectToRoute('app_dashboard', ['action' => 1]);
+            } catch (\Exception $e) {
+                $this->addFlash('danger', 'L\'image ne s\'est pas chargée correctement.');
             }
-
-            $this->em->persist($event);
-            $this->em->flush();
-            return $this->redirectToRoute('app_dashboard', ['action' => 1]);
         }
-
         return $this->render('dashboard/index.html.twig', [
             'first_name' => $firstName,
             'company_id' => $this->getUser()->getCompany()->getId(),
@@ -137,5 +142,4 @@ class DashboardController extends AbstractController
             'route' => "dashboard",
         ]);
     }
-
 }

@@ -14,7 +14,7 @@
         <section class="col-start-2 col-end-13 flex flex-col items-center justify-center py-8">
             <h1 class="text-stroke custom-h1 md:mb-6">Connexion</h1>
             {% if error %}
-                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div class="text-red-500">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
             {% include "layouts/_flash.html.twig" %}
@@ -25,7 +25,6 @@
                         <label for="inputEmail"></label>
                         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" autocomplete="email" required autofocus class="rounded-full my-2 md:my-3" placeholder="E-mail">
                     </div>
-
                     <div class="flex">
                         <label for="inputPassword"></label>
                         <input type="password" name="password" id="inputPassword" autocomplete="current-password" required class="rounded-full my-2 md:my-3" placeholder="Mot de passe">

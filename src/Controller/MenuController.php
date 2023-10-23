@@ -81,7 +81,6 @@ class MenuController extends AbstractController
     public function sell(ProductRepository $productRepository, EventRepository $eventRepository, Request $request): Response
     {
 
-
         // Récupérer les options uniques pour les champs du formulaire
         $filterOptions = [
             'style_choices' => $productRepository->findUniqueStyles('109'),

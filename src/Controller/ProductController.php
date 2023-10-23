@@ -17,22 +17,23 @@ class ProductController extends AbstractController
     public function __construct(private EntityManagerInterface $em)
     {
     }
+
     #[Route('/{id}/products', name: 'app_product')]
-    public function index(ProductRepository $productRepository, Company $company): Response
+    public function index(Request $request, ProductRepository $productRepository, Company $company): Response
     {
-        $response = new Response();
-        // Récupération tous les produits depuis le ProductRepository
-        $products = $company->getProducts();
+        $filters =  json_decode($request->query->get("filter"),true);
+        $filters["company"] = $company->getId();
+        $filteredProducts = $productRepository->findBy($filters);
         return $this->json([
-            'products' => $products,
+            'products' => $filteredProducts
         ]);
     }
 
-    //Route de modification de produits
+    // product modification route
     #[Route(path: '/product/{id}/update', name: 'app_product_update')]
     function updateProduct(Request $request, Product $product, ProductRepository $productRepository): Response
     {
-        //Récupération des différentes options pour les champs select du formulaire
+        // Retrieval of the different options for the select fields of the form
         $filterOptions = [
             'label_choices' => $productRepository->findUniqueLabels(),
         ];
@@ -45,7 +46,8 @@ class ProductController extends AbstractController
             $slug = str_replace(' ', '_', strtolower($productName));
             $product->setSlug($slug);
             $this->em->flush();
-            return $this->redirectToRoute('app_dashboard',["action" => 2]);
+            $this->addFlash('success', "Produit mis à jour avec succès");
+            return $this->redirectToRoute('app_dashboard', ["action" => 2]);
         }
 
         return $this->render('dashboard/index.html.twig', [
@@ -56,12 +58,14 @@ class ProductController extends AbstractController
         ]);
     }
 
-    //Route de suppression de produits
+    // Product removal route
     #[Route(path: '/product/{id}/delete', name: 'app_product_delete')]
     function deleteProduct(Request $request, Product $product): Response
     {
         $this->em->remove($product);
         $this->em->flush();
-        return $this->redirectToRoute('app_dashboard',["action" => 2]);
+        return $this->redirectToRoute('app_dashboard', ["action" => 2]);
     }
+
+
 }

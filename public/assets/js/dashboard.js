@@ -7,7 +7,7 @@ const eventContainer = document.querySelector("#eventForm");
 let companyId = iconProduct.getAttribute("data-companyId");
 let isLoading = false;
 window.addEventListener("load", (event) => {
-    switch (parseInt(window.location.search.split('=')[1])){
+    switch (parseInt(window.location.search.split('=')[1])) {
         case 1:
             getEvents()
             break
@@ -51,12 +51,11 @@ document.querySelector("#dashboard_product_form_style").insertAdjacentElement("a
 function extractFirstWords(text, wordCount) {
     let words = text.trim().split(/\s+/);
     return words.slice(0, wordCount).join(' ');
-
 }
 
 //Reformat the date
 function formatDate(dateString) {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const options = {year: 'numeric', month: 'long', day: 'numeric'};
     const date = new Date(dateString);
     return date.toLocaleDateString('fr-FR', options);
 }
@@ -71,12 +70,16 @@ function formatTime(dateTimeString) {
 }
 
 //Employees//
-async function getEmployees() {
+async function getEmployees(filter = null) {
+
+    createEmployeeFilters();
+
+    // This function avoids overloading the server and displaying the table several times
     if (isLoading) {
         return
     }
     isLoading = true;
-
+    // we reset the display of the table
     if (document.getElementById("listEmployee")) {
         document.getElementById("listEmployee").remove();
     }
@@ -134,7 +137,7 @@ async function getEmployees() {
         let divEmployeeNumber = document.createElement('div');
         divEmployeeNumber.classList.add("grid-cols-5", "flex", "flex-col", "items-center", "justify-center");
         divEmployeeNumber.innerHTML = employee.employee_number;
-        if (parseInt(employee.employee_number) === 1 ) {
+        if (parseInt(employee.employee_number) === 1) {
             button2.classList.add('hidden');
         }
         employeeList.appendChild(divEmployeeNumber);
@@ -147,18 +150,21 @@ async function getEmployees() {
 }
 
 //Products//
-async function getProducts() {
+async function getProducts(filter = null) {
+
+    createProductFilters();
+
+    // This function avoids overloading the server and displaying the table several times
     if (isLoading) {
         return
     }
     isLoading = true;
-
+    // we reset the display of the table
     if (document.getElementById("listProduct")) {
         document.getElementById("listProduct").remove();
     }
 
-    let products = await fetch(`/${companyId}/products`);
-    products = await products.json();
+    // I adapt the classes of my elements to display only those related to my products
     iconProduct.classList.add("activTab");
     iconEmployee.classList.remove("activTab");
     iconEvent.classList.remove('activTab');
@@ -170,7 +176,15 @@ async function getProducts() {
     productList.classList.add("dashFormBg", "mt-4", "rounded-xl", "overflow-x-auto");
     productList.id = "listProduct";
     productContainer.appendChild(productList);
+    let products = null
 
+    if (filter == null) {
+        products = await fetch(`/${companyId}/products`);
+    } else {
+        products = await fetch(`/${companyId}/products?filter=${filter}`);
+    }
+
+    products = await products.json();
     let tableContainer = document.createElement("div");
     tableContainer.classList.add("overflow-x-auto", "p-2");
 
@@ -182,7 +196,8 @@ async function getProducts() {
     let headerRow = document.createElement("tr");
     headerRow.classList.add("mb-4", "flex", "items-center");
 
-    let headers = ["", "Id", "Nom", "Marque", "Catégorie", "Style", "Degré d'alcool", "Provenance", "Contenance", "Prix Unitaire", "Promotion", "Stock", "Seuil de réaprovisionnement", "Label", "Description Client", "Description Serveur"];
+    let headers = ["", "Id", "Nom", "Marque", "Catégorie", "Style", "Degré d'alcool", "Provenance", "Contenance", "Prix Unitaire", "Promotion",
+        "Stock", "Seuil de réaprovisionnement", "Label", "Description Client", "Description Serveur"];
     headers.forEach(headerText => {
         let th = document.createElement("th");
         th.classList.add("py-4", "px-8", "font-bold", "text-center");
@@ -353,12 +368,12 @@ async function getEvents() {
                 cellContent.textContent = extractFirstWords(data, 10);
             }
 
-            if (event.image == data){
+            if (event.image == data) {
                 let img = document.createElement('img');
                 img.src = "../uploaded_img/" + data;
                 cellContent.classList.remove("justify-center")
                 cellContent.appendChild(img);
-            }else{
+            } else {
                 cellContent.textContent = data;
             }
             cell.appendChild(cellContent);
@@ -369,4 +384,186 @@ async function getEvents() {
     table.appendChild(tbody);
     tableContainer.appendChild(table);
     eventList.appendChild(tableContainer);
+}
+
+async function createProductFilters() {
+    let productsResponse = await fetch(`/${companyId}/products`);
+    products = await productsResponse.json();
+
+    let filterContainer = document.createElement("div");
+    filterContainer.id = "filterContainerProducts";
+    productContainer.appendChild(filterContainer);
+    let filterForm = document.createElement('form');
+    filterForm.classList.add("flex", "justify-center", "gap-8", "py-6");
+    listProduct.appendChild(filterForm);
+
+    const nameFilterInput = document.createElement("input");
+    nameFilterInput.type = "text";
+    nameFilterInput.id = "productFilterName";
+    nameFilterInput.placeholder = "Nom du produit";
+    nameFilterInput.classList.add("rounded-full", "md:my-3", "w-64");
+    filterForm.appendChild(nameFilterInput);
+
+    const brandFilterSelect = document.createElement("select");
+    brandFilterSelect.id = "productFilterBrand";
+    brandFilterSelect.classList.add("rounded-full", "md:my-3", "w-64");
+    const placeholderBrand = document.createElement("option");
+    placeholderBrand.textContent = "Sélectionnez une marque";
+    placeholderBrand.value = "";
+    brandFilterSelect.appendChild(placeholderBrand);
+    filterForm.appendChild(brandFilterSelect);
+
+    // We use a temporary set to recover the marks only once
+    const uniqueBrands = new Set();
+
+    // Populate the brand drop-down list
+    products.products.forEach(product => {
+        let brand = product.brand;
+        if (brand && !uniqueBrands.has(brand)) {
+            uniqueBrands.add(brand);
+            let option = document.createElement("option");
+            option.textContent = brand;
+            option.value = brand;
+            brandFilterSelect.appendChild(option);
+        }
+    });
+
+    const categoryFilterSelect = document.createElement("select");
+    categoryFilterSelect.id = "productFilterCategory";
+    categoryFilterSelect.classList.add("rounded-full", "md:my-3", "w-64");
+    const placeholderCat = document.createElement("option");
+    placeholderCat.textContent = "Sélectionnez une catégorie";
+    placeholderCat.value = "";
+    categoryFilterSelect.appendChild(placeholderCat);
+    filterForm.appendChild(categoryFilterSelect);
+
+    // We use a temporary set to retrieve the categories only once
+    const uniqueCategories = new Set();
+
+    // Populate the category dropdown
+    products.products.forEach(product => {
+        let category = product.category;
+        if (category && !uniqueCategories.has(category)) {
+            uniqueCategories.add(category);
+            let option = document.createElement("option");
+            option.textContent = category;
+            option.value = category;
+            categoryFilterSelect.appendChild(option);
+        }
+    });
+
+    const originFilterSelect = document.createElement("select");
+    originFilterSelect.id = "productFilterOrigin";
+    originFilterSelect.classList.add("rounded-full", "md:my-3", "w-64");
+    const placeholderOri = document.createElement("option");
+    placeholderOri.value = null;
+    placeholderOri.textContent = "Sélectionnez le pays d'origine";
+    originFilterSelect.appendChild(placeholderOri);
+    filterForm.appendChild(originFilterSelect);
+
+    // We use a temporary set to retrieve the origins only once
+    const uniqueOrigin = new Set();
+
+    // Fill in the origins drop-down list
+    products.products.forEach(product => {
+        let origin = product.origin;
+        if (origin && !uniqueCategories.has(origin)) {
+            uniqueCategories.add(origin);
+            let option = document.createElement("option");
+            option.textContent = origin;
+            option.value = origin;
+            originFilterSelect.appendChild(option);
+        }
+    });
+
+    const labelFilterSelect = document.createElement("select");
+    labelFilterSelect.id = "productFilterLabel";
+    labelFilterSelect.classList.add("rounded-full", "md:my-3", "w-64");
+    const placeholderLab = document.createElement("option");
+    placeholderLab.value = null;
+    placeholderLab.textContent = "Sélectionnez un label";
+    labelFilterSelect.appendChild(placeholderLab);
+    filterForm.appendChild(labelFilterSelect);
+
+    // We use a temporary set to retrieve the labels only once
+    const uniqueLabels = new Set();
+
+    // Populate the label drop-down list
+    products.products.forEach(product => {
+        let label = product.label;
+        if (label && !uniqueLabels.has(label)) {
+            uniqueCategories.add(label);
+            let option = document.createElement("option");
+            option.textContent = label;
+            option.value = label;
+            labelFilterSelect.appendChild(option);
+        }
+    });
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.addEventListener("click", () => {
+        fetchProductFilter();
+    })
+    button.textContent = "Filtrer";
+    button.classList.add("btn", "px-10", "my-4", "rounded-full", "bg-persian-orange", "text-raisin-black", "text-center");
+    filterForm.appendChild(button);
+}
+
+async function fetchProductFilter() {
+
+    let filter = {}
+
+    const nameFilterInput = document.querySelector('#productFilterName');
+    const brandFilterSelect = document.querySelector('#productFilterBrand');
+    const categoryFilterSelect = document.querySelector('#productFilterCategory');
+    const originFilterSelect = document.querySelector('#productFilterOrigin');
+    const labelFilterSelect = document.querySelector('#productFilterLabel');
+
+    if (nameFilterInput !== null){
+        filter.name = nameFilterInput.value;
+    }
+    if (brandFilterSelect !== null){
+        filter.brand = brandFilterSelect.value;
+    }
+    if (categoryFilterSelect !== null){
+        filter.category = categoryFilterSelect.value;
+    }
+    if (originFilterSelect !== null){
+        filter.origin = originFilterSelect.value;
+    }
+    if (labelFilterSelect !== null){
+        filter.label = labelFilterSelect.value;
+    }
+
+    filter = JSON.stringify(filter);
+    await getProducts(filter);
+}
+
+async function createEmployeeFilters(){
+    let employeesResponse = await fetch(`/${companyId}/employee`);
+    employees = await employeesResponse.json();
+
+    let filterContainer = document.createElement("div");
+    filterContainer.id = "filterContainerEmployees";
+    employeeContainer.appendChild(filterContainer);
+    let filterForm = document.createElement('form');
+    filterForm.classList.add("flex", "justify-center", "gap-8", "py-6");
+    listEmployee.appendChild(filterForm);
+
+    const searchTerms = document.createElement("input");
+    searchTerms.type = "text";
+    searchTerms.id = "searchField";
+    searchTerms.placeholder = "Rechercher un employé";
+    searchTerms.classList.add("rounded-full", "md:my-3", "w-64");
+    filterForm.appendChild(searchTerms);
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.addEventListener("click", () => {
+        fetchEmployeeFilter();
+    })
+    button.textContent = "Filtrer";
+    button.classList.add("btn", "px-10", "my-4", "rounded-full", "bg-persian-orange", "text-raisin-black", "text-center");
+    filterForm.appendChild(button);
 }

@@ -46,6 +46,7 @@ class EventController extends AbstractController
             }
             $this->em->persist($event);
             $this->em->flush();
+            $this->addFlash('success', "Évènement mis à jour avec succès");
             return $this->redirectToRoute('app_dashboard', ['action' => 1]);
         }
 
