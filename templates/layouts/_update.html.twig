@@ -87,10 +87,17 @@
                     {{ form_row(updateForm.start_time) }}
                     {{ form_row(updateForm.end_time) }}
                 </div>
-                <div class="flex justify-center gap-32 my-4">
-                    {{ form_row(updateForm.image) }}
-                    {{ form_row(updateForm.description) }}
+                <div class="flex justify-center my-4">
+            {{ form_row(updateForm.description) }}
+        </div>
+        <div class="flex justify-center my-4">
+            {{ form_row(updateForm.image) }}
+        </div>
+            {% if updateForm.image%}
+                <div class="flex justify-center">
+                    <img id="image" alt="" class="w-24 h-24" src="{{ asset("assets/img/icon_image.png") }}">
                 </div>
+            {% endif %}
                 <div class="flex justify-center gap-32 my-4">
                     {{ form_row(updateForm.Envoyer) }}
                 </div>

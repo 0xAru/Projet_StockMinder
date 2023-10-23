@@ -22,10 +22,11 @@ class SecurityController extends AbstractController
     #[Route(path: '/connexion', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
+        //We are checking whether a user is already logged in or not.
         if ($this->getUser()) {
             if ($this->getUser()->getRoles()[0] == "ROLE_ADMIN"){
                 return $this->redirectToRoute('app_dashboard');
-            }else{
+            } else {
                 return $this->redirectToRoute('app_sell');
             }
         }

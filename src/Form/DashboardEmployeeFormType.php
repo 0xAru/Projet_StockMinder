@@ -22,7 +22,7 @@ class DashboardEmployeeFormType extends AbstractType
                     'class' => 'rounded-full md:my-3 h-6 md:h-11 md:w-96 text-xs md:text-base'
                 ]
             ])
-            ->add("lastname", TextType::class,[
+            ->add("lastname", TextType::class, [
                 'label' => false,
                 'required' => true,
                 'attr' => [

@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\User;
 use App\Form\DashboardEmployeeFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,6 +17,17 @@ class UserController extends AbstractController
     public function __construct(private readonly EntityManagerInterface $em)
     {
     }
+
+//    #[Route('/{id}/employee', name: 'app_employee')]
+//    public function index(Request $request, UserRepository $userRepository, Company $company): Response
+//    {
+//        $filters =  json_decode($request->query->get("filter"),true);
+//        $filters["company"] = $company->getId();
+//        $filteredEmployees = $userRepository->findBy($filters);
+//        return $this->json([
+//            'employees' => $filteredEmployees
+//        ]);
+//    }
 
     //Route de modification d'un utilisateur
     #[Route(path: '/employee/{id}/update', name: 'app_employee_update')]

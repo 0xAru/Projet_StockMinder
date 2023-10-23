@@ -1,3 +1,4 @@
+{% if app.flashes is defined %}
 {% for label, messages in app.flashes %}
     {% for message in messages %}
         {% if label == "success" %}
@@ -11,3 +12,4 @@
         {% endif %}
     {% endfor %}
 {% endfor %}
+{% endif %}

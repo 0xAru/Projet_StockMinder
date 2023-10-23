@@ -27,9 +27,6 @@ class DashboardProductFormType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Nom du produit',
                     'class' => 'rounded-full md:my-3 w-96'
-                ],
-                'row_attr' => [
-                    'class' => 'text-red-500'
                 ]
             ])
             ->add('brand', TextType::class, [
@@ -115,9 +112,6 @@ class DashboardProductFormType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Stock',
                     'class' => 'rounded-full md:my-3 w-96'
-                ],
-                'row_attr' => [
-                    'class' => 'text-red-500'
                 ]
             ])
             ->add('threshold', IntegerType::class, [
@@ -126,9 +120,6 @@ class DashboardProductFormType extends AbstractType
                 'attr' => [
                     'placeholder' => "Seuil de réapprovisionnement",
                     'class' => 'rounded-full md:my-3 w-96'
-                ],
-                'row_attr' => [
-                    'class' => 'text-red-500'
                 ]
             ])
             ->add('customer_description', TextareaType::class, [
