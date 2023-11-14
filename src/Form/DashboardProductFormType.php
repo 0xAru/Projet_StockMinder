@@ -65,7 +65,7 @@ class DashboardProductFormType extends AbstractType
                 ]
             ])
             ->add('label', ChoiceType::class, [
-                'choices' => array_combine($labelChoices, $labelChoices),
+                'choices' => array_combine($options['label_choices'], $options['label_choices']),
                 'required' => false,
                 'label' => false,
                 'placeholder' => 'Choisissez un label si necessaire',

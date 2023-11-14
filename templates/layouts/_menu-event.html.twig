@@ -5,7 +5,7 @@
         <div class="my-carousel flex flex-col justify-center mb-6" id="myCarousel">
             {% for event in events %}
                 <div class="my-event flex justify-center text-center mx-auto mt-3 w-80 h-38 lg:w-700 lg:h-48 lg:justify-between">
-                    <img class="h-20 w-20 flex my-auto lg:w-96 lg:h-48" src="{{ event.image }}" alt="">
+                    <img class="h-20 w-20 flex my-auto lg:w-96 lg:h-48" src="{{ asset('uploaded_img/' ~ event.image) }}" alt="">
                     <div class="my-event-data h-36 flex flex-col p-2 lg:h-48 lg:justify-between">
                         <h3 class="text-lg capitalize lg:text-4xl">{{ event.name }}</h3>
                         <p class="my-event-time text-center text-xs lg:text-lg">Du {{ event.startDate | date('d-m-Y') }}

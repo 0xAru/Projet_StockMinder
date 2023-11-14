@@ -1,6 +1,17 @@
+let screenWidth = window.innerWidth;
+function handleResize() {
+    screenWidth = window.innerWidth;
+}
+window.addEventListener('resize', handleResize);
+
+
+// Appeler la fonction initiale au chargement de la page
+handleResize();
+
 let selects = document.querySelectorAll("select");
 let burger = document.querySelector('.my-burger');
 let menu = document.querySelector('.my-menu-container');
+
 
 // défilement de la navbar catégories avec la molette de la souris et fonction tactile mobile
 
@@ -12,7 +23,7 @@ let scrollLeft;
 
 navBar.addEventListener('wheel', (event) => {
     event.preventDefault();
-    navBar.scrollLeft += event.deltaY * 2; // Ajustez la valeur de défilement selon vos besoins
+    navBar.scrollLeft += event.deltaY * 2; // Valeur de défilement x2
 });
 
 navBar.addEventListener('touchstart', (event) => {
@@ -25,7 +36,7 @@ navBar.addEventListener('touchmove', (event) => {
     if (!isScrolling) return;
     event.preventDefault();
     const x = event.touches[0].pageX - navBar.offsetLeft;
-    const walk = (x - startX) * 2; // Ajustez la valeur de défilement selon vos besoins
+    const walk = (x - startX) * 2; // Valeur de défilement x2
     navBar.scrollLeft = scrollLeft - walk;
 });
 
@@ -46,17 +57,12 @@ window.addEventListener('scroll', function() {
         navBar.classList.add("fixed-nav");
         burger.classList.add("fixed-menu");
         menu.classList.add("fixed-menu");
-
-
     } else {
         navBar.classList.remove("fixed-nav");
         burger.classList.remove("fixed-menu");
         menu.classList.remove("fixed-menu");
-
     }
 });
-
-
 
 
 selects.forEach(function (select) {
@@ -74,29 +80,29 @@ selects.forEach(function (select) {
     });
 });
 
-
 burger.addEventListener('click', () => {
 
-    if (burger.classList.contains('my-closed')) {
-        burger.src = "assets/img/burger-menu-cross.svg";
-        burger.classList.remove("my-closed");
-        burger.classList.add("my-opened");
-        burger.classList.add("burger-visible")
-        burger.classList.remove("burger-hidden")
-        menu.classList.remove("menu-hidden");
-        menu.classList.add("menu-visible");
+        if (burger.classList.contains('my-closed')) {
+            burger.src = "assets/img/burger-menu-cross.svg";
+            burger.classList.remove("my-closed");
+            burger.classList.add("my-opened");
+            burger.classList.add("burger-visible")
+            burger.classList.remove("burger-hidden")
+            menu.classList.remove("menu-hidden");
+            menu.classList.add("menu-visible");
 
-    } else {
-        burger.src = "assets/img/burger-menu.svg";
-        burger.classList.remove("my-opened");
-        burger.classList.add("my-closed");
-        burger.classList.add("burger-hidden")
-        burger.classList.remove("burger-visible")
-        menu.classList.remove("menu-visible");
-        menu.classList.add("menu-hidden");
+        } else {
+            burger.src = "assets/img/burger-menu.svg";
+            burger.classList.remove("my-opened");
+            burger.classList.add("my-closed");
+            burger.classList.add("burger-hidden")
+            burger.classList.remove("burger-visible")
+            menu.classList.remove("menu-visible");
+            menu.classList.add("menu-hidden");
 
-    }
-});
+        }
+    });
+
 
 //suppression des paramètres dans la barre URL
 function removeSearchParamFromURL() {

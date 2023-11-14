@@ -38,9 +38,15 @@ class SecurityController extends AbstractController
 
 
     #[Route(path: '/logout', name: 'app_logout')]
-    public function logout(): void
+    public function logout(): Response
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        //gestion du cache pour éviter de soumettre à nouveau un formulaire en faisant un retour en arrière
+        $response = new Response();
+        $response->headers->set('Cache-Control', 'no-store, private, must-revalidate');
+        $response->headers->set('Pragma', 'no-cache');
+        $response->headers->set('Expires', '0');
+
+        return $response;
     }
 
     #[Route(path: '/forgot-password', name: 'app_forgot_password')]

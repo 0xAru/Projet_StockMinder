@@ -56,35 +56,23 @@
                         -{{ product.promotion }}%</p>
                 {% endif %}
                 <div class="my-product-data flex flex-col col-start-1 col-end-3">
-                    <h4 class="text-xs flex justify-center items-center"
-                        id="name{{ loop.index0 }}">{{ product.name }}</h4>
+                    <h4 class="text-xs flex justify-center items-center text-center" id="name{{ loop.index0 }}">{{ product.name }}</h4>
                     <p class="flex justify-center items-center text-center">{{ product.brand }}</p>
-                    <span class="my-invisible" id="id{{ loop.index0 }}"
-                          data-productId= {{ product.id }}>{{ product.id }}</span>
+                    <span class="my-invisible" id="id{{ loop.index0 }}" data-productId= {{ product.id }}>{{ product.id }}</span>
                     <div class="flex flex-col items-center">
                         {% if product.label != "" %}
                             {% if product.label == "Local" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Local.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Local.svg') }}" alt=""></a>
                             {% elseif product.label == "Biologique" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
                             {% elseif product.label == "Sans gluten" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}" alt=""></a>
                             {% elseif product.label == "Sans alcool" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}" alt=""></a>
                             {% elseif product.label == "Avec lactose" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Lactose.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt=""></a>
                             {% elseif product.label == "Avec arachides" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
                         {% endif %}
                         <img class="h-7 w-7 my-1" id="infoBtn{{ loop.index0 }}"
@@ -119,26 +107,18 @@
                             {% endif %}
                         </div>
                         <div class="my-stock flex items-center">
-                            <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg"
-                                   id="stock{{ loop.index0 }}" data-productStock= {{ product.stock }} type="number"
-                                   value="{{ product.stock }}">
-                            <!-- mettre une condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
-                            <button type="button"
-                                    class="my-stock-btn h-7 w-7 items-center text-sm mx-auto p-1 rounded-lg text-center"
-                                    id="openStockModalBtn{{ loop.index0 }}"
-                                    onclick="stockModal(this, {{ loop.index0 }})">OK</button>
+                            <!-- Condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
+                            {% if 'ROLE_CHEF' in app.user.roles  %}
+                                <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}">
+                                <button type="button" class="my-stock-btn h-7 w-7 items-center text-sm mx-auto p-1 rounded-lg text-center" id="openStockModalBtn{{ loop.index0 }}" onclick="stockModal(this, {{ loop.index0 }})">OK</button>
+                            {% else %}
+                                <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}" disabled>
+                            {% endif %}
                         </div>
                         <div class="flex">
-                            <button class="my-minus h-7 w-7 items-center mx-auto rounded-lg"
-                                    onclick="minus(this, {{ loop.index0 }})"><img class="mx-auto"
-                                                                                  src="{{ asset('assets/img/minus.svg') }}"
-                                                                                  alt=""></button>
-                            <input class="my-quantity h-7 w-7 flex justify-center text-center mx-auto p-1 rounded-lg"
-                                   id="qty{{ loop.index0 }}" type="number" value="0" disabled>
-                            <button class="my-plus h-7 w-7 items-center mx-auto p-1 rounded-lg"
-                                    onclick="plus(this,  {{ loop.index0 }}) "><img class="mx-auto"
-                                                                                   src="{{ asset('assets/img/plus.svg') }}"
-                                                                                   alt=""></button>
+                            <button class="my-minus h-7 w-7 items-center mx-auto rounded-lg" onclick="minus(this, {{ loop.index0 }})"><img class="mx-auto" src="{{ asset('assets/img/minus.svg') }}" alt=""></button>
+                            <input class="my-quantity h-7 w-7 flex justify-center text-center mx-auto p-1 rounded-lg" id="qty{{ loop.index0 }}" type="number" value="0" disabled>
+                            <button class="my-plus h-7 w-7 items-center mx-auto p-1 rounded-lg" onclick="plus(this,  {{ loop.index0 }}) "><img class="mx-auto" src="{{ asset('assets/img/plus.svg') }}" alt=""></button>
                         </div>
                     </div>
                 {% else %}
@@ -178,8 +158,7 @@
                         -{{ product.promotion }}%</p>
                 {% endif %}
                 <div class="my-product-data flex flex-col col-start-1 col-end-3">
-                    <h4 class="text-xs flex justify-center items-center"
-                        id="name{{ loop.index0 }}">{{ product.name }}</h4>
+                    <h4 class="text-xs flex justify-center items-center text-center" id="name{{ loop.index0 }}">{{ product.name }}</h4>
                     <p class="flex justify-center items-center text-center">{{ product.brand }}</p>
                     <span class="my-invisible" id="id{{ loop.index0 }}"
                           data-productId= {{ product.id }}>{{ product.id }}</span>
@@ -240,15 +219,13 @@
                             {% endif %}
                         </div>
                         <div class="my-stock flex items-center">
-                            <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg"
-                                   id="stock{{ loop.index0 }}" type="number"
-                                   value="{{ product.stock }}" data-productStock="{{ product.stock }}">
-                            <!-- mettre une condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
-                            <button type="button"
-                                    class="my-stock-btn  h-7 w-7 items-center mx-auto text-sm rounded-lg text-center"
-                                    id="openStockModalBtn{{ loop.index0 }}"
-                                    onclick="stockModal(this, {{ loop.index0 }})">OK
-                            </button>
+                            <!-- Condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
+                            {% if 'ROLE_CHEF' in app.user.roles  %}
+                                <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}">
+                                <button type="button" class="my-stock-btn h-7 w-7 items-center text-sm mx-auto p-1 rounded-lg text-center" id="openStockModalBtn{{ loop.index0 }}" onclick="stockModal(this, {{ loop.index0 }})">OK</button>
+                            {% else %}
+                                <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}" disabled>
+                            {% endif %}
                         </div>
 
                         <div class="flex">
@@ -298,20 +275,15 @@
                         -{{ product.promotion }}%</p>
                 {% endif %}
                 <div class="my-product-data flex flex-col col-start-1 col-end-3">
-                    <h4 class="text-xs flex justify-center items-center"
-                        id="name{{ loop.index0 }}">{{ product.name }}</h4>
+                    <h4 class="text-xs flex justify-center items-center text-center" id="name{{ loop.index0 }}">{{ product.name }}</h4>
                     <p class="flex justify-center items-center text-center">{{ product.brand }}</p>
-                    <span class="my-invisible" id="id{{ loop.index0 }}"
-                          data-productId= {{ product.id }}>{{ product.id }}</span>
+                    <span class="my-invisible" id="id{{ loop.index0 }}" data-productId= {{ product.id }}>{{ product.id }}</span>
                     <div class="flex flex-col items-center">
                         {% if product.label != "" %}
                             {% if product.label == "Local" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Local.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Local.svg') }}" alt=""></a>
                             {% elseif product.label == "Biologique" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
                             {% elseif product.label == "Sans gluten" %}
                                 <a href="#legend"><img class="h-7 w-7 mx-auto"
                                                        src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
@@ -360,15 +332,13 @@
                             {% endif %}
                         </div>
                         <div class="my-stock flex items-center">
-                            <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg"
-                                   id="stock{{ loop.index0 }}" type="number"
-                                   value="{{ product.stock }}" data-productStock="{{ product.stock }}">
-                            <!-- mettre une condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
-                            <button type="button"
-                                    class="my-stock-btn h-7 w-7 items-center text-sm mx-auto rounded-lg text-center"
-                                    id="openStockModalBtn{{ loop.index0 }}"
-                                    onclick="stockModal(this, {{ loop.index0 }})">OK
-                            </button>
+                            <!-- Condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
+                            {% if 'ROLE_CHEF' in app.user.roles  %}
+                                <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}">
+                                <button type="button" class="my-stock-btn h-7 w-7 items-center text-sm mx-auto p-1 rounded-lg text-center" id="openStockModalBtn{{ loop.index0 }}" onclick="stockModal(this, {{ loop.index0 }})">OK</button>
+                            {% else %}
+                                <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}" disabled>
+                            {% endif %}
                         </div>
 
                         <div class="flex">
@@ -409,7 +379,7 @@
         {% if product.category == "Ambrée" %}
         {% if not ambreesHeadingDisplayed %}
         {% set ambreesHeadingDisplayed = true %}
-        <div class="flex flex-col justify-center my-blanches my-container">
+        <div class="flex flex-col justify-center my-ambrees my-container">
             <h3 class="ml-5 my-5 !important text-2xl" id="blanches">Les ambrées</h3>
             {% endif %}
 
@@ -419,40 +389,27 @@
                         -{{ product.promotion }}%</p>
                 {% endif %}
                 <div class="my-product-data flex flex-col col-start-1 col-end-3">
-                    <h4 class="text-xs flex justify-center items-center"
-                        id="name{{ loop.index0 }}">{{ product.name }}</h4>
+                    <h4 class="text-xs flex justify-center items-center text-center" id="name{{ loop.index0 }}">{{ product.name }}</h4>
                     <p class="flex justify-center items-center text-center">{{ product.brand }}</p>
-                    <span class="my-invisible" id="id{{ loop.index0 }}"
-                          data-productId= {{ product.id }}>{{ product.id }}</span>
+                    <span class="my-invisible" id="id{{ loop.index0 }}" data-productId= {{ product.id }}>{{ product.id }}</span>
                     <div class="flex flex-col items-center">
                         {% if product.label != "" %}
                             {% if product.label == "Local" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Local.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Local.svg') }}" alt=""></a>
                             {% elseif product.label == "Biologique" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
                             {% elseif product.label == "Sans gluten" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}" alt=""></a>
                             {% elseif product.label == "Sans alcool" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}" alt=""></a>
                             {% elseif product.label == "Avec lactose" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Lactose.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt=""></a>
                             {% elseif product.label == "Avec arachides" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
                         {% endif %}
                         <img class="h-7 w-7 my-1" id="infoBtn{{ loop.index0 }}"
-                             onclick="infoModal(this, {{ loop.index0 }})" src="{{ asset('assets/img/info.svg') }}"
-                             alt="">
+                             onclick="infoModal(this, {{ loop.index0 }})" src="{{ asset('assets/img/info.svg') }}" alt="">
                     </div>
                 </div>
                 {% if product.stock >= product.threshold %}
@@ -480,29 +437,21 @@
                                 <p id="price{{ loop.index0 }}">{{ product.totalPrice / 100 }}€</p>
                             {% endif %}
                         </div>
-                        <div class="my-stock flex items-center">
-                            <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg"
-                                   id="stock{{ loop.index0 }}" type="number"
-                                   value="{{ product.stock }}" data-productStock="{{ product.stock }}">
-                            <!-- mettre une condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
-                            <button type="button"
-                                    class="my-stock-btn h-7 w-7 items-center text-sm mx-auto rounded-lg text-center"
-                                    id="openStockModalBtn{{ loop.index0 }}"
-                                    onclick="stockModal(this, {{ loop.index0 }})">OK
-                            </button>
-                        </div>
+                            <div class="my-stock flex items-center">
+                                <!-- Condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
+                                {% if 'ROLE_CHEF' in app.user.roles  %}
+                                    <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}">
+                                    <button type="button" class="my-stock-btn h-7 w-7 items-center text-sm mx-auto p-1 rounded-lg text-center" id="openStockModalBtn{{ loop.index0 }}" onclick="stockModal(this, {{ loop.index0 }})">OK</button>
+                                {% else %}
+                                    <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}" disabled>
+                                {% endif %}
+                            </div>
 
                         <div class="flex">
-                            <button class="my-minus h-7 w-7 items-center mx-auto p-1 rounded-lg"
-                                    onclick="minus(this, {{ loop.index0 }}) "><img class="mx-auto"
-                                                                                   src="{{ asset('assets/img/minus.svg') }}"
-                                                                                   alt=""></button>
-                            <input class="my-quantity h-7 w-7 flex justify-center text-center mx-auto p-1 rounded-lg"
-                                   id="qty{{ loop.index0 }}" type="number" value="0" disabled>
+                            <button class="my-minus h-7 w-7 items-center mx-auto p-1 rounded-lg" onclick="minus(this, {{ loop.index0 }}) "><img class="mx-auto" src="{{ asset('assets/img/minus.svg') }}" alt=""></button>
+                            <input class="my-quantity h-7 w-7 flex justify-center text-center mx-auto p-1 rounded-lg" id="qty{{ loop.index0 }}" type="number" value="0" disabled>
                             <button class="my-plus h-7 w-7 items-center mx-auto p-1 rounded-lg"
-                                    onclick="plus(this,  {{ loop.index0 }})"><img class="mx-auto"
-                                                                                  src="{{ asset('assets/img/plus.svg') }}"
-                                                                                  alt=""></button>
+                                    onclick="plus(this,  {{ loop.index0 }})"><img class="mx-auto" src="{{ asset('assets/img/plus.svg') }}" alt=""></button>
                         </div>
                     </div>
                 {% else %}
@@ -542,35 +491,23 @@
                         -{{ product.promotion }}%</p>
                 {% endif %}
                 <div class="my-product-data flex flex-col col-start-1 col-end-3">
-                    <h4 class="text-xs flex justify-center items-center"
-                        id="name{{ loop.index0 }}">{{ product.name }}</h4>
+                    <h4 class="text-xs flex justify-center items-center text-center" id="name{{ loop.index0 }}">{{ product.name }}</h4>
                     <p class="flex justify-center items-center text-center">{{ product.brand }}</p>
-                    <span class="my-invisible" id="id{{ loop.index0 }}"
-                          data-productId= {{ product.id }}>{{ product.id }}</span>
+                    <span class="my-invisible" id="id{{ loop.index0 }}" data-productId= {{ product.id }}>{{ product.id }}</span>
                     <div class="flex flex-col items-center">
                         {% if product.label != "" %}
                             {% if product.label == "Local" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Local.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Local.svg') }}" alt=""></a>
                             {% elseif product.label == "Biologique" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
                             {% elseif product.label == "Sans gluten" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}" alt=""></a>
                             {% elseif product.label == "Sans alcool" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}" alt=""></a>
                             {% elseif product.label == "Avec lactose" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Lactose.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt=""></a>
                             {% elseif product.label == "Avec arachides" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
                         {% endif %}
                         <img class="h-7 w-7 my-1" id="infoBtn{{ loop.index0 }}"
@@ -604,15 +541,13 @@
                             {% endif %}
                         </div>
                         <div class="my-stock flex items-center">
-                            <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg"
-                                   id="stock{{ loop.index0 }}" type="number"
-                                   value="{{ product.stock }}" data-productStock="{{ product.stock }}">
-                            <!-- mettre une condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
-                            <button type="button"
-                                    class="my-stock-btn h-7 w-7 items-center text-sm mx-auto rounded-lg text-center"
-                                    id="openStockModalBtn{{ loop.index0 }}"
-                                    onclick="stockModal(this, {{ loop.index0 }})">OK
-                            </button>
+                            <!-- Condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
+                            {% if 'ROLE_CHEF' in app.user.roles  %}
+                                <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}">
+                                <button type="button" class="my-stock-btn h-7 w-7 items-center text-sm mx-auto p-1 rounded-lg text-center" id="openStockModalBtn{{ loop.index0 }}" onclick="stockModal(this, {{ loop.index0 }})">OK</button>
+                            {% else %}
+                                <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}" disabled>
+                            {% endif %}
                         </div>
                         <div class="flex">
                             <button class="my-minus h-7 w-7 items-center mx-auto p-1 rounded-lg"
@@ -650,11 +585,11 @@
         {% for product in products %}
 
 
-        {% if product.category == "Sansalcool" %}
+        {% if product.category == "Sans-Alcool" %}
         {% if not sansalcoolHeadingDisplayed %}
         {% set sansalcoolHeadingDisplayed = true %}
         <div class="flex flex-col justify-center my-brunes my-container">
-            <h3 class="ml-5 my-5 !important text-2xl" id="sansalcool">Les sans alcool</h3>
+            <h3 class="ml-5 my-5 !important text-2xl" id="sansAlcool">Les sans alcool</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-8 mb-5 pb-3">
                 {% if product.promotion is not null %}
@@ -662,35 +597,23 @@
                         -{{ product.promotion }}%</p>
                 {% endif %}
                 <div class="my-product-data flex flex-col col-start-1 col-end-3">
-                    <h4 class="text-xs flex justify-center items-center"
-                        id="name{{ loop.index0 }}">{{ product.name }}</h4>
+                    <h4 class="text-xs flex justify-center items-center text-center" id="name{{ loop.index0 }}">{{ product.name }}</h4>
                     <p class="flex justify-center items-center text-center">{{ product.brand }}</p>
-                    <span class="my-invisible" id="id{{ loop.index0 }}"
-                          data-productId= {{ product.id }}>{{ product.id }}</span>
+                    <span class="my-invisible" id="id{{ loop.index0 }}" data-productId= {{ product.id }}>{{ product.id }}</span>
                     <div class="flex flex-col items-center">
                         {% if product.label != "" %}
                             {% if product.label == "Local" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Local.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Local.svg') }}" alt=""></a>
                             {% elseif product.label == "Biologique" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
                             {% elseif product.label == "Sans gluten" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}" alt=""></a>
                             {% elseif product.label == "Sans alcool" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}" alt=""></a>
                             {% elseif product.label == "Avec lactose" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Lactose.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt=""></a>
                             {% elseif product.label == "Avec arachides" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
                         {% endif %}
                         <img class="h-7 w-7 my-1" id="infoBtn{{ loop.index0 }}"
@@ -726,15 +649,13 @@
 
                         </div>
                         <div class="my-stock flex items-center">
-                            <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg"
-                                   id="stock{{ loop.index0 }}" data-productStock= {{ product.stock }} type="number"
-                                   value="{{ product.stock }}">
-                            <!-- mettre une condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
-                            <button type="button"
-                                    class="my-stock-btn h-7 w-7 items-center text-sm mx-auto rounded-lg text-center"
-                                    id="openStockModalBtn{{ loop.index0 }}"
-                                    onclick="stockModal(this, {{ loop.index0 }})">OK
-                            </button>
+                            <!-- Condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
+                            {% if 'ROLE_CHEF' in app.user.roles  %}
+                                <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}">
+                                <button type="button" class="my-stock-btn h-7 w-7 items-center text-sm mx-auto p-1 rounded-lg text-center" id="openStockModalBtn{{ loop.index0 }}" onclick="stockModal(this, {{ loop.index0 }})">OK</button>
+                            {% else %}
+                                <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}" disabled>
+                            {% endif %}
                         </div>
                         <div class="flex">
                             <button class="my-minus h-7 w-7 items-center mx-auto p-1 rounded-lg"
@@ -787,34 +708,22 @@
                         -{{ product.promotion }}%</p>
                 {% endif %}
                 <div class="my-product-data flex flex-col col-start-1 col-end-3">
-                    <h4 class="text-xs flex justify-center items-center"
-                        id="name{{ loop.index0 }}">{{ product.name }}</h4>
-                    <span class="my-invisible" id="id{{ loop.index0 }}"
-                          data-productId= {{ product.id }}>{{ product.id }}</span>
+                    <h4 class="text-xs flex justify-center items-center text-center" id="name{{ loop.index0 }}">{{ product.name }}</h4>
+                    <span class="my-invisible" id="id{{ loop.index0 }}" data-productId= {{ product.id }}>{{ product.id }}</span>
                     <div class="flex flex-col items-center">
                         {% if product.label != "" %}
                             {% if product.label == "Local" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Local.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Local.svg') }}" alt=""></a>
                             {% elseif product.label == "Biologique" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Bio.svg') }}" alt=""></a>
                             {% elseif product.label == "Sans gluten" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Gluten_Free.svg') }}" alt=""></a>
                             {% elseif product.label == "Sans alcool" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Alcohol_Free.svg') }}" alt=""></a>
                             {% elseif product.label == "Avec lactose" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Lactose.svg') }}"
-                                                       alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Lactose.svg') }}" alt=""></a>
                             {% elseif product.label == "Avec arachides" %}
-                                <a href="#legend"><img class="h-7 w-7 mx-auto"
-                                                       src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
+                                <a href="#legend"><img class="h-7 w-7 mx-auto" src="{{ asset('assets/img/Logo_Nut.svg') }}" alt=""></a>
                             {% endif %}
                         {% endif %}
                         <img class="h-7 w-7 my-1" id="infoBtn{{ loop.index0 }}"
@@ -844,15 +753,13 @@
                             {% endif %}
                         </div>
                         <div class="my-stock flex items-center py-0.5">
-                            <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg"
-                                   id="stock{{ loop.index0 }}" data-productStock= {{ product.stock }} type="number"
-                                   value="{{ product.stock }}">
-                            <!-- mettre une condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
-                            <button type="button"
-                                    class="my-stock-btn h-7 w-7 items-center text-sm mx-auto rounded-lg text-center"
-                                    id="openStockModalBtn{{ loop.index0 }}"
-                                    onclick="stockModal(this, {{ loop.index0 }})">OK
-                            </button>
+                            <!-- Condition par rapport au rôle du user connecté: si user_role = chef de salle alors le bouton sera disponible et la soumission du nouveau stock pourra être effectuée -->
+                            {% if 'ROLE_CHEF' in app.user.roles  %}
+                                <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}">
+                                <button type="button" class="my-stock-btn h-7 w-7 items-center text-sm mx-auto p-1 rounded-lg text-center" id="openStockModalBtn{{ loop.index0 }}" onclick="stockModal(this, {{ loop.index0 }})">OK</button>
+                            {% else %}
+                                <input class="my-stock-value h-7 w-10 flex justify-center text-center mx-auto p-1 rounded-lg" id="stock{{ loop.index0 }}" data-productStock= "{{ product.stock }}" type="number" value="{{ product.stock }}" disabled>
+                            {% endif %}
                         </div>
                         <div class="flex py-0.5">
                             <button class="my-minus h-7 w-7 items-center mx-auto p-1 rounded-lg"
@@ -886,15 +793,16 @@
 
 
         {% include '/layouts/_menu-legend.html.twig' %}
-        {% block scripts %}
-            <script src="{{ asset("assets/js/script.js") }}"></script>
-            <script src="{{ asset('assets/js/vente.js') }}"></script>
-        {% endblock %}
 
         <div class="my-overlay hidden fixed top-0 left-0 bg-gray-300 bg-opacity-10 backdrop-blur-sm z-20 h-screen w-screen"></div>
-
     </main>
 {% endblock %}
+
+{% block scripts %}
+    <script src="{{ asset("assets/js/script.js") }}"></script>
+    <script src="{{ asset('assets/js/vente.js') }}"></script>
+{% endblock %}
+
 {% block footer %}
     {% include '/layouts/_menu-footer.html.twig' %}
 {% endblock %}

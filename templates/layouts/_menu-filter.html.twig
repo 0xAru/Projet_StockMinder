@@ -1,34 +1,26 @@
 <nav>
     <div class="flex">
-        <img src="{{ asset('assets/img/burger-menu.svg') }}" alt=""
-             class="my-burger burger-hidden my-closed ml-0 mt-3 fixed">
-        <div class="my-menu-container menu-hidden w-48 py-3.5 mt-3 rounded-br-lg fixed">
+        <img src="{{ asset('assets/img/burger-menu.svg') }}" alt="" class="my-burger burger-hidden my-closed ml-0 mt-3 fixed lg:invisible">
+        <div class="my-menu-container menu-hidden w-48 py-3.5 mt-3 rounded-br-lg lg:w-lg">
             {% set action =  null %}
             {% if app.request.get('_route') == 'app_menu' %}
                 {% set action = '/carte' %}
             {% elseif app.request.get('_route') == 'app_sell' %}
                 {% set action = '/vente' %}
             {% endif %}
-
             {% if action is not null %}
             <form id="searchTermForm" action="{{ action }}" method="get">
                 <div class="flex">
-                    {% if searchTerm %}  <input type="text"
-                                                class="my-search-input w-32 rounded-full p-1 ml-2 focus:font-bold focus:ring-0 border-0"
-                                                placeholder="Tout voir" name="search">
-                    {% else %} <input type="text"
-                                      class="my-search-input w-32 rounded-full p-1 ml-2 focus:font-bold focus:ring-0 border-0"
-                                      placeholder="Recherche..." name="search">
+                    {% if searchTerm %}  <input type="text" class="my-search-input w-32 rounded-full p-1 ml-2 focus:font-bold focus:ring-0 border-0" placeholder="Tout voir" name="search">
+                    {% else %} <input type="text" class="my-search-input w-32 rounded-full p-1 ml-2 focus:font-bold focus:ring-0 border-0" placeholder="Recherche..." name="search">
                     {% endif %}
-                    <button type="submit" id="submitBtn"><img class="mx-4"
-                                                              src="{{ asset('assets/img/search-icon.svg') }}"
-                                                              alt="">
-                    </button>
+                    <button type="submit" id="submitBtn"><img class="mx-4" src="{{ asset('assets/img/search-icon.svg') }}" alt=""></button>
                 </div>
             </form>
             {% endif %}
-
             {{ form_start(form) }}
+            <div class="lg:flex lg:flex-col lg:items-center py-2">
+                <div class="lg:flex lg:justify-center">
             <div class="my-filter-fields">
                 {{ form_row(form.style) }}
             </div>
@@ -44,19 +36,19 @@
             <div class="my-filter-fields my-capacity">
                 {{ form_row(form.capacity) }}
             </div>
-
-            <div class="flex flex-col items-center w-48">
-
-                <div class="pt-2">
+                </div>
+            <div class="my-form-btn flex flex-col items-center w-48 lg:flex-row">
+                <div class="pt-2 my-submit lg:mr-2">
                     {{ form_row(form.submit) }}
                 </div>
 
-                <div class="pt-2">
+                <div class="pt-2 my-cancel lg:ml-2">
                     {{ form_row(form.button) }}
                 </div>
-
             </div>
+                </div>
             {{ form_end(form) }}
+
         </div>
     </div>
 </nav>
