@@ -258,9 +258,8 @@ async function getProducts(filter = null) {
             cellContent.classList.add("h-28", "overflow-y-scroll", "flex", "flex-col", "justify-center", "mx-3");
             cellContent.textContent = data;
 
-            if (data && data.length > 70) {
+            if (data && data.length > 80) {
                 cellContent.textContent = extractFirstWords(data, 10);
-                cellContent.classList.remove("justify-center");
             }
 
             if (data == "null%") {

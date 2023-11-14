@@ -17,7 +17,7 @@ class DashboardProductFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        //Récupération des différents styles et labels de l'entité Product
+        //Recovery of the different styles and labels of the Product entity
         $labelChoices = array_values(array_unique($options['label_choices']));
 
         $builder
