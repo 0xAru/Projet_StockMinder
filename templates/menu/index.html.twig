@@ -268,7 +268,7 @@
         {% if product.category == "Ambrée" %}
         {% if not ambreesHeadingDisplayed %}
         {% set ambreesHeadingDisplayed = true %}
-        <div class="flex flex-col justify-center my-ambrees my-menu-container lg:w-lg lg:mx-auto">
+        <div class="flex flex-col justify-center my-ambrees my-container lg:w-lg lg:mx-auto">
             <h3 class="ml-5 my-5 !important text-2xl lg:text-4xl" id="ambrees">Les ambrées</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
@@ -417,11 +417,11 @@
         {% set sansalcoolHeadingDisplayed = false %}
 
         {% for product in products %}
-        {% if product.category == "Sansalcool" %}
+        {% if product.category == "Sans-Alcool" %}
         {% if not sansalcoolHeadingDisplayed %}
         {% set sansalcoolHeadingDisplayed = true %}
         <div class="flex flex-col justify-center my-brunes my-container lg:w-lg lg:mx-auto">
-            <h3 class="ml-5 my-5 !important text-2xl lg:text-4xl" id="sansalcool">Les sans alcool</h3>
+            <h3 class="ml-5 my-5 !important text-2xl lg:text-4xl" id="sansAlcool">Les sans alcool</h3>
             {% endif %}
             <div class="my-product-card grid grid-cols-6 mb-5 my-container mx-1 pb-3">
                 {% if product.promotion is not null %}
@@ -560,12 +560,23 @@
 
 
         {% include '/layouts/_menu-legend.html.twig' %}
-        {% block scripts %}
-            <script src="{{ asset('assets/js/carte.js') }}"></script>
-        {% endblock %}
+
     </main>
 </div>
+
 {% endblock %}
+
+{% block scripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let companyId = {{ companyId|default(0) }};
+            urlTransform(companyId);
+        });
+    </script>
+    <script src="{{ asset("assets/js/script.js") }}"></script>
+    <script src="{{ asset('assets/js/carte.js') }}"></script>
+{% endblock %}
+
 {% block footer %}
     {% include '/layouts/_menu-footer.html.twig' %}
 {% endblock %}

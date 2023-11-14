@@ -20,14 +20,14 @@ final class Version20230824094038 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE product ADD total_price INT NOT NULL');
-        $this->addSql('ALTER TABLE user CHANGE reset_token reset_token VARCHAR(100) DEFAULT NULL');
+        //$this->addSql('ALTER TABLE product ADD total_price INT NOT NULL');
+        //$this->addSql('ALTER TABLE user CHANGE reset_token reset_token VARCHAR(100) DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE user CHANGE reset_token reset_token VARCHAR(100) NOT NULL');
-        $this->addSql('ALTER TABLE product DROP total_price');
+        //$this->addSql('ALTER TABLE user CHANGE reset_token reset_token VARCHAR(100) NOT NULL');
+        //$this->addSql('ALTER TABLE product DROP total_price');
     }
 }

@@ -55,3 +55,19 @@ if (events && carousel) {
         indicatorItems[i].addEventListener("click", () => showEvent(i));
     }
 }
+
+//Fonction d'affichage de l'url avec l'ID de la compagnie
+function urlTransform(companyId) {
+    let currentUrl = window.location.href;
+
+    if (currentUrl.indexOf('#' + companyId) === -1) {
+        let updatedUrl = currentUrl + '#' + companyId;
+
+        window.history.replaceState({}, document.title, updatedUrl);
+
+        //restauration de l'url d'origine avant de quitter la page
+        window.addEventListener('beforeunload', function () {
+            window.history.replaceState({}, document.title, currentUrl);
+        });
+    }
+}

@@ -4,7 +4,7 @@ namespace App\Form;
 
 use App\Entity\Product;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType; // pour utiliser le type de champs ChoiceType (champs avec ou sans alcool)
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,16 +14,16 @@ class ProductFilterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        // Récupérer les options uniques pour le champ "style" et supprimer les doublons
+        // Récupération des options uniques pour le champ "style" et suppression des doublons. Routourne un tableau indexé à partir de 0 avec le options uniques.
         $styleChoices = array_values(array_unique($options['style_choices']));
         $originChoices = array_values(array_unique($options['origin_choices']));
         $brandChoices = array_values(array_unique($options['brand_choices']));
         $capacityChoices = array_values(array_unique($options['capacity_choices']));
-
         $builder
 
             ->add('style', ChoiceType::class, [
-                'choices' => array_combine($styleChoices, $styleChoices),
+                'choices' => array_combine($styleChoices, $styleChoices), //Creates an array by using the values from the keys array as keys and the values from the values array as the corresponding values.
+                //les options et les valeurs soumises sont identiques (nom du style et pas 0,1,2...)
                 'required' => false,
                 'placeholder' => 'Style',
                 'label' => false,
@@ -74,7 +74,7 @@ class ProductFilterType extends AbstractType
             ])
 
             ->add('submit', SubmitType::class, [
-                'label' => 'Filtrer', // activer le bouton submit uniquement lorsque le champs de recherche est renseigner
+                'label' => 'Filtrer',
                 'attr' => [
                     'class' => 'my-button w-28 rounded-full p-1 focus:font-bold focus:ring-0 border-0 ',
                 ],
@@ -89,7 +89,6 @@ class ProductFilterType extends AbstractType
             ]);
 
     }
-// Ne pouvoir filtrer que sur un seul champs
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

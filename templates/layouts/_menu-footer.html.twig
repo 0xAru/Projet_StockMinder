@@ -16,6 +16,9 @@
         </div>
     </div>
     <div>
+        {% if route is defined and route == "vente" %}
+            <a href="/logout"><img src=" {{ asset("assets/img/logout-persian-orange.png") }}" class="fixed w-6 h-6 left-3 bottom-8" title="Déconnexion"></a>
+        {% endif %}
         <p class="text-center text-xs pt-3 lg:text-xl">© Copyright | All rights reserved</p>
     </div>
 </footer>

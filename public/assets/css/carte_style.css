@@ -2,7 +2,10 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Gestion du menu de filtrage */
+
 .my-menu-container {
+    position: fixed;
     background-color: rgb(238, 150, 94);
     color: var(--wine);
     font-family: deliusregular, serif, sans-serif;
@@ -71,6 +74,8 @@ select:focus {
     color: var(--dutch-white);
     box-shadow: 0px 3px 3px 0px rgb(39, 37, 37, 0.8);
 }
+
+/* Fin gestion menu de filtrage */
 
 .my-cart-button {
     background-color: var(--persian-orange);
@@ -306,5 +311,57 @@ select:focus {
 /* Fin Affichage des produits-----------------------------------------------------------------*/
 
 
+@media screen and (min-width: 1024px) {
+    /* Gestion du menu de filtrage */
 
+    .my-menu-container {
+        display: flex;
+        background-color: var(--dutch-white);
+        margin-top: 0;
+        margin-left: auto;
+        margin-right: auto;
+        position: initial;
+        align-items: center;
+        border-radius: 0;
+        padding: 0;
+    }
+
+    #searchTermForm {
+        background-color: var(--persian-orange);
+        padding: 5px;
+        border-radius: 20px;
+        width: 180px ;
+        margin-left: 15px;
+    }
+
+    .my-form-btn {
+        margin-left: 8%;
+    }
+
+    .my-menu {
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
+
+    .menu-hidden {
+
+    }
+
+    .my-filter-fields select {
+        background-color: var(--persian-orange);
+        margin-left: 15px;
+        border-radius: 20px;
+        width: 120px;
+        padding-right: 15px;
+
+    }
+
+    .menu-visible {
+        left:50px;
+        transition: none;
+    }
+
+    /* Fin gestion menu de filtrage */
+}
 
