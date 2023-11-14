@@ -1,3 +1,4 @@
+{% include "/layouts/_flash.html.twig" %}
 <div id="productForm" class="w-full flex flex-col justify-center rounded-lg hidden">
     {{ form_errors(productForm) }}
 
@@ -41,10 +42,10 @@
 
     {# Ajouter le tableau de produits ici #}
 </div>
+
 <div id="employeeForm" class="w-full flex flex-col justify-center rounded-lg">
 
     {{ form_errors(employeeForm) }}
-    {% include "/layouts/_flash.html.twig" %}
     {{ form_start(employeeForm) }}
     <div class="flex flex-col items-center md:grid dashFormBg mb-16 pb-14 rounded-xl">
         <h2 class="md:text-4xl m-2 md:m-6">Employés</h2>
@@ -67,7 +68,7 @@
     {{ form_errors(eventForm) }}
 
     {{ form_start(eventForm) }}
-    <div class="grid dashFormBg mb-16 pb-14 rounded-xl">
+    <div class="grid dashFormBg mb-16 pb-10 rounded-xl">
         <h2 class="text-4xl m-6">Évènements</h2>
         <div class="flex justify-center gap-32 my-4">
             {{ form_row(eventForm.name) }}
@@ -82,10 +83,17 @@
             {{ form_row(eventForm.start_time) }}
             {{ form_row(eventForm.end_time) }}
         </div>
-        <div class="flex justify-center gap-32 my-4">
-            {{ form_row(eventForm.image) }}
+        <div class="flex justify-center my-4">
             {{ form_row(eventForm.description) }}
         </div>
+        <div class="flex justify-center my-4">
+            {{ form_row(eventForm.image) }}
+        </div>
+        {% if eventForm.image%}
+            <div class="flex justify-center">
+                <img id="image" alt="" class="w-24 h-24" src="{{ asset("assets/img/icon_image.png") }}">
+            </div>
+        {% endif %}
         <div class="flex justify-center gap-32 my-4">
             {{ form_row(eventForm.Envoyer) }}
         </div>

@@ -17,9 +17,8 @@ class DashboardProductFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        //Récupération des différents styles et labels de l'entité Product
+        //Recovery of the different styles and labels of the Product entity
         $labelChoices = array_values(array_unique($options['label_choices']));
-        $originChoices = array_values(array_unique($options['origin_choices']));
 
         $builder
             ->add('name', TextType::class, [
@@ -141,7 +140,7 @@ class DashboardProductFormType extends AbstractType
             ])
             ->add("Envoyer", SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn rounded-full px-10 py-2 font-semibold'
+                    'class' => 'btn rounded-full px-10 py-2'
                 ],
                 'row_attr' => [
                     'class' => 'flex justify-center md:my-3 w-96'

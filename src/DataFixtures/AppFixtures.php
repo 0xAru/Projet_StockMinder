@@ -83,13 +83,17 @@ class AppFixtures extends Fixture
                 $user->setFirstname($faker->firstName($gender = null));
                 $user->setLastname($faker->lastname());
                 $user->setEmployeeNumber($faker->numberBetween(10, 200));
+                $user->setCompany($company);
+                $employeeNumber = $user->getEmployeeNumber();
+                $companyId = $user->getCompany();
+                $email = $employeeNumber . '@' . $companyId;
+                $user->setEmail($email);
                 $user->setResetToken('');
                 if($user->getEmployeeNumber() > 2 && $user->getEmployeeNumber() < 100){
                     $user->setRoles(["ROLE_CHEF"]);
                 } else {
                     $user->setRoles(["ROLE_SERVEUR"]);
                 }
-                $user->setCompany($company);
                 $manager->persist($user);
             }
             for ($k = 0; $k < 5; $k++) {
@@ -119,10 +123,9 @@ class AppFixtures extends Fixture
                 $currentDate = new \DateTime();
                 $event->setStartDate($faker->dateTimeBetween($currentDate, "+30 days"));
                 $event->setEndDate($faker->dateTimeBetween($event->getStartDate(), $event->getStartDate()->format('Y-m-d') . "+10 days"));
-                // Créer une instance de DateTime à partir de la chaîne de caractères de l'heure
+                // Create a DateTime instance from the time string
                 $startTime = new \DateTime($faker->time());
                 $event->setStartTime($startTime);
-                // De même pour l'heure de fin, si nécessaire
                 $endTime = new \DateTime($faker->time());
                 $event->setEndTime($endTime);
                 $event->setDisplayTimePeriod($faker->numberBetween(7, 30));

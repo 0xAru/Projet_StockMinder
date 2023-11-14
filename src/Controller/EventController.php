@@ -46,12 +46,14 @@ class EventController extends AbstractController
             }
             $this->em->persist($event);
             $this->em->flush();
+            $this->addFlash('success', "Évènement mis à jour avec succès");
             return $this->redirectToRoute('app_dashboard', ['action' => 1]);
         }
 
         return $this->render('dashboard/index.html.twig', [
             'action' => 'update_event',
             'company_id' => $this->getUser()->getCompany()->getId(),
+            'company_logo' => $this->getUser()->getCompany()->getLogo(),
             'updateForm' => $updateForm->createView()
         ]);
     }

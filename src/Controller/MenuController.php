@@ -87,7 +87,6 @@ class MenuController extends AbstractController
         $company = $this->getUser()->getCompany();
         $companyId = $company->getId();
 
-
         // Récupérer les options uniques pour les champs du formulaire
         $filterOptions = [
             'style_choices' => $productRepository->findUniqueStyles($companyId),

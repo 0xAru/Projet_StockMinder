@@ -103,6 +103,17 @@ class ProductRepository extends ServiceEntityRepository
         return array_map('current', $query->getScalarResult());
     }
 
+    public function findUniqueCategories($companyId): array{
+        $query = $this->entityManager->createQueryBuilder()
+            ->select('DISTINCT p.category')
+            ->from(Product::class, 'p')
+            ->where('p.company = :companyId')
+            ->setParameter('companyId', $companyId)
+            ->getQuery();
+
+        return array_map('current', $query->getScalarResult());
+    }
+
     public function findByFilters($data, $companyId)
     {
         $em = $this->getEntityManager();

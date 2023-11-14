@@ -22,7 +22,7 @@ class DashboardEmployeeFormType extends AbstractType
                     'class' => 'rounded-full md:my-3 h-6 md:h-11 md:w-96 text-xs md:text-base'
                 ]
             ])
-            ->add("lastname", TextType::class,[
+            ->add("lastname", TextType::class, [
                 'label' => false,
                 'required' => true,
                 'attr' => [
@@ -43,7 +43,7 @@ class DashboardEmployeeFormType extends AbstractType
 
             ->add("Envoyer", SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn rounded-full px-10 py-2 font-semibold'
+                    'class' => 'btn rounded-full px-10 py-2'
                 ],
                 'row_attr' => [
                     'class' => 'flex justify-center md:my-3 md:w-96'

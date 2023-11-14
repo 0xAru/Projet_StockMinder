@@ -17,9 +17,13 @@
     {# Section principale #}
     <section class="col-start-2 col-end-13 flex flex-col items-center py-4 relative mx-10">
     <div class="w-full flex flex-col justify-center">
-        <div class="w-full flex justify-center">
-            <img src=" {{ asset("assets/img/logo-cheers-beers-wine.png") }}" class="w-40">
-        </div>
+                {% if company_logo is defined %}
+                    <div class="w-full flex justify-center"><img src=" {{ asset("uploaded_img/" ~ company_logo) }}" class="w-20 md:w-40 mt-5 md:mt-0">
+                    </div>
+                {% else %}
+                    <div class="w-full flex justify-center"><img src=" {{ asset("assets/img/default-logo.png") }}" class="w-20 md:w-40 mt-5 md:mt-0">
+                    </div>
+                {% endif %}
         <div class="w-full flex justify-center my-4">
             <h1 class="text-stroke custom-h1sm md:m-6 text-3xl">Bienvenue sur votre tableau de bord {{ app.session.get('user_name') }}!</h1>
         </div>
