@@ -19,20 +19,17 @@ use App\Security\UserAuthenticator;
 class RegistrationController extends AbstractController
 {
     #[Route('/inscription', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator,UserAuthenticator $authenticator, EntityManagerInterface $entityManager, SessionInterface $session): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher,
+                             UserAuthenticatorInterface $userAuthenticator, UserAuthenticator $authenticator,
+                             EntityManagerInterface $entityManager, SessionInterface $session): Response
     {
-        $stylesOptions = [
-            'attr' => [
-                'class' => 'flex flex-col items-center'
-            ]
-        ];
 
-        $form = $this->createForm(RegistrationFormType::class, null, $stylesOptions);
+        $form = $this->createForm(RegistrationFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Récupérer les données à partir du formulaire
+            // Get data from form
             $data = $form->getData();
 
             $user = new User();
@@ -69,11 +66,11 @@ class RegistrationController extends AbstractController
                 $newFilename = uniqid() . '.' . $uploadedFile->getClientOriginalExtension();
                 $uploadedFile->move($this->getParameter('uploads_path'), $newFilename);
 
-                // Mettre à jour le chemin de l'image dans l'entité
+                // Update image path in entity
                 $company->setLogo($newFilename);
             }
 
-            // Associez la société à l'utilisateur
+            // Associate the company with the user
             $user->setCompany($company);
 
             $entityManager->persist($user);
